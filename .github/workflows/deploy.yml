@@ -1,0 +1,23 @@
+name: Deploy to FTP
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Install lftp
+      - name: Install lftp
+        run: sudo apt-get install -y lftp
+
+      # Deploy to FTP
+      - name: Deploy to FTP
+        run: |
+          lftp -e "set ftp:ssl-allow no; mirror --reverse --delete --verbose=3 --no-perms ./ /${{ secrets.FTP_DIR }}; bye" ftp://${{ secrets.FTP_HOST }} -u ${{ secrets.FTP_USER }},${{ secrets.FTP_PASS }}
