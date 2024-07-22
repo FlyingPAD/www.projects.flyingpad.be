@@ -38,4 +38,4 @@ jobs:
       # Deploy to FTP
       - name: Deploy to FTP
         run: |
-          lftp -e "set ftp:ssl-allow no; set mirror:use-pget-n 5; mirror --reverse --delete --verbose=3 --no-perms --exclude .well-known/ --exclude web.config ./dist/projects/browser /${{ secrets.FTP_DIR }}; bye" ftp://${{ secrets.FTP_HOST }} -u ${{ secrets.FTP_USER }},${{ secrets.FTP_PASS }}
+          lftp -e "set ftp:ssl-allow no; set mirror:use-pget-n 5; mirror --reverse --delete --verbose=3 --no-perms --exclude .well-known/ --exclude web.config ./dist/${{ secrets.FTP_DIR }}/browser /${{ secrets.FTP_DIR }}; bye" ftp://${{ secrets.FTP_HOST }} -u ${{ secrets.FTP_USER }},${{ secrets.FTP_PASS }}
