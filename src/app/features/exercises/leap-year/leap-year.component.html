@@ -1,0 +1,10 @@
+<div class="leap-year" [formGroup]="form">
+    <input type="text" formControlName="year" placeholder="Enter a year" aria-label="Year input">
+    <div *ngIf="form.get('year')?.errors?.['required']" class="error">Year is required.</div>
+    <div *ngIf="form.get('year')?.errors?.['min']" class="error">Please enter a valid year below 5000000000.</div>
+    <div *ngIf="form.get('year')?.errors?.['max']" class="error">Please enter a valid year above -4500000000.</div>
+
+    <p *ngIf="isALeapYear === true">{{ form.get('year')?.value }} <span class="green">is a leap year!</span></p>
+    <p *ngIf="isALeapYear === false">{{ form.get('year')?.value }} <span class="red">is not a leap year!</span></p>
+    <p *ngIf="isALeapYear === undefined">Please, enter a valid year...</p>
+</div>
