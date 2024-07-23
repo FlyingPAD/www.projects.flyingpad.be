@@ -1,0 +1,51 @@
+// ========================================================================================================================
+// Flying PAD | MoodBoard | SCSS Global Variables
+
+:root 
+{
+    // Break Points :
+
+    --mobile :          450px;
+    --tablet-small :    768px;
+    --tablet :          992px;
+    --desktop :         1024px;
+
+    // Theme Colors :
+
+    --colorMain :        #6b5240;
+    --colorWhite :       #fff;
+
+    // CRUD Colors :
+
+    --colorGreen :       green;
+    --colorOrange :      orange;
+    --colorRed :         red;
+
+
+    // Fonts & Typography : 
+
+    --fontFamily : 'Open Sans', sans-serif;
+
+    $sizeH1 : 17px;
+    $sizeH2 : 16px;
+    $sizeH3 : 15px;
+
+    // Logos : 
+
+    --logoFull : url(../../public/assets/app_logos/fp_logo_02.png);
+    --logoSmall : url(../../public/assets/app_logos/fp_logo_03.png);
+
+    // Icons :
+
+    --hamburger : url(../../public/assets/app_icons/icon_hamburger_001.png);
+    --hamburgerLeft : url(../../public/assets/app_icons/icon_hamburger_left_001.png);
+    --hamburgerRight : url(../../public/assets/app_icons/icon_hamburger_right_001.png);
+
+    // Backgrounds & Textures :
+
+    --texture001 : url(../../public/assets/app_backgrounds/texture_001.jpg);
+
+    // - Borders :
+
+    --border : 1px;
+}

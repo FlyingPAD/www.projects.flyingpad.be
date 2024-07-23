@@ -1,0 +1,26 @@
+.line
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 375px;
+    margin: auto;
+    
+    background-color: rgba(128, 128, 128, 0.3);
+    border-radius: 15px;
+
+    padding: 0 15px;
+
+    margin-top: 15px;
+    margin-bottom: 5px;
+
+    a{
+        color: black;
+        text-decoration: none;
+    }
+    a:hover{
+        text-decoration: underline;
+        transition-duration: 500ms;
+    }
+}
