@@ -8,8 +8,8 @@
 
         img{
             margin: 5px;
-            height: 70px;
-            width: 70px;
+            height: 60px;
+            width: 60px;
 
             border: 2px solid #6b5240;
             border-radius: 15px;
@@ -73,5 +73,30 @@
             font-size: 18px;
             font-weight: normal;
         }
+    }
+
+    @media screen and (max-width: 500px) {
+        .countdown-display{
+        width: 90%;
+        header{
+            display: flex;
+            align-items: center;
+
+            img{
+                height: 125px;
+                width: 125px;
+            }
+            h1{
+                font-size: 22px;
+            }
+        }
+        p{
+            text-indent: 10px;
+        }
+        h4{
+            font-size: 15px;
+            text-indent: 15px;
+        }
+      }
     }
 }
