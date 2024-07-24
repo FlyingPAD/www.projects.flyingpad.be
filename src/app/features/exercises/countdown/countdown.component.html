@@ -1,7 +1,7 @@
 <div class="countdown">
   <div class="event-buttons">
     <div *ngFor="let event of events">
-      <img [src]="'assets/events/' + event.thumbnail" [class.active]="event.isActive" (click)="setTargetDate(event.date, event.id, event.name)" />
+      <img [src]="'./assets/events/' + event.thumbnail" [class.active]="event.isActive" (click)="setTargetDate(event.date, event.id, event.name)" />
     </div>
   </div>
   <div class="countdown-display">
@@ -21,3 +21,6 @@
     <h4><b>{{ countdown.months }}</b> months, <b>{{ countdown.days }}</b> days, <b>{{ countdown.hours }}</b> hours, <b>{{ countdown.minutes }}</b> minutes, <b>{{ countdown.seconds }}</b> seconds</h4>
   </div>
 </div>
+
+<!-- <img src="./assets/app_logos/fp_logo_01.png" />
+<img src="assets/app_logos/fp_logo_01.png" /> -->
