@@ -23,11 +23,11 @@ export class CountdownComponent implements OnInit, OnDestroy {
   currentEventName: string | null = null;
 
   events: Events[] = [
-    { id: 1, name: 'New Year', thumbnail: 'newyear.png', date: new Date('2025-01-01'), isActive: false },
-    { id: 2, name: 'Valentine\'s Day', thumbnail: 'valentines.png', date: new Date('2025-02-14'), isActive: false },
-    { id: 3, name: 'Carnival', thumbnail: 'carnival.png', date: new Date('2025-03-04'), isActive: false },
-    { id: 4, name: 'Halloween', thumbnail: 'halloween.png', date: new Date('2024-10-31'), isActive: false },
-    { id: 5, name: 'Christmas', thumbnail: 'christmas.png', date: new Date('2024-12-25'), isActive: false },
+    { id: 1, name: 'New Year', thumbnail: 'newyear.webp', date: new Date('2025-01-01'), isActive: false },
+    { id: 2, name: 'Valentine\'s Day', thumbnail: 'valentines.webp', date: new Date('2025-02-14'), isActive: false },
+    { id: 3, name: 'Carnival', thumbnail: 'carnival.webp', date: new Date('2025-03-04'), isActive: false },
+    { id: 4, name: 'Halloween', thumbnail: 'halloween.webp', date: new Date('2024-10-31'), isActive: false },
+    { id: 5, name: 'Christmas', thumbnail: 'christmas.webp', date: new Date('2024-12-25'), isActive: false },
   ];
 
   ngOnInit(): void {
