@@ -28,8 +28,13 @@
             "assets": [
               {
                 "glob": "**/*",
+                "input": "public/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "favicon.ico",
                 "input": "public",
-                "output": "assets/"
+                "output": "./"
               }
             ],
             "styles": [
