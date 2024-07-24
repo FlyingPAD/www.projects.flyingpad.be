@@ -2,11 +2,9 @@
     <h1>Exercises</h1>
     <p>Coding can be interesting !</p>
 </div>
-<hr>
 <div class="menu-exercises">
     <a (click)="triggerCountDown()" [class.active]="boolCountDown">CountDown</a>
     <a (click)="triggerLeapYear()" [class.active]="boolLeapYear">Leap Year</a>
 </div>
-<hr>
 <app-countdown *ngIf="boolCountDown"/>
 <app-leap-year *ngIf="boolLeapYear" />

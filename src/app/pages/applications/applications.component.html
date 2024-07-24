@@ -2,4 +2,8 @@
     <h1>Applications</h1>
     <p>Coding can be useful !</p>
 </div>
-<hr>
+<div class="tools-icons">
+    <a [class.active]="showDiapason" (click)="toggleDiapason()"><img src="../../../../assets/app_icons/diapason.svg"></a>
+</div>
+
+<app-diapason *ngIf="showDiapason" />
