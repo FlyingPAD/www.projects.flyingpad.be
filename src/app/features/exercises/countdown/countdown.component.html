@@ -8,7 +8,7 @@
     <header *ngFor="let event of events">
       @if(event.isActive)
       {
-        <img [src]="'assets/events/' + event.thumbnail" [class.active]="event.isActive" 
+        <img [src]="'/assets/events/' + event.thumbnail" [class.active]="event.isActive" 
           (click)="setTargetDate(event.date, event.id, event.name)" />
         <div>
           <h1>{{ event.name }}</h1>
@@ -21,3 +21,4 @@
     <h4><b>{{ countdown.months }}</b> months, <b>{{ countdown.days }}</b> days, <b>{{ countdown.hours }}</b> hours, <b>{{ countdown.minutes }}</b> minutes, <b>{{ countdown.seconds }}</b> seconds</h4>
   </div>
 </div>
+<img src="assets/test.png"/>
