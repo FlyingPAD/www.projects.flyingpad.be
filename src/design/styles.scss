@@ -1,10 +1,21 @@
+h1{
+    color: #6b5240;
+    text-shadow: 0px 3px 3px rgba(0,0,0,0.2);
+    letter-spacing: 2px;
+    text-align: center;
+    font-size: 25px;
+}
+
 .card-title{
-    width: 400px;
+    width: 300px;
     margin: auto;
 
     h1{
-        font-size: 22px;
         color: #6b5240;
+        text-shadow: 0px 3px 3px rgba(0,0,0,0.2);
+        letter-spacing: 2px;
+        text-align: center;
+        font-size: 25px;
     }
     p{
         text-indent: 15px;

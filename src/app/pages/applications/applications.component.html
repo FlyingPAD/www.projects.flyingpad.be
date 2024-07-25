@@ -2,8 +2,18 @@
     <h1>Applications</h1>
     <p>Coding can be useful !</p>
 </div>
-<div class="tools-icons">
-    <a [class.active]="showDiapason" (click)="toggleDiapason()"><img src="../../../../assets/app_icons/diapason.svg"></a>
+<div class="icons-container">
+    <div class="icon" [class.active]="currentApp === 'diapason'" (click)="selectGame('diapason')">
+        <img src="assets/app_icons/diapason.svg">
+    </div>
+    <div class="icon" [class.active]="currentApp === 'keyboard'" (click)="selectGame('keyboard')">
+        <img src="assets/app_icons/keys-mini.svg">
+    </div>
 </div>
 
-<app-diapason *ngIf="showDiapason" />
+<div [@routeAnimations]="currentApp">
+    <ng-container [ngSwitch]="currentApp">
+        <app-diapason *ngSwitchCase="'diapason'" key="diapason" />
+        <app-flying-keys-mini *ngSwitchCase="'keyboard'" key="keyboard" />
+    </ng-container>
+</div>

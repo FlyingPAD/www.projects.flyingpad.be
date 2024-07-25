@@ -2,9 +2,22 @@
     <h1>Exercises</h1>
     <p>Coding can be interesting !</p>
 </div>
-<div class="menu-exercises">
-    <a (click)="triggerCountDown()" [class.active]="boolCountDown">CountDown</a>
-    <a (click)="triggerLeapYear()" [class.active]="boolLeapYear">Leap Year</a>
+<div class="icons-container">
+    <div class="icon" (click)="selectTool('countdown')" [class.active]="currentExercise === 'countdown'">
+        1
+    </div>
+    <div class="icon" (click)="selectTool('leapYear')" [class.active]="currentExercise === 'leapYear'">
+        2
+    </div>
+    <div class="icon" (click)="selectTool('chordWheel')" [class.active]="currentExercise === 'chordWheel'">
+        <img src="assets/app_icons/chord_wheel.png" />
+    </div>
 </div>
-<app-countdown *ngIf="boolCountDown"/>
-<app-leap-year *ngIf="boolLeapYear" />
+
+<div [@routeAnimations]="currentExercise">
+    <ng-container [ngSwitch]="currentExercise">
+        <app-countdown *ngSwitchCase="'countdown'" key="countdown" />
+        <app-leap-year  *ngSwitchCase="'leapYear'" key="leapYear" />
+        <app-chord-wheel  *ngSwitchCase="'chordWheel'" key="chordWheel" />
+    </ng-container>
+</div>

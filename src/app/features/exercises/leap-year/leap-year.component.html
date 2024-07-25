@@ -1,3 +1,4 @@
+<h1>Leap Year</h1>
 <div class="leap-year" [formGroup]="form">
     <input type="text" formControlName="year" placeholder="Enter a year" aria-label="Year input">
     <div *ngIf="form.get('year')?.errors?.['required']" class="error">Year is required.</div>

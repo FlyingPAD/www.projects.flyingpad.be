@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AudioService } from '../../../services/audio.service';
 import { FormsModule } from '@angular/forms';
+import { AnimSpinDirective } from '../../../directives/anim-spin.directive';
 
 @Component({
   selector: 'app-diapason',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AnimSpinDirective],
   templateUrl: './diapason.component.html',
   styleUrls: ['./diapason.component.scss']
 })

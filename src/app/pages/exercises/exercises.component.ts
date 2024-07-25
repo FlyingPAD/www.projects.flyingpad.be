@@ -2,25 +2,21 @@ import { Component } from '@angular/core';
 import { LeapYearComponent } from "../../features/exercises/leap-year/leap-year.component";
 import { CommonModule } from '@angular/common';
 import { CountdownComponent } from '../../features/exercises/countdown/countdown.component';
+import { ChordWheelComponent } from '../../features/exercises/chord-wheel/chord-wheel.component';
+import { slideInAnimation } from '../../animations/animations';
 
 @Component({
   selector: 'app-exercises',
   standalone: true,
-  imports: [CommonModule, LeapYearComponent, CountdownComponent],
+  imports: [CommonModule, CountdownComponent, LeapYearComponent, ChordWheelComponent],
   templateUrl: './exercises.component.html',
-  styleUrl: './exercises.component.scss'
+  styleUrl: './exercises.component.scss',
+  animations: [slideInAnimation]
 })
 export class ExercisesComponent {
-  boolCountDown: boolean = true;
-  boolLeapYear: boolean = false;
+  currentExercise: string = 'countdown'
 
-  triggerCountDown(): void {
-    this.boolCountDown = true;
-    this.boolLeapYear = false;
-  }
-
-  triggerLeapYear(): void {
-    this.boolCountDown = false;
-    this.boolLeapYear = true;
+  selectTool(exerciseName: string) {
+    this.currentExercise = exerciseName
   }
 }

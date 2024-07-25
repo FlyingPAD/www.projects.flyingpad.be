@@ -35,7 +35,8 @@
               "src/design/01_normalize.scss",
               "src/design/02_global_variables.scss",
               "src/design/03_global_settings.scss",
-              "src/design/styles.scss"
+              "src/design/styles.scss",
+              "src/design/animations.scss"
             ],
             "scripts": []
           },

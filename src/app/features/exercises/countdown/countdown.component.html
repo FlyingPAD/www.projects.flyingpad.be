@@ -1,4 +1,5 @@
 <div class="countdown">
+  <h1>Countdowns</h1>
   <div class="event-buttons">
     <div *ngFor="let event of events">
       <img [src]="'assets/events/' + event.thumbnail" [class.active]="event.isActive" (click)="setTargetDate(event.date, event.id, event.name)" />

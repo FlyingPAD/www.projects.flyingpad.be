@@ -1,27 +1,13 @@
 <div class="card-title">
     <h1>Home</h1>
-    <p>Hello everyone!</p>
-    <p>Welcome to my portfolio.</p>
+    <p>Coding portfolio.</p>
 </div>
 
 <div class="icons-container">
-    <div class="icon">
+    <div class="icon" [class.active]="showAbout" (click)="toggleShowAbout()">
         <img src="assets/app_icons/icon_about_001.png" />
     </div>
-    <div class="icon">
-        <img src="assets/app_icons/random.png" />
-    </div>
 </div>
 
 
-<div class="card-title">
-    <p>Additionally, you can find:</p>
-</div>
-<div class="line">
-    <span>My online resume:</span>
-    <p><a target="_blank" href="https://cv.flyingpad.be">https://cv.flyingpad.be</a></p>
-</div>
-<div class="line">
-    <p>My main project:</p>
-    <p><a target="_blank" href="https://www.flyingpad.be">https://www.flyingpad.be</a></p>
-</div>
+<app-about *ngIf="showAbout === true" />

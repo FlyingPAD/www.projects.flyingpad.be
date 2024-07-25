@@ -2,4 +2,15 @@
     <h1>Games</h1>
     <p>Coding can be fun !</p>
 </div>
-<app-story />
+
+<div class="icons-container">
+    <div class="icon" [class.active]="currentGame === 'trainer'" (click)="selectGame('trainer')">
+        <img src="assets/app_icons/trainer-notes.png" />
+    </div>
+</div>
+
+<div [@routeAnimations]="currentGame">
+    <ng-container [ngSwitch]="currentGame">
+        <app-trainer-notes *ngSwitchCase="'trainer'" key="trainer"/>
+    </ng-container>
+</div>
