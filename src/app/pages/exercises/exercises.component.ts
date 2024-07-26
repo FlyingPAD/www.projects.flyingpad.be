@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { CountdownComponent } from '../../features/exercises/countdown/countdown.component';
 import { ChordWheelComponent } from '../../features/exercises/chord-wheel/chord-wheel.component';
 import { slideInAnimation } from '../../animations/animations';
+import { CircleOfFifthsComponent } from '../../features/exercises/circle-of-fifths/circle-of-fifths.component';
 
 @Component({
   selector: 'app-exercises',
   standalone: true,
-  imports: [CommonModule, CountdownComponent, LeapYearComponent, ChordWheelComponent],
+  imports: [CommonModule, CountdownComponent, LeapYearComponent, ChordWheelComponent, CircleOfFifthsComponent],
   templateUrl: './exercises.component.html',
   styleUrl: './exercises.component.scss',
   animations: [slideInAnimation]

@@ -12,6 +12,9 @@
     <div class="icon" (click)="selectTool('chordWheel')" [class.active]="currentExercise === 'chordWheel'">
         <img src="assets/app_icons/chord_wheel.png" />
     </div>
+    <div class="icon" (click)="selectTool('circleOfFifths')" [class.active]="currentExercise === 'circleOfFifths'">
+        <img src="assets/app_icons/circle_fifths.png" />
+    </div>
 </div>
 
 <div [@routeAnimations]="currentExercise">
@@ -19,5 +22,6 @@
         <app-countdown *ngSwitchCase="'countdown'" key="countdown" />
         <app-leap-year  *ngSwitchCase="'leapYear'" key="leapYear" />
         <app-chord-wheel  *ngSwitchCase="'chordWheel'" key="chordWheel" />
+        <app-circle-of-fifths *ngSwitchCase="'circleOfFifths'" key="circleOfFifths" />
     </ng-container>
 </div>

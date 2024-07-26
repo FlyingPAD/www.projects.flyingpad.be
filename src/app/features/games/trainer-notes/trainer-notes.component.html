@@ -1,5 +1,7 @@
-<h1 *ngIf="gameStart === false">Select your Clef</h1>
-<h1 *ngIf="gameStart === true">Score : {{ score | number : '3.0' }}<span *ngIf="timer > 0"> | Timer : {{ timer | number : '2.0'}}</span></h1>
+<h1>Notes Reading Trainer</h1>
+
+<h2 *ngIf="gameStart === false">Select your Clef</h2>
+<h2 *ngIf="gameStart === true">Score : {{ score | number : '3.0' }}<span *ngIf="timer > 0"> | Timer : {{ timer | number : '2.0'}}</span></h2>
 
 <div class="trainer">
     <div class="trainer-container" *ngIf="gameEnd === false">

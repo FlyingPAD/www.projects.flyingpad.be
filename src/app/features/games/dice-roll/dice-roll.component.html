@@ -1,0 +1,91 @@
+<h1>Dice Roll</h1>
+
+<div class="dice-roll">
+    <div class="team">
+        <div id="avatar">
+            <div>
+                <img class="opacity" src="assets/app_icons/gender/female.png" />
+                <img src="assets/dice_roll/girl/f_{{emptyF}}.gif" />
+                <img src="assets/dice_roll/girl/f_{{overlayF}}.png" />
+                <img src="assets/dice_roll/girl/f_{{imageFName}}.png" />
+            </div>
+        </div>                     
+        <div *ngIf="messageFemale != undefined">
+            <div id="message">
+                <p>{{messageFemale}}</p>
+            </div>
+        </div>
+        <div *ngIf="resultFemale == undefined">
+            <div id="title">
+                <h1>Roll the Dice</h1>
+            </div>    
+            <div id="dice_roll">
+                <img src="assets/dice_roll/dice_roll.gif" (click)="femaleStartRoll()"/>
+            </div>      
+        </div>       
+        <div *ngIf="resultFemale">
+            <div class="flex" >
+                <p>Result :</p>
+                <p><b>{{resultFemale}}</b></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="rpg"> 
+        <div class="win" *ngIf="diceRollVictoryResult == 1">
+            <h1>{{messageResult}} !!</h1>
+            <div id="interface_screen">       
+                <div>           
+                    <img src="assets/dice_roll/winner.gif" />
+                </div>
+            </div>
+            <h2 (click)="diceRollRestart()">Restart</h2>
+        </div>
+        
+        <div class="win" *ngIf="diceRollVictoryResult == 2">
+            <h1>{{messageResult}} !!</h1>
+            <div id="interface_screen">       
+                <div>           
+                    <img src="assets/dice_roll/winner.gif" />
+                </div>
+            </div>
+            <h2 (click)="diceRollRestart()">Restart</h2>
+        </div>
+    
+        <div class="win" *ngIf="diceRollVictoryResult == 3">
+            <h1>{{messageResult}} !</h1>
+            <h2 (click)="diceRollRestart()">Restart</h2>
+        </div>
+    </div>
+    
+    <div class="team">
+        <div id="avatar">
+            <div>
+                <img class="opacity" src="assets/app_icons/gender/male.png" />
+                <img src="assets/dice_roll/boy/m_{{emptyM}}.gif" />
+                <img src="assets/dice_roll/boy/m_{{overlayM}}.png" />
+                <img src="assets/dice_roll/boy/m_{{imageMName}}.png" />
+            </div>
+        </div>                     
+        <div *ngIf="messageMale != undefined">
+            <div id="message">
+                <p>{{messageMale}}</p>
+            </div>
+        </div>
+        <div *ngIf="resultFemale && resultMale == undefined">
+            <div id="title">
+                <h1>Roll the Dice</h1>
+            </div>     
+            <div id="dice_roll">
+                <img src="assets/dice_roll/dice_roll.gif" (click)="maleStartRoll()"/>
+            </div>      
+        </div>       
+        <div *ngIf="resultMale">
+            <div class="flex" >
+                <p>Result :</p>
+                <p><b>{{resultMale}}</b></p>
+            </div>
+        </div>   
+    </div>
+</div>
+    

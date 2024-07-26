@@ -1,0 +1,139 @@
+// -------------------------------------------------------------------------------
+// - USED IN DICE ROLL : 
+// -------------------------------------------------------------------------------
+
+.dice-roll{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .team
+    {
+        width: 250px;
+        border: 1px solid #6b5240;
+        padding: 20px;
+    
+        #avatar
+        {
+            position: relative;
+    
+            height: 250px;
+            width: 250px;
+
+            margin: auto;
+            margin-bottom: 20px;
+    
+            border: 1px solid #6b5240;
+            border-radius: 5px;
+    
+            transition-duration: 500ms;
+    
+            img
+            {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+            .opacity
+            {
+                opacity: 0.5;
+            }
+        }
+    
+        #message
+        {   
+            border: 1px solid #6b5240;
+            border-radius: 5px;
+    
+            p
+            {
+                text-align: center;
+                color: #6b5240;
+            }
+        }
+    
+        #dice_roll
+        {           
+            img
+            {
+                width: 100%;
+                border-radius: 5px;
+            }
+            img:hover
+            {
+                cursor: pointer;
+            }
+        }
+    }
+    
+    
+    
+    #rpg
+    {
+        margin-top: 15px;
+    
+        h1
+        {
+            text-align: center;
+            color:#6b5240;  
+            margin: 15px;
+            font-size : 20px;
+        }
+    
+        h2
+        {
+            display: block;
+            width: 250px;
+            margin: auto; margin-top: 25px; margin-bottom: 25px;
+    
+            border: 1px solid #6b5240;  
+            border-radius: 5px;
+            background-color: white;  
+    
+            padding: 15px;
+    
+            color:#6b5240;  
+            text-align: center;
+        }
+        h2:hover
+        {
+            cursor: pointer;
+            color:#ffffff;  
+            background-color: #6b5240;    
+            transition-duration: 500ms; 
+        }
+    }
+    
+    #interface_screen
+    {
+        height: 100%;
+    
+        display: flex;
+        justify-content: center;
+    
+        img
+        {
+            border: 15px solid #ffffff00;
+            border-radius: 50px;
+            animation: anim_01 1s linear forwards;
+        }
+    
+        video
+        {
+            width: 500px;
+            height: 500px;
+            border: 15px solid #ffffff00;
+            border-radius: 50px;
+            animation: anim_01 1s linear forwards;
+    
+            background-color: black;
+        }
+    
+        @keyframes anim_01
+        {
+            0% {border: 15px solid #ffffff00;}
+            100% {border: 15px solid #755f46;}
+        }
+    }
+}

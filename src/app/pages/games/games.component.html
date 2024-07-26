@@ -7,10 +7,14 @@
     <div class="icon" [class.active]="currentGame === 'trainer'" (click)="selectGame('trainer')">
         <img src="assets/app_icons/trainer-notes.png" />
     </div>
+    <div class="icon" [class.active]="currentGame === 'diceRoll'" (click)="selectGame('diceRoll')">
+        <img src="assets/app_icons/dice-roll.png" />
+    </div>
 </div>
 
 <div [@routeAnimations]="currentGame">
     <ng-container [ngSwitch]="currentGame">
         <app-trainer-notes *ngSwitchCase="'trainer'" key="trainer"/>
+        <app-dice-roll *ngSwitchCase="'diceRoll'" key="diceRoll" />
     </ng-container>
 </div>
