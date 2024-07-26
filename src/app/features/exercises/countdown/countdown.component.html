@@ -22,3 +22,8 @@
     <h4><b>{{ countdown.months }}</b> months, <b>{{ countdown.days }}</b> days, <b>{{ countdown.hours }}</b> hours, <b>{{ countdown.minutes }}</b> minutes, <b>{{ countdown.seconds }}</b> seconds</h4>
   </div>
 </div>
+
+<div class="birthday">
+  <input type="date" [(ngModel)]="birthday">
+  <button (click)="processDate()">Process</button>
+</div>

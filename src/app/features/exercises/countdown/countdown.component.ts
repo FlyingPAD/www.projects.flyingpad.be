@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 interface Events {
   id: number;
@@ -12,7 +13,7 @@ interface Events {
 @Component({
   selector: 'app-countdown',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './countdown.component.html',
   styleUrls: ['./countdown.component.scss']
 })
@@ -21,6 +22,8 @@ export class CountdownComponent implements OnInit, OnDestroy {
   targetTime!: Date;
   countdown!: { months: number, days: number, hours: number, minutes: number, seconds: number };
   currentEventName: string | null = null;
+
+  birthday! : Date
 
   events: Events[] = [
     { id: 1, name: 'New Year', thumbnail: 'newyear.webp', date: new Date('2025-01-01'), isActive: false },
@@ -106,5 +109,11 @@ export class CountdownComponent implements OnInit, OnDestroy {
   stopCountDown(): void {
     clearInterval(this.intervalId);
     this.intervalId = undefined;
+  }
+
+  processDate(): void {
+    if (this.birthday) {
+      this.setTargetDate(new Date(this.birthday), -1, 'User Selected Date');
+    }
   }
 }
