@@ -25,8 +25,8 @@
         </div>       
         <div *ngIf="resultFemale">
             <div class="flex" >
-                <p>Result :</p>
-                <p><b>{{resultFemale}}</b></p>
+                <h1>Result</h1>
+                <img [src]="getDiceImagePath(resultFemale)" />
             </div>
         </div>
     </div>
@@ -81,9 +81,9 @@
             </div>      
         </div>       
         <div *ngIf="resultMale">
+            <h1>Result</h1>
             <div class="flex" >
-                <p>Result :</p>
-                <p><b>{{resultMale}}</b></p>
+                <img [src]="getDiceImagePath(resultMale)" />
             </div>
         </div>   
     </div>

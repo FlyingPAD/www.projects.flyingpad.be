@@ -49,6 +49,7 @@ export class DiceRollComponent
     this.victoryF = false
     this.victoryM = false
     this.messageFemale = "Ready to play ?"
+    this.messageMale = "Of course !"
     this.imageFName = "start"
     this.imageMName = "start"
     this.emptyF = "empty"
@@ -159,5 +160,10 @@ export class DiceRollComponent
     this.emptyF = "empty"
     this.overlayF = "empty"
     this.overlayM = "empty"
+  }
+
+  getDiceImagePath(result: number | undefined): string {
+    if (result === undefined) return ''
+    return `assets/dice_roll/dice-${result}.png`
   }
 }

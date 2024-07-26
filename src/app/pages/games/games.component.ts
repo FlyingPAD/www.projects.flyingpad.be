@@ -14,7 +14,7 @@ import { HigherOrLowerComponent } from '../../features/games/higher-or-lower/hig
   animations: [slideInAnimation]
 })
 export class GamesComponent {
-  currentGame: string = 'higherOrLower'
+  currentGame: string = 'diceRoll'
 
   selectGame(gameName: string) {
     this.currentGame = gameName

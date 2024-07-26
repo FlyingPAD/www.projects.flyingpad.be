@@ -5,11 +5,12 @@ import { CountdownComponent } from '../../features/exercises/countdown/countdown
 import { ChordWheelComponent } from '../../features/exercises/chord-wheel/chord-wheel.component';
 import { slideInAnimation } from '../../animations/animations';
 import { CircleOfFifthsComponent } from '../../features/exercises/circle-of-fifths/circle-of-fifths.component';
+import { ConvertorsComponent } from '../../features/exercises/convertors/convertors.component';
 
 @Component({
   selector: 'app-exercises',
   standalone: true,
-  imports: [CommonModule, CountdownComponent, LeapYearComponent, ChordWheelComponent, CircleOfFifthsComponent],
+  imports: [CommonModule, CountdownComponent, LeapYearComponent, ChordWheelComponent, CircleOfFifthsComponent, ConvertorsComponent],
   templateUrl: './exercises.component.html',
   styleUrl: './exercises.component.scss',
   animations: [slideInAnimation]

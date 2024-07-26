@@ -1,7 +1,12 @@
 import { trigger, state, style, animate, transition, query, group } from '@angular/animations';
 
 export const slideInAnimation = trigger('routeAnimations', [
-  transition('* => countdown, * => keyboard, * => higherOrLower, countdown <=> leapYear, countdown <=> chordWheel, countdown <=> circleOfFifths, leapYear <=> chordWheel, leapYear <=> circleOfFifths, chordWheel <=> circleOfFifths, trainer <=> diceRoll, trainer <=> higherOrLower, diceRoll <=> higherOrLower, diapason <=> keyboard', [
+  transition(
+    '* => countdown, * => keyboard, * => higherOrLower, ' + 
+    'countdown <=> leapYear, countdown <=> convertors, countdown <=> chordWheel, countdown <=> circleOfFifths, ' +
+    'leapYear <=> convertors, leapYear <=> chordWheel, leapYear <=> circleOfFifths, convertors <=> chordWheel, convertors <=> circleOfFifths, chordWheel <=> circleOfFifths, ' + 
+    'trainer <=> diceRoll, trainer <=> higherOrLower, diceRoll <=> higherOrLower, ' +
+    'keyboard <=> diapason, keyboard <=> tuner, diapason <=> tuner', [
     style({ position: 'relative' }),
     query(':enter, :leave', [
       style({

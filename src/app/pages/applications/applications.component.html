@@ -9,11 +9,15 @@
     <div class="icon" [class.active]="currentApp === 'diapason'" (click)="selectGame('diapason')">
         <img src="assets/app_icons/diapason.svg">
     </div>
+    <div class="icon" [class.active]="currentApp === 'tuner'" (click)="selectGame('tuner')">
+        <img src="assets/app_icons/tuner.png">
+    </div>
 </div>
 
 <div [@routeAnimations]="currentApp">
     <ng-container [ngSwitch]="currentApp">
         <app-diapason *ngSwitchCase="'diapason'" key="diapason" />
         <app-flying-keys-mini *ngSwitchCase="'keyboard'" key="keyboard" />
+        <app-tuner *ngSwitchCase="'tuner'" key="tuner" />
     </ng-container>
 </div>

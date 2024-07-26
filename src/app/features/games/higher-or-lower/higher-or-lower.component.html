@@ -1,4 +1,4 @@
-<h1>Higher or Lower</h1>
+<h1>Guess the Right Number</h1>
 <div class="higher-or-lower">
     <p>{{ message }}</p>
     <div *ngIf="!gameStart">
@@ -18,4 +18,5 @@
         <input type="number" [(ngModel)]="userInputValue">
         <div class="button" (click)="process()" >Process</div>
     </div>
+    <p *ngIf="moves !== 0"><u>Moves</u> : {{ moves }}</p>
 </div>

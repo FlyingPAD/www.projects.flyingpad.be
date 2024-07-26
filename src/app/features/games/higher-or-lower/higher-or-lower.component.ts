@@ -16,6 +16,7 @@ export class HigherOrLowerComponent {
   message : string = 'Please select your level'
   gameStart : boolean = false
   level : string = '0'
+  moves : number = 0
   
   generateRandom(): void {
     const min = 1
@@ -30,6 +31,7 @@ export class HigherOrLowerComponent {
     } else {
       this.message = 'Correct!'
     }
+    this.moves += 1
     this.checkGameStatus()
   }
 
@@ -42,6 +44,7 @@ export class HigherOrLowerComponent {
     this.generateRandom()
     this.gameStart = true
     this.message = 'Let\'s Go !!!'
+    this.moves = 0
   }
 
   checkGameStatus(){
