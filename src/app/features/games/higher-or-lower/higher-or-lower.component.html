@@ -1,0 +1,21 @@
+<h1>Higher or Lower</h1>
+<div class="higher-or-lower">
+    <p>{{ message }}</p>
+    <div *ngIf="!gameStart">
+        <div class="buttons-level">
+            <button (click)="selectLevel(1)">1</button>
+            <button (click)="selectLevel(2)">2</button>
+            <button (click)="selectLevel(3)">3</button>
+        </div>
+    </div>
+    <p *ngIf="level != '0'">Level <b>{{ level }}</b></p>
+    <div *ngIf="!gameStart">       
+        <p>( Find the number between 1 and {{ refLevel }} )</p>
+        <div class="button" (click)="startGame()">Start Game</div>
+    </div>
+    
+    <div *ngIf="gameStart">
+        <input type="number" [(ngModel)]="userInputValue">
+        <div class="button" (click)="process()" >Process</div>
+    </div>
+</div>

@@ -4,11 +4,14 @@
 </div>
 
 <div class="icons-container">
-    <div class="icon" [class.active]="currentGame === 'trainer'" (click)="selectGame('trainer')">
-        <img src="assets/app_icons/trainer-notes.png" />
+    <div class="icon" [class.active]="currentGame === 'higherOrLower'" (click)="selectGame('higherOrLower')">
+        <img src="assets/app_icons/high-low.png" />
     </div>
     <div class="icon" [class.active]="currentGame === 'diceRoll'" (click)="selectGame('diceRoll')">
         <img src="assets/app_icons/dice-roll.png" />
+    </div>
+    <div class="icon" [class.active]="currentGame === 'trainer'" (click)="selectGame('trainer')">
+        <img src="assets/app_icons/trainer.png" />
     </div>
 </div>
 
@@ -16,5 +19,6 @@
     <ng-container [ngSwitch]="currentGame">
         <app-trainer-notes *ngSwitchCase="'trainer'" key="trainer"/>
         <app-dice-roll *ngSwitchCase="'diceRoll'" key="diceRoll" />
+        <app-higher-or-lower *ngSwitchCase="'higherOrLower'" key="higherOrLower" />
     </ng-container>
 </div>

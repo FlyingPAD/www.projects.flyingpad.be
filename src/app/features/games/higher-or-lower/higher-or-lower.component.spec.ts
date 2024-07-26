@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StoryComponent } from './story.component';
+import { HigherOrLowerComponent } from './higher-or-lower.component';
 
-describe('StoryComponent', () => {
-  let component: StoryComponent;
-  let fixture: ComponentFixture<StoryComponent>;
+describe('HigherOrLowerComponent', () => {
+  let component: HigherOrLowerComponent;
+  let fixture: ComponentFixture<HigherOrLowerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StoryComponent]
+      imports: [HigherOrLowerComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(StoryComponent);
+    fixture = TestBed.createComponent(HigherOrLowerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,6 +3,8 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { AudioOldService } from '../../../services/audio-old.service';
 import { StorageService } from '../../../services/storage.service';
 import { FormsModule } from '@angular/forms';
+import { AnimSpinDirective } from '../../../directives/anim-spin.directive';
+import { AnimGrowDirective } from '../../../directives/anim-grow.directive';
 
 export class Note
 {
@@ -26,7 +28,7 @@ export interface GameResult
 @Component({
   selector: 'app-trainer-notes',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AnimGrowDirective, AnimSpinDirective],
   templateUrl: './trainer-notes.component.html',
   styleUrl: './trainer-notes.component.scss'
 })
