@@ -53,3 +53,14 @@
         color: white;
     }
 }
+
+img{
+    display: block;
+    margin: auto;
+}
+
+@media (max-width: 1024px){
+    img{
+        width: 100%;
+    }
+}
