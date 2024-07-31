@@ -14,7 +14,7 @@ import { TunerComponent } from '../../features/applications/tuner/tuner.componen
   animations: [slideInAnimation]
 })
 export class ApplicationsComponent {
-  currentApp: string = 'keyboard'
+  currentApp: string = 'tuner'
 
   selectGame(appName: string) {
     this.currentApp = appName

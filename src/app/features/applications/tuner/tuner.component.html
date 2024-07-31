@@ -1,5 +1,26 @@
-<h1>Guitar Tuner</h1>
-<div class="tuner">
-    <p>Note détectée: {{ currentNote }}</p>
-    <button (click)="startTuning()">Démarrer l'Accordage</button>
+<div class="guitar-tuner">
+    <h2>Guitar Tuner</h2>
+    <div class="box">
+        <p> ▸ 6 strings</p>
+        <p> ▸ Standard Tuning</p>
+    </div>
+        <div class="notes">
+            <div [class.highlight]="targetNote === 'E2'">E2</div>
+            <div [class.highlight]="targetNote === 'A2'">A2</div>
+            <div [class.highlight]="targetNote === 'D3'">D3</div>
+            <div [class.highlight]="targetNote === 'G3'">G3</div>
+            <div [class.highlight]="targetNote === 'B3'">B3</div>
+            <div [class.highlight]="targetNote === 'E4'">E4</div>
+        </div>
+        <div class="display">
+            <p *ngIf="frequencyDifference > 0"> < </p>
+            <p>{{ currentNote }}</p>
+            <p *ngIf="frequencyDifference < 0"> > </p>
+        </div>
+        
+        <div class="temp">
+            <p class="center">{{ frequencyDifference }} Hz</p>
+        </div>
+
+        <button (click)="startTuning()">Microphone</button>
 </div>
