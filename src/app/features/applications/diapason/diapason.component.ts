@@ -16,7 +16,7 @@ export class DiapasonComponent {
   audioService = inject(AudioService);
   #router = inject(Router);
 
-  currentVolume: number = 0.5;
+  currentVolume: number = 0.2;
   frequency: number = 440;
 
   constructor() {

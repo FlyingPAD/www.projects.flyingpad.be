@@ -23,7 +23,7 @@ export class FlyingKeysMiniComponent
   // Station
 
   keyStation :       KeyStation   = new KeyStation(this.#audioService, this.keysService)
-  currentVolume :    number       = 0.5
+  currentVolume :    number       = 0.2
   showNotes :        boolean      = true
 
   CKeyPressed :      boolean  = false

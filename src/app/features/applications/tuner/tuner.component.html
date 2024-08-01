@@ -1,26 +1,25 @@
+<h1>Accordeur de Guitare</h1>
 <div class="guitar-tuner">
-    <h2>Guitar Tuner</h2>
-    <div class="box">
-        <p> ▸ 6 strings</p>
-        <p> ▸ Standard Tuning</p>
-    </div>
-        <div class="notes">
-            <div [class.highlight]="targetNote === 'E2'">E2</div>
-            <div [class.highlight]="targetNote === 'A2'">A2</div>
-            <div [class.highlight]="targetNote === 'D3'">D3</div>
-            <div [class.highlight]="targetNote === 'G3'">G3</div>
-            <div [class.highlight]="targetNote === 'B3'">B3</div>
-            <div [class.highlight]="targetNote === 'E4'">E4</div>
-        </div>
-        <div class="display">
-            <p *ngIf="frequencyDifference > 0"> < </p>
-            <p>{{ currentNote }}</p>
-            <p *ngIf="frequencyDifference < 0"> > </p>
-        </div>
-        
-        <div class="temp">
-            <p class="center">{{ frequencyDifference }} Hz</p>
-        </div>
+  <h2>Guitar Tuner</h2>
+  <div class="box">
+    <p> ▸ 6 strings</p>
+    <p> ▸ Standard Tuning</p>
+  </div>
+  <div class="display">
+    <p>Note jouée: {{ currentNote?.name }}</p>
+    <p>Différence: {{ currentNote?.difference }} Hz</p>
+  </div>
+  <div class="temp">
+    <p class="center">{{ currentNote?.difference }} Hz</p>
+  </div>
+</div>
 
-        <button (click)="startTuning()">Microphone</button>
+<div class="guitar-head">
+    <img src="assets/tuner/guitar-head.png" alt="Guitar Head" />
+    <div class="note e2" (click)="playNote('E2')" [class.highlight]="targetNote?.name === 'E2'">E2</div>
+    <div class="note a2" (click)="playNote('A2')" [class.highlight]="targetNote?.name === 'A2'">A2</div>
+    <div class="note d3" (click)="playNote('D3')" [class.highlight]="targetNote?.name === 'D3'">D3</div>
+    <div class="note g3" (click)="playNote('G3')" [class.highlight]="targetNote?.name === 'G3'">G3</div>
+    <div class="note b3" (click)="playNote('B3')" [class.highlight]="targetNote?.name === 'B3'">B3</div>
+    <div class="note e4" (click)="playNote('E4')" [class.highlight]="targetNote?.name === 'E4'">E4</div>
 </div>

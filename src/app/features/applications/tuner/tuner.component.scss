@@ -1,22 +1,19 @@
-.notes {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
 
-    
-  }
-  
-  .notes div {
+  .note {
+    width: 60px;
+    height: 60px;
+
     padding: 10px;
+    margin: 15px;
+    
     font-size: 1.5em;
     border: 1px solid #6b5240;
     border-radius: 5px;
-    margin: 15px;
-
+    
     background-color:  rgb(107, 82, 64, 0.3);
   }
   
-  .notes .highlight {
+  .highlight {
     background-color: rgb(255, 145, 0);
     border-radius: 5px;
   }
@@ -39,4 +36,92 @@ button{
     border-radius: 5px;
 
     background-color:  rgb(107, 82, 64, 0.3);
+}
+
+.guitar-head {
+  position: relative;
+  width: 100%;
+  max-width: 471px;
+  height: auto;
+  margin: auto;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  .note {
+    position: absolute;
+    padding: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: white; /* Juste pour la visibilité, à ajuster selon votre design */
+    border-radius: 5px;
+    transform: translate(-50%, -50%); /* Pour centrer les notes par rapport à leur position */
+  }
+
+  .e2 {
+    top: 12.5%;  /* Ajuster selon l'image */
+    left: -5%;  /* Ajuster selon l'image */
+  }
+
+  .a2 {
+    top: 25%;  /* Ajuster selon l'image */
+    left: -5%;  /* Ajuster selon l'image */
+  }
+
+  .d3 {
+    top: 37%;  /* Ajuster selon l'image */
+    left: -5%;  /* Ajuster selon l'image */
+  }
+
+  .g3 {
+    top: 12.5%;  /* Ajuster selon l'image */
+    left: 98%;  /* Ajuster selon l'image */
+  }
+
+  .b3 {
+    top: 25%;  /* Ajuster selon l'image */
+    left: 98%;  /* Ajuster selon l'image */
+  }
+
+  .e4 {
+    top: 37%;  /* Ajuster selon l'image */
+    left: 98%;  /* Ajuster selon l'image */
+  }
+
+  .highlight {
+    background-color: yellow;
+  }
+
+  @media (max-width: 471px){
+    img{
+      display: block;
+      width: 80%;
+      margin: auto;
+    }
+    .e2 {
+      left: 7%;  /* Ajuster selon l'image */
+    }
+  
+    .a2 {
+      left: 7%;  /* Ajuster selon l'image */
+    }
+  
+    .d3 {
+      left: 7%;  /* Ajuster selon l'image */
+    }
+  
+    .g3 {
+      left: 86%;  /* Ajuster selon l'image */
+    }
+  
+    .b3 {
+      left: 86%;  /* Ajuster selon l'image */
+    }
+  
+    .e4 {
+      left: 86%;  /* Ajuster selon l'image */
+    }
+  }
 }
