@@ -1,42 +1,30 @@
-
-  .note {
-    width: 60px;
-    height: 60px;
-
-    padding: 10px;
-    margin: 15px;
-    
-    font-size: 1.5em;
-    border: 1px solid #6b5240;
-    border-radius: 5px;
-    
-    background-color:  rgb(107, 82, 64, 0.3);
-  }
-  
-  .highlight {
-    background-color: rgb(255, 145, 0);
-    border-radius: 5px;
-  }
-  
-  .display{
-    p{
-      text-align: center;
-    }
-  }
-
-  .temp{
-text-align: center;
+.display {
+  text-align: center;
 }
-button{
-    display: block;
-    margin: 15px;
-    margin: auto;
-    padding: 10px;
-    font-size: 1.5em;
-    border: 1px solid #6b5240;
-    border-radius: 5px;
 
-    background-color:  rgb(107, 82, 64, 0.3);
+.indicator {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  transition: background-color 0.5s;
+  border: 1px solid #6b5240;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.temp {
+  text-align: center;
+}
+
+button {
+  display: block;
+  margin: 15px;
+  margin: auto;
+  padding: 10px;
+  font-size: 1.5em;
+  border: 1px solid #6b5240;
+  border-radius: 5px;
+  background-color: rgb(107, 82, 64, 0.3);
 }
 
 .guitar-head {
@@ -45,84 +33,91 @@ button{
   max-width: 471px;
   height: auto;
   margin: auto;
+}
 
-  img {
-    width: 100%;
-    height: auto;
+.guitar-head img {
+  width: 100%;
+  height: auto;
+}
+
+.note {
+  position: absolute;
+  width: 47px;
+  height: 47px;
+  margin: 15px;
+  padding: 5px;
+  background-color: #fff;
+  border: 5px solid #6b5240;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  transform: translate(-50%, -50%);
+}
+
+.note:hover {
+  background-color: rgb(255, 201, 162);
+  transition-duration: 500ms;
+  cursor: pointer;
+}
+
+.e2 {
+  top: 12.5%;
+  left: -5%;
+}
+
+.a2 {
+  top: 25%;
+  left: -5%;
+}
+
+.d3 {
+  top: 37%;
+  left: -5%;
+}
+
+.g3 {
+  top: 12.5%;
+  left: 98%;
+}
+
+.b3 {
+  top: 25%;
+  left: 98%;
+}
+
+.e4 {
+  top: 37%;
+  left: 98%;
+}
+
+.highlight {
+  background-color: rgb(255, 145, 0);
+}
+
+@media (max-width: 471px) {
+  .guitar-head img {
+    display: block;
+    width: 80%;
+    margin: auto;
   }
-
-  .note {
-    position: absolute;
-    padding: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    background-color: white; /* Juste pour la visibilité, à ajuster selon votre design */
-    border-radius: 5px;
-    transform: translate(-50%, -50%); /* Pour centrer les notes par rapport à leur position */
-  }
-
   .e2 {
-    top: 12.5%;  /* Ajuster selon l'image */
-    left: -5%;  /* Ajuster selon l'image */
+    left: 7%;
   }
-
   .a2 {
-    top: 25%;  /* Ajuster selon l'image */
-    left: -5%;  /* Ajuster selon l'image */
+    left: 7%;
   }
-
   .d3 {
-    top: 37%;  /* Ajuster selon l'image */
-    left: -5%;  /* Ajuster selon l'image */
+    left: 7%;
   }
-
   .g3 {
-    top: 12.5%;  /* Ajuster selon l'image */
-    left: 98%;  /* Ajuster selon l'image */
+    left: 86%;
   }
-
   .b3 {
-    top: 25%;  /* Ajuster selon l'image */
-    left: 98%;  /* Ajuster selon l'image */
+    left: 86%;
   }
-
   .e4 {
-    top: 37%;  /* Ajuster selon l'image */
-    left: 98%;  /* Ajuster selon l'image */
-  }
-
-  .highlight {
-    background-color: yellow;
-  }
-
-  @media (max-width: 471px){
-    img{
-      display: block;
-      width: 80%;
-      margin: auto;
-    }
-    .e2 {
-      left: 7%;  /* Ajuster selon l'image */
-    }
-  
-    .a2 {
-      left: 7%;  /* Ajuster selon l'image */
-    }
-  
-    .d3 {
-      left: 7%;  /* Ajuster selon l'image */
-    }
-  
-    .g3 {
-      left: 86%;  /* Ajuster selon l'image */
-    }
-  
-    .b3 {
-      left: 86%;  /* Ajuster selon l'image */
-    }
-  
-    .e4 {
-      left: 86%;  /* Ajuster selon l'image */
-    }
+    left: 86%;
   }
 }

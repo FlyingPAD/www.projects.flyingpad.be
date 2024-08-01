@@ -1,21 +1,32 @@
+<h1>Accordeur de Guitare</h1>
 <div class="guitar-tuner">
   <h2>Guitar Tuner</h2>
   <div class="box">
-    <p> ▸ 6 strings</p>
-    <p> ▸ Standard Tuning</p>
+    <p> ▸ Guitar Type : 6 strings</p>
+    <p> ▸ Tuning :
+      <select (change)="onTuningChange($event)">
+        <option value="standard">Standard</option>
+        <option value="dropC">Drop C</option>
+        <option value="dropD">Drop D</option>
+        <option value="DADADD">DADADD</option>
+        <option value="DADADF#">DADADF#</option>
+        <option value="DADADA">DADADA</option>
+      </select>
+    </p>
   </div>
   <div class="display">
-    <p>{{ currentFrequency | number : '2.2' }} Hz</p>
-    <p>{{ frequencyDifference | number : '2.2' }} Hz</p>
+    <p><b>{{ currentFrequency | number : '2.2' }}</b> Hz</p>
+    <p><b>{{ frequencyDifference | number : '2.2' }}</b> Hz</p>
+    <div class="indicator" [style.background]="getIndicatorColor()"></div>
   </div>
 </div>
 
 <div class="guitar-head">
     <img src="assets/tuner/guitar-head.png" alt="Guitar Head" />
-    <div class="note e2" (click)="playNote('E2')" [class.highlight]="targetNote?.name === 'E2'">E2</div>
-    <div class="note a2" (click)="playNote('A2')" [class.highlight]="targetNote?.name === 'A2'">A2</div>
-    <div class="note d3" (click)="playNote('D3')" [class.highlight]="targetNote?.name === 'D3'">D3</div>
-    <div class="note g3" (click)="playNote('G3')" [class.highlight]="targetNote?.name === 'G3'">G3</div>
-    <div class="note b3" (click)="playNote('B3')" [class.highlight]="targetNote?.name === 'B3'">B3</div>
-    <div class="note e4" (click)="playNote('E4')" [class.highlight]="targetNote?.name === 'E4'">E4</div>
+    <div class="note e2" (click)="playNote(currentTuning[0].name!)" [class.highlight]="targetNote?.name === currentTuning[0].name">{{ currentTuning[0].name }}</div>
+    <div class="note a2" (click)="playNote(currentTuning[1].name!)" [class.highlight]="targetNote?.name === currentTuning[1].name">{{ currentTuning[1].name }}</div>
+    <div class="note d3" (click)="playNote(currentTuning[2].name!)" [class.highlight]="targetNote?.name === currentTuning[2].name">{{ currentTuning[2].name }}</div>
+    <div class="note g3" (click)="playNote(currentTuning[3].name!)" [class.highlight]="targetNote?.name === currentTuning[3].name">{{ currentTuning[3].name }}</div>
+    <div class="note b3" (click)="playNote(currentTuning[4].name!)" [class.highlight]="targetNote?.name === currentTuning[4].name">{{ currentTuning[4].name }}</div>
+    <div class="note e4" (click)="playNote(currentTuning[5].name!)" [class.highlight]="targetNote?.name === currentTuning[5].name">{{ currentTuning[5].name }}</div>
 </div>
