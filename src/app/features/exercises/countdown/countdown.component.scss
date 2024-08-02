@@ -1,5 +1,6 @@
 .countdown {
     margin-top: 15px;
+    margin-bottom: 75px;
 
     .event-buttons {
         display: flex;
@@ -147,7 +148,6 @@
         .date-picker{
             width: 100%;
             border: none;
-            border-top: 3px solid rgb(107, 82, 64, 0.8);
             border-bottom: 3px solid rgb(107, 82, 64, 0.8);
             border-radius: 0;
         }

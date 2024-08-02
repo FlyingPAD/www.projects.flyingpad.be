@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .pet-image {
+    width: 150px;
+    height: 150px;
+    margin: 20px 0;
+  }
+  
+  input {
+    margin-bottom: 10px;
+  }
+  
+  button {
+    margin: 5px;
+  }

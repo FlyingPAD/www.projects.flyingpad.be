@@ -1,4 +1,12 @@
 <h2>Leap Year</h2>
+
+<div class="box">
+    <p>The Earth takes approximately 365.25 days to orbit the Sun, which is known as a solar year. However, a calendar year has 365 days.</p>
+    <p>The remaining 0.25 days accumulate each year, which means that after four years, we have an extra day (0.25 days x 4 = 1 day).</p>
+    <p>To compensate for this difference, we add a day to the month of February every four years, making it 29 days instead of 28.</p>
+    <p>This is called a leap year.</p>
+</div>
+
 <div class="leap-year" [formGroup]="form">
     <input type="text" formControlName="year" placeholder="Enter a year" aria-label="Year input">
     <div *ngIf="form.get('year')?.errors?.['required']" class="error">Year is required.</div>
@@ -10,11 +18,8 @@
     <p *ngIf="isALeapYear === undefined">Please, enter a valid year...</p>
 </div>
 
-<div class="box">
-    <p>A leap year has an extra day, February 29, to keep the calendar aligned with the Earth's orbit around the Sun, which takes about 365.25 days.</p>
-</div>
+<img src="assets/img/sun.webp" />
+
 <div class="box">
     <p>A year is a leap year if it is divisible by 4. However, if the year is divisible by 100, it must also be divisible by 400. For example, 2000 is a leap year, but 1900 is not.</p>
 </div>
-
-<img src="assets/img/sun.webp" />

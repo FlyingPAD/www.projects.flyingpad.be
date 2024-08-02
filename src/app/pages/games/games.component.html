@@ -13,6 +13,9 @@
     <div class="icon" [class.active]="currentGame === 'trainer'" (click)="selectGame('trainer')">
         <img src="assets/app_icons/trainer.png" />
     </div>
+    <div class="icon" [class.active]="currentGame === 'virtualPet'" (click)="selectGame('virtualPet')">
+        <img src="assets/app_icons/virtual-pet.png" />
+    </div>
 </div>
 
 <div [@routeAnimations]="currentGame">
@@ -20,5 +23,6 @@
         <app-trainer-notes *ngSwitchCase="'trainer'" key="trainer"/>
         <app-dice-roll *ngSwitchCase="'diceRoll'" key="diceRoll" />
         <app-higher-or-lower *ngSwitchCase="'higherOrLower'" key="higherOrLower" />
+        <app-virtual-pet *ngSwitchCase="'virtualPet'" key="virtualPet" />
     </ng-container>
 </div>

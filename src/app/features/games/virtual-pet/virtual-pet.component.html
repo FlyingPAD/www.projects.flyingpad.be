@@ -1,0 +1,23 @@
+<div class="container">
+    <div *ngIf="!isNamed" class="center-content">
+      <h1>Donnez un nom à votre Virtual Pet</h1>
+      <input type="text" [(ngModel)]="name">
+      <button (click)="setName(name)">Valider</button>
+    </div>
+    
+    <div *ngIf="isNamed && isAlive" class="center-content">
+      <h1>{{ name }}</h1>
+      <img src="assets/placeholder.png" alt="Virtual Pet Image" class="pet-image">
+      <p>Hunger: {{ hunger }}</p>
+      <p>Happiness: {{ happiness }}</p>
+      <p>Cleanliness: {{ cleanliness }}</p>
+      <button (click)="feed()">Nourrir</button>
+      <button (click)="play()">Jouer</button>
+      <button (click)="clean()">Nettoyer</button>
+    </div>
+    
+    <div *ngIf="isNamed && !isAlive" class="center-content">
+      <h1>{{ name }} est mort.</h1>
+      <button (click)="restart()">Redémarrer</button>
+    </div>
+  </div>
