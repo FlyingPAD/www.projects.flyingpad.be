@@ -21,9 +21,10 @@ export class CountdownComponent implements OnInit, OnDestroy {
   intervalId: ReturnType<typeof setInterval> | undefined = undefined;
   targetTime!: Date;
   countdown!: { months: number, days: number, hours: number, minutes: number, seconds: number };
+  countdownMessage: string = 'Time remaining :';
   currentEventName: string | null = null;
 
-  birthday! : Date
+  birthday!: Date | undefined;
 
   events: Events[] = [
     { id: 1, name: 'New Year', thumbnail: 'newyear.webp', date: new Date('2025-01-01'), isActive: false },
@@ -83,26 +84,25 @@ export class CountdownComponent implements OnInit, OnDestroy {
     const now = new Date();
     const timeDiff = this.targetTime.getTime() - now.getTime();
 
-    const totalDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const isPast = timeDiff < 0;
+    this.countdownMessage = isPast ? 'Time since :' : 'Time remaining :';
+
+    const totalDays = Math.floor(Math.abs(timeDiff) / (1000 * 60 * 60 * 24));
     const months = Math.floor(totalDays / 30); // Approximative
     const days = totalDays % 30;
 
     this.countdown = {
       months: months,
       days: days,
-      hours: Math.floor((timeDiff / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((timeDiff / 1000 / 60) % 60),
-      seconds: Math.floor((timeDiff / 1000) % 60)
+      hours: Math.floor((Math.abs(timeDiff) / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((Math.abs(timeDiff) / 1000 / 60) % 60),
+      seconds: Math.floor((Math.abs(timeDiff) / 1000) % 60),
     };
   }
 
   startCountDown(): void {
     this.intervalId = setInterval(() => {
       this.updateCountdown();
-      if (this.targetTime.getTime() <= new Date().getTime()) {
-        clearInterval(this.intervalId);
-        this.countdown = { months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
-      }
     }, 1000);
   }
 
@@ -111,9 +111,16 @@ export class CountdownComponent implements OnInit, OnDestroy {
     this.intervalId = undefined;
   }
 
-  processDate(): void {
+  handleDateChange(): void {
     if (this.birthday) {
       this.setTargetDate(new Date(this.birthday), -1, 'User Selected Date');
+    } else {
+      this.setNextActiveEvent();
     }
+  }
+
+  handleEventClick(targetDate: Date, eventId: number, eventName: string): void {
+    this.birthday = undefined; // Reset birthday to avoid displaying both
+    this.setTargetDate(targetDate, eventId, eventName);
   }
 }

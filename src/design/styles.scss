@@ -53,11 +53,16 @@ h2{
     justify-content: center;
 
     .icon{
-        height: 50px;
-        width: 50px;
+        min-height: 50px;
+        max-height: 50px;
+        min-width: 50px;
+        max-width: 50px;
+
         background-color: rgb(0, 0, 0, 0.3);
         border: 1px solid rgb(107, 82, 64, 0.3);
         border-radius: 5px;
+        box-shadow: 0 3px 4px 0px rgba(80, 42, 14, 0.3);
+
         padding: 5px;
         margin: 10px;
 

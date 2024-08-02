@@ -1,136 +1,155 @@
-.countdown{
+.countdown {
     margin-top: 15px;
 
-    h1{
-        color: #6b5240;
-        text-shadow: 0px 3px 3px rgba(0,0,0,0.2);
-        letter-spacing: 2px;
-        text-align: center;
-        font-size: 25px;
-    }
-
-    .event-buttons{
-        display:flex;
+    .event-buttons {
+        display: flex;
         justify-content: center;
         flex-wrap: wrap;
 
-        img{
+        img {
             margin: 5px;
             height: 50px;
             width: 50px;
 
             border: 2px solid #6b5240;
-            border-radius: 15px;
+            border-radius: 5px;
+            box-shadow: 0 3px 4px 0px rgba(80, 42, 14, 0.3);
 
             opacity: 0.5;
         }
-        img:hover:not(.active){
+
+        img:hover:not(.active) {
             opacity: 1;
             transition-duration: 500ms;
             cursor: pointer;
         }
-        .active{
+
+        .active {
             opacity: 1;
             border: 2px solid #6b5240;
         }
     }
 
-    .countdown-display{
+    .countdown-display {
         width: 500px;
         margin: auto;
+        margin-top: 10px;
+
         border: 3px solid rgb(107, 82, 64, 0.8);
-        border-radius: 15px;
+        border-radius: 15px 15px 0 0;
         background-color: rgba(255, 255, 255, 0.4);
 
-        header{
+        header {
             display: flex;
             align-items: center;
 
-            img{
-                height: 175px;
-                width: 175px;
+            img {
+                height: 165px;
+                width: 165px;
                 margin: 15px;
                 border-radius: 15px;
                 border: 1px solid #6b5240;
             }
-            h1{
-                color: #6b5240;
-                text-shadow: 0px 3px 3px rgba(0,0,0,0.2);
-                letter-spacing: 2px;
-                font-size: 30px;
-            }
-            h3{
-                color: #6b5240;
-                text-indent: 15px;
-            }
-            h2{
-                color: #6b5240;
-                text-indent: 15px;
-                font-size: 18px;
+
+            div{
+                h1 {
+                    color: #6b5240;
+                    text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+                    letter-spacing: 2px;
+                    font-size: 27px;
+                    text-align: left;
+                }
+    
+                h2 {
+                    color: #6b5240;
+                    text-indent: 15px;
+                    font-size: 18px;
+                    text-align: left;
+                }
             }
         }
 
-        p{
+        p {
             text-indent: 28px;
-            color:#6b5240;
+            color: #6b5240;
             text-decoration: underline;
             font-weight: bold;
         }
-        h4{
+
+        h4 {
             text-indent: 35px;
             font-size: 18px;
             font-weight: normal;
         }
     }
 
+    .date-picker{
+        width: 506px;
+        margin: auto;
+        text-align: center;
+        color: #fff;
+        padding: 10px 0;
+        border-bottom: 3px solid #6b5240;
+        background-color: #6b5240;
+        border-radius: 0 0 15px 15px;
+
+        input {
+            display: block;
+            width: 150px;
+            margin: auto;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+    
+        input:focus {
+            outline: none;
+            border: 2px solid #4b3627;
+        }
+    }
+
     @media screen and (max-width: 500px) {
-        .countdown-display{
-        width: 90%;
-        header{
-            display: flex;
-            align-items: center;
+        .countdown-display {
+            width: 100%;
+            border: none;
+            border-top: 3px solid rgb(107, 82, 64, 0.8);
+            border-bottom: 3px solid rgb(107, 82, 64, 0.8);
+            border-radius: 0;
 
-            img{
-                height: 125px;
-                width: 125px;
+            header {
+                display: flex;
+                align-items: center;
+
+                img {
+                    height: 125px;
+                    width: 125px;
+                }
+
+                div{
+                    h1 {
+                        font-size: 20px;
+                    }
+                    h2{
+                        text-indent: 0;
+                    }
+                }
             }
-            h1{
-                font-size: 22px;
+
+            p {
+                text-indent: 10px;
+            }
+
+            h4 {
+                font-size: 15px;
+                text-indent: 15px;
             }
         }
-        p{
-            text-indent: 10px;
+        .date-picker{
+            width: 100%;
+            border: none;
+            border-top: 3px solid rgb(107, 82, 64, 0.8);
+            border-bottom: 3px solid rgb(107, 82, 64, 0.8);
+            border-radius: 0;
         }
-        h4{
-            font-size: 15px;
-            text-indent: 15px;
-        }
-      }
-    }
-}
-
-.birthday{
-
-    margin-top: 50px;
-    input{
-        display: block;
-        width: 250px;
-        margin: auto;
-        padding: 10px;
-        border-radius: 5px;
-        text-align: right;
-        font-size: 20px;
-    }
-    input:focus
-    {
-        outline: none;
-        border: 2px solid #000000;
-    }
-    button{
-        width: 150px;
-        height: 35px;
-        display: block;
-        margin: auto;
-        margin-top: 20px;
     }
 }
