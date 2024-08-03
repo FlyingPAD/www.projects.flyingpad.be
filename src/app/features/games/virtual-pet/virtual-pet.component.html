@@ -1,23 +1,39 @@
+<h2>Select your Virtual Pet</h2>
 <div class="container">
-    <div *ngIf="!isNamed" class="center-content">
-      <h1>Donnez un nom à votre Virtual Pet</h1>
-      <input type="text" [(ngModel)]="name">
-      <button (click)="setName(name)">Valider</button>
-    </div>
-    
-    <div *ngIf="isNamed && isAlive" class="center-content">
-      <h1>{{ name }}</h1>
-      <img src="assets/placeholder.png" alt="Virtual Pet Image" class="pet-image">
-      <p>Hunger: {{ hunger }}</p>
-      <p>Happiness: {{ happiness }}</p>
-      <p>Cleanliness: {{ cleanliness }}</p>
-      <button (click)="feed()">Nourrir</button>
-      <button (click)="play()">Jouer</button>
-      <button (click)="clean()">Nettoyer</button>
-    </div>
-    
-    <div *ngIf="isNamed && !isAlive" class="center-content">
-      <h1>{{ name }} est mort.</h1>
-      <button (click)="restart()">Redémarrer</button>
+  <div *ngIf="!isSelected" class="center-content">
+    <div class="selection">
+      <div *ngFor="let pet of pets" class="pet-container">
+        <img [src]="'assets/virtual_pet/' + pet.type.toLowerCase() + '.png'" alt="" (click)="selectPet(pet)" class="pet-selection-image" (error)="onImageError($event, pet)">
+        <div class="pet-type">{{ pet.type }}</div>
+      </div>
     </div>
   </div>
+
+  <div *ngIf="isSelected && !isNamed" class="center-content">
+    <img [src]="'assets/virtual_pet/' + pet!.type.toLowerCase() + '.png'" alt="Virtual Pet Image" class="pet-image">
+    <h1>Name your {{ pet!.type }}</h1> <!-- Utilisation du non-null assertion operator -->
+    <input type="text" [(ngModel)]="name">
+    <button (click)="setName(name)">Confirm</button>
+  </div>
+
+  <div *ngIf="isNamed && isAlive" class="center-content">
+    <h1>{{ name }}</h1>
+    <img [src]="'assets/virtual_pet/' + pet!.type.toLowerCase() + '.png'" alt="Virtual Pet Image" class="pet-image">
+    <p>Hunger: {{ pet!.hunger }}</p>
+    <p>Happiness: {{ pet!.happiness }}</p>
+    <p>Cleanliness: {{ pet!.cleanliness }}</p>
+    <button (click)="feed()">Feed</button>
+    <button (click)="play()">Play</button>
+    <button (click)="clean()">Clean</button>
+  </div>
+
+  <div *ngIf="isNamed && !isAlive" class="center-content">
+    <h1>{{ name }} is dead.</h1>
+    <img [src]="'assets/virtual_pet/' + pet!.type.toLowerCase() + '_dead.png'" alt="Virtual Pet Image" class="pet-image">
+    <button (click)="restart()">Restart</button>
+  </div>
+  
+  <div *ngIf="message" class="center-content">
+    <p>{{ message }}</p>
+  </div>
+</div>

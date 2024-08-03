@@ -15,7 +15,7 @@ import { VirtualPetComponent } from '../../features/games/virtual-pet/virtual-pe
   animations: [slideInAnimation]
 })
 export class GamesComponent {
-  currentGame: string = 'diceRoll'
+  currentGame: string = 'virtualPet'
 
   selectGame(gameName: string) {
     this.currentGame = gameName
