@@ -18,13 +18,19 @@
 
   <div *ngIf="isNamed && isAlive" class="center-content">
     <h1>{{ name }}</h1>
-    <img [src]="'assets/virtual_pet/' + pet!.type.toLowerCase() + '.png'" alt="Virtual Pet Image" class="pet-image">
-    <p>Hunger: {{ pet!.hunger }}</p>
-    <p>Happiness: {{ pet!.happiness }}</p>
-    <p>Cleanliness: {{ pet!.cleanliness }}</p>
-    <button (click)="feed()">Feed</button>
-    <button (click)="play()">Play</button>
-    <button (click)="clean()">Clean</button>
+    <div class="display">
+      <img [src]="'assets/virtual_pet/' + pet!.type.toLowerCase() + '.png'" alt="Virtual Pet Image" class="pet-image">
+    </div>
+    <div class="state">
+      <p>🍖 {{ pet!.hunger | number : '3.0' }}</p>
+      <p>😀 {{ pet!.happiness | number : '3.0' }}</p>
+      <p>💦 {{ pet!.cleanliness | number : '3.0' }}</p>
+    </div>
+    <div class="buttons">
+      <div (click)="feed()">Feed</div>
+      <div (click)="play()">Play</div>
+      <div (click)="clean()">Clean</div>
+    </div>
   </div>
 
   <div *ngIf="isNamed && !isAlive" class="center-content">
