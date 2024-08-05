@@ -12,6 +12,6 @@ export class ConvertDistancePipe implements PipeTransform {
     } else if (fromUnit === 'Miles' && toUnit === 'Kilometers') {
       convertedValue = value / 0.621371;
     }
-    return `${convertedValue} ${toUnit}`;
+    return `${convertedValue.toFixed(2)} ${toUnit}`;
   }
 }

@@ -16,7 +16,7 @@ import { ConvertorsComponent } from '../../features/exercises/convertors/convert
   animations: [slideInAnimation]
 })
 export class ExercisesComponent {
-  currentExercise: string = 'countdown'
+  currentExercise: string = 'convertors'
 
   selectTool(exerciseName: string) {
     this.currentExercise = exerciseName

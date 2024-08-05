@@ -12,6 +12,6 @@ export class ConvertVolumePipe implements PipeTransform {
     } else if (fromUnit === 'Gallons' && toUnit === 'Liters') {
       convertedValue = value / 0.264172;
     }
-    return `${convertedValue} ${toUnit}`;
+    return `${convertedValue.toFixed(2)} ${toUnit}`;
   }
 }

@@ -12,6 +12,6 @@ export class ConvertTemperaturePipe implements PipeTransform {
     } else if (fromUnit === 'Fahrenheit' && toUnit === 'Celsius') {
       convertedValue = (value - 32) * 5 / 9;
     }
-    return `${convertedValue} ° ${toUnit}`;
+    return `${convertedValue.toFixed(2)} ° ${toUnit}`;
   }
 }

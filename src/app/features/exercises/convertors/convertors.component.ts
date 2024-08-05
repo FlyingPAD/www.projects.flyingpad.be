@@ -21,85 +21,94 @@ import { ConvertVolumePipe } from '../../../pipes/convert-volume.pipe';
   ],
 })
 export class ConvertorsComponent {
-  temperatureForm: FormGroup;
-  distanceForm: FormGroup;
-  massForm: FormGroup;
-  volumeForm: FormGroup;
+  temperature : boolean = false
+  temperatureToggle():void{ this.temperature = !this.temperature}
+  distance : boolean = false
+  distanceToggle():void{ this.distance = !this.distance}
+  mass : boolean = false
+  massToggle():void{ this.mass = !this.mass}
+  volume : boolean = false
+  volumeToggle():void{ this.volume = !this.volume}
 
-  temperatureUnits = ['Celsius', 'Fahrenheit'];
-  distanceUnits = ['Kilometers', 'Miles'];
-  massUnits = ['Kilograms', 'Pounds'];
-  volumeUnits = ['Liters', 'Gallons'];
+  temperatureForm: FormGroup
+  distanceForm: FormGroup
+  massForm: FormGroup
+  volumeForm: FormGroup
 
-  toTemperatureUnit: string;
-  toDistanceUnit: string;
-  toMassUnit: string;
-  toVolumeUnit: string;
+  temperatureUnits = ['Celsius', 'Fahrenheit']
+  distanceUnits = ['Kilometers', 'Miles']
+  massUnits = ['Kilograms', 'Pounds']
+  volumeUnits = ['Liters', 'Gallons']
+
+  toTemperatureUnit: string
+  toDistanceUnit: string
+  toMassUnit: string
+  toVolumeUnit: string
 
   constructor(private fb: FormBuilder) {
     this.temperatureForm = this.fb.group({
-      value: [0],
+      value: [10],
       fromUnit: ['Celsius'],
       toUnit: ['Fahrenheit']
-    });
+    })
 
     this.distanceForm = this.fb.group({
-      value: [0],
+      value: [10],
       fromUnit: ['Kilometers'],
       toUnit: ['Miles']
-    });
+    })
 
     this.massForm = this.fb.group({
-      value: [0],
+      value: [10],
       fromUnit: ['Kilograms'],
       toUnit: ['Pounds']
-    });
+    })
 
     this.volumeForm = this.fb.group({
-      value: [0],
+      value: [10],
       fromUnit: ['Liters'],
       toUnit: ['Gallons']
-    });
+    })
 
-    this.toTemperatureUnit = this.temperatureUnits[1];
-    this.toDistanceUnit = this.distanceUnits[1];
-    this.toMassUnit = this.massUnits[1];
-    this.toVolumeUnit = this.volumeUnits[1];
+    this.toTemperatureUnit = this.temperatureUnits[1]
+    this.toDistanceUnit = this.distanceUnits[1]
+    this.toMassUnit = this.massUnits[1]
+    this.toVolumeUnit = this.volumeUnits[1]
 
     this.temperatureForm.get('fromUnit')?.valueChanges.subscribe(value => {
-      this.updateTemperatureToUnit(value);
-    });
+      this.updateTemperatureToUnit(value)
+    })
 
     this.distanceForm.get('fromUnit')?.valueChanges.subscribe(value => {
-      this.updateDistanceToUnit(value);
-    });
+      this.updateDistanceToUnit(value)
+    })
 
     this.massForm.get('fromUnit')?.valueChanges.subscribe(value => {
-      this.updateMassToUnit(value);
-    });
+      this.updateMassToUnit(value)
+    })
 
     this.volumeForm.get('fromUnit')?.valueChanges.subscribe(value => {
-      this.updateVolumeToUnit(value);
-    });
+      this.updateVolumeToUnit(value)
+    })
   }
 
   updateTemperatureToUnit(fromUnit: string) {
-    this.toTemperatureUnit = this.temperatureUnits.find(unit => unit !== fromUnit) || '';
-    this.temperatureForm.get('toUnit')?.setValue(this.toTemperatureUnit);
+    this.toTemperatureUnit = this.temperatureUnits.find(unit => unit !== fromUnit) || ''
+    this.temperatureForm.get('toUnit')?.setValue(this.toTemperatureUnit)
   }
 
   updateDistanceToUnit(fromUnit: string) {
-    this.toDistanceUnit = this.distanceUnits.find(unit => unit !== fromUnit) || '';
-    this.distanceForm.get('toUnit')?.setValue(this.toDistanceUnit);
+    this.toDistanceUnit = this.distanceUnits.find(unit => unit !== fromUnit) || ''
+    this.distanceForm.get('toUnit')?.setValue(this.toDistanceUnit)
   }
 
   updateMassToUnit(fromUnit: string) {
-    this.toMassUnit = this.massUnits.find(unit => unit !== fromUnit) || '';
-    this.massForm.get('toUnit')?.setValue(this.toMassUnit);
+    this.toMassUnit = this.massUnits.find(unit => unit !== fromUnit) || ''
+    this.massForm.get('toUnit')?.setValue(this.toMassUnit)
   }
 
   updateVolumeToUnit(fromUnit: string) {
-    this.toVolumeUnit = this.volumeUnits.find(unit => unit !== fromUnit) || '';
-    this.volumeForm.get('toUnit')?.setValue(this.toVolumeUnit);
+    this.toVolumeUnit = this.volumeUnits.find(unit => unit !== fromUnit) || ''
+    this.volumeForm.get('toUnit')?.setValue(this.toVolumeUnit)
   }
 }

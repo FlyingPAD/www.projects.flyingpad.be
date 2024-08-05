@@ -12,6 +12,6 @@ export class ConvertMassPipe implements PipeTransform {
     } else if (fromUnit === 'Pounds' && toUnit === 'Kilograms') {
       convertedValue = value / 2.20462;
     }
-    return `${convertedValue} ${toUnit}`;
+    return `${convertedValue.toFixed(2)} ${toUnit}`;
   }
 }
