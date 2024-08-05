@@ -87,17 +87,28 @@
     .date-picker{
         width: 506px;
         margin: auto;
-        text-align: center;
-        color: #fff;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
         padding: 10px 0;
+
         border-bottom: 3px solid #6b5240;
         background-color: #6b5240;
         border-radius: 0 0 15px 15px;
 
+        color: #fff;
+
+        span{
+            margin-right: 10px;
+            font-size: 17px;
+            letter-spacing: 1px;
+        }
+
         input {
             display: block;
             width: 150px;
-            margin: auto;
             padding: 10px;
             border-radius: 5px;
             font-size: 18px;

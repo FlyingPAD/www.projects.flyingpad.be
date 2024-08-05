@@ -247,7 +247,13 @@ export class TunerComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.streamSource) {
       this.streamSource.disconnect();
+    }
+    if (this.audioContext) {
       this.audioContext.close();
+    }
+    if (this.streamSource && this.streamSource.mediaStream) {
+      const tracks = this.streamSource.mediaStream.getTracks();
+      tracks.forEach(track => track.stop());
     }
   }
 }

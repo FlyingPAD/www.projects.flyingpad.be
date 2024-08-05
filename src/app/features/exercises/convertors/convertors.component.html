@@ -11,7 +11,7 @@
       <select id="tempFromUnit" formControlName="fromUnit">
         <option *ngFor="let unit of temperatureUnits" [value]="unit"> {{unit}}</option>
       </select>
-      <label for="tempToUnit"> To {{ toTemperatureUnit }}</label>
+      <label for="tempToUnit"> to {{ toTemperatureUnit }}</label>
       <input id="tempValue" formControlName="value" type="number">
       <p> = {{ temperatureForm.value.value | convertTemperature : temperatureForm.value.fromUnit:temperatureForm.value.toUnit }}</p>
     </form>
@@ -29,7 +29,7 @@
       <select id="distFromUnit" formControlName="fromUnit">
         <option *ngFor="let unit of distanceUnits" [value]="unit"> {{unit}}</option>
       </select>
-      <label for="distToUnit"> To {{ toDistanceUnit }}</label>
+      <label for="distToUnit"> to {{ toDistanceUnit }}</label>
       <input id="distValue" formControlName="value" type="number">
       <p> = {{ distanceForm.value.value | convertDistance:distanceForm.value.fromUnit:distanceForm.value.toUnit }}</p>
     </form>
@@ -47,7 +47,7 @@
       <select id="massFromUnit" formControlName="fromUnit">
         <option *ngFor="let unit of massUnits" [value]="unit"> {{unit}}</option>
       </select>
-      <label for="massToUnit"> To {{ toMassUnit }}</label>
+      <label for="massToUnit"> to {{ toMassUnit }}</label>
       <input id="massValue" formControlName="value" type="number">
       <p> = {{ massForm.value.value | convertMass:massForm.value.fromUnit:massForm.value.toUnit }}</p>
     </form>
@@ -65,7 +65,7 @@
       <select id="volumeFromUnit" formControlName="fromUnit">
         <option *ngFor="let unit of volumeUnits" [value]="unit"> {{unit}}</option>
       </select>
-      <label for="volumeToUnit"> To {{ toVolumeUnit }}</label>
+      <label for="volumeToUnit"> to {{ toVolumeUnit }}</label>
       <input id="volumeValue" formControlName="value" type="number">
       <p> = {{ volumeForm.value.value | convertVolume:volumeForm.value.fromUnit:volumeForm.value.toUnit }}</p>
     </form>
