@@ -1,65 +1,118 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { VirtualPetService } from '../../../services/virtual-pet.service';
 import { Pet } from '../../../models/pet';
+import { ButtonTopComponent } from '../../../components/button-top/button-top.component';
 
 @Component({
   selector: 'app-virtual-pet',
   standalone: true,
   templateUrl: './virtual-pet.component.html',
   styleUrls: ['./virtual-pet.component.scss'],
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, ButtonTopComponent]
 })
-export class VirtualPetComponent implements OnInit {
-  virtualPetService = inject(VirtualPetService)
-  pets: Pet[] = [];
-  selectedPet: Pet | null = null;
-  message: string = '';
+export class VirtualPetComponent implements OnDestroy {
+  petSelection: boolean = false;
+  petNaming: boolean = false;
+  controlRoom: boolean = false;
+  petDetails: boolean = false;
+  initialPets: Pet[] = [
+    new Pet('Monster', 100, 0, 100, '', 'roar ?'),
+    new Pet('Dog', 100, 0, 100, '', 'Wif wif !'),
+  ];
+  currentPet!: Pet;
+  currentPets: Pet[] = [];
+  private happinessInterval: any;
+  private hungerInterval: any;
+  private cleanlinessInterval: any;
 
-
-
-  ngOnInit() {
-    this.virtualPetService.pets$.subscribe(pets => this.pets = pets);
-    this.virtualPetService.message$.subscribe(message => this.message = message);
+  startSelection() {
+    this.petSelection = true;
+    this.controlRoom = false;
   }
 
-  selectPet(petType: string) {
-    this.selectedPet = this.virtualPetService.selectPet(petType);
+  SelectPet(pet: Pet) {
+    this.currentPet = this.clonePet(pet);
+    this.petSelection = false;
+    this.petNaming = true;
   }
 
   setName(newName: string) {
-    if (this.selectedPet) {
-      this.virtualPetService.setName(this.selectedPet.type, newName);
+    if (this.currentPet) {
+      this.currentPet.name = this.capitalize(newName);
+    }
+    this.currentPet.updateDialog();
+    this.petNaming = false;
+    this.controlRoom = true;
+  }
+
+  capitalize(string: string) {
+    if (!string) return '';
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }
+
+  addPet(pet: Pet) {
+    this.currentPets.push(pet);
+  }
+
+  goDetails(pet: Pet) {
+    this.currentPet = pet;
+    this.controlRoom = false;
+    this.petDetails = true;
+    this.startConsumption();
+  }
+
+  goControlRoom() {
+    this.petDetails = false;
+    this.controlRoom = true;
+    this.clearIntervals();
+  }
+
+  clonePet(pet: Pet): Pet {
+    return new Pet(pet.type, pet.happiness, pet.hunger, pet.cleanliness, pet.name, pet.dialog);
+  }
+
+  startConsumption() {
+    this.clearIntervals();
+
+    this.happinessInterval = setInterval(() => {
+      if(!this.currentPet.isDead) this.currentPet.decreaseHappiness();
+    }, 1000);
+
+    this.hungerInterval = setInterval(() => {
+      if(!this.currentPet.isDead) this.currentPet.increaseHunger();
+    }, 2000);
+
+    this.cleanlinessInterval = setInterval(() => {
+      if(!this.currentPet.isDead) this.currentPet.decreaseCleanliness();
+    }, 3000);
+  }
+
+  clearIntervals() {
+    if (this.happinessInterval) {
+      clearInterval(this.happinessInterval);
+    }
+    if (this.hungerInterval) {
+      clearInterval(this.hungerInterval);
+    }
+    if (this.cleanlinessInterval) {
+      clearInterval(this.cleanlinessInterval);
     }
   }
 
-  feed() {
-    if (this.selectedPet) {
-      this.virtualPetService.feed(this.selectedPet.type);
-    }
+  ngOnDestroy() {
+    this.clearIntervals();
   }
 
-  play() {
-    if (this.selectedPet) {
-      this.virtualPetService.play(this.selectedPet.type);
-    }
+  feedPet(pet: Pet) {
+    pet.feed();
   }
 
-  clean() {
-    if (this.selectedPet) {
-      this.virtualPetService.clean(this.selectedPet.type);
-    }
+  cleanPet(pet: Pet) {
+    pet.clean();
   }
 
-  restart() {
-    this.virtualPetService.restart();
-    this.selectedPet = null;
-  }
-
-  onImageError(event: any, pet: Pet) {
-    event.target.src = 'assets/virtual_pet/placeholder.png'; // Path to a default image
-    event.target.alt = ''; // Clear alt text
-    console.error(`Image for ${pet.type} not found.`);
+  playPet(pet: Pet) {
+    pet.play();
   }
 }

@@ -1,57 +1,105 @@
-<div class="container">
-  <div *ngIf="!selectedPet" class="center-content">
-    <p>Select your virtual pet</p>
-    <div class="selection">
-      <div *ngFor="let pet of pets" class="pet-container">
-        <img [src]="'assets/virtual_pet/' + pet.type.toLowerCase() + '.png'" alt="" (click)="selectPet(pet.type)" class="pet-selection-image" (error)="onImageError($event, pet)">
-        <div class="pet-type">{{ pet.type }}</div>
+@if(!petSelection && !petNaming &&!controlRoom && !petDetails){
+  <div class="title-screen">
+    <img src="assets/virtual_pet/title-screen.png" (click)="startSelection()">
+  </div>
+  <div class="buttons">
+    <div class="button" (click)="startSelection()">Start Game</div>
+  </div>
+}
+
+@if (petSelection){
+  <h2>Select your Pet</h2>
+  <div class="selection-screen">
+    @for (pet of initialPets; track $index) {
+      <img [src]="pet.getImageUrl()" (click)="SelectPet(pet)">
+    }
+  </div>
+}
+
+@if(petNaming){
+  <h2>Name your Pet</h2>
+  <div class="naming-screen">
+    <img [src]="currentPet.getImageUrl()">
+  </div>
+  <input type="text" [(ngModel)]="currentPet.name">
+  <div class="buttons">
+    <div class="button" (click)="setName(currentPet.name); addPet(currentPet)">Confirm</div>
+  </div>
+}
+
+@if(controlRoom){
+  <h2>Control Room</h2>
+  <div class="control-room">
+    @for (pet of currentPets; track $index) {
+      <div class="card" (click)="goDetails(pet)">
+        <p class="name">{{ pet.name }}</p>
+        <img [src]="pet.getImageUrl()">
+        <div class="stat">
+          @if(pet.isDead) {
+            <p> 💀 </p>
+          }
+          @else {
+            <p> 😀 </p>
+          }
+          <p>{{pet.happiness | number : '3.0'}}</p>
+        </div>
+        <div class="stat">
+          <p> 🍖 </p>
+          <p>{{pet.hunger | number : '3.0'}}</p>
+        </div>
+        <div class="stat">
+          <p> 💦 </p>
+          <p>{{pet.cleanliness | number : '3.0'}}</p>
+        </div>
       </div>
-    </div>
+    }
   </div>
-
-  <div *ngIf="selectedPet && !selectedPet.name" class="center-content">
-    <img [src]="'assets/virtual_pet/' + selectedPet.type.toLowerCase() + '.png'" alt="Virtual Pet Image" class="pet-image">
-    <h1>Name your {{ selectedPet.type }}</h1>
-    <input type="text" [(ngModel)]="selectedPet.name">
-    <button (click)="setName(selectedPet.name)">Confirm</button>
+  <div class="buttons">
+    <div class="button" (click)="startSelection()">Add New Pet</div>
   </div>
+}
 
-  <div *ngIf="selectedPet && selectedPet.name && selectedPet.hunger < 100 && selectedPet.happiness > 0 && selectedPet.cleanliness > 0" class="center-content">
-    <h1>{{ selectedPet.name }}</h1>
+@if(petDetails){
+  <div class="pet-details">
+    <h2>{{currentPet.name}}</h2>
     <div class="display">
-      <img [src]="'assets/virtual_pet/' + selectedPet.type.toLowerCase() + '.png'" alt="Virtual Pet Image" class="pet-image">
-    </div>
-    <div class="state">
-      <p>🍖 {{ selectedPet.hunger | number : '3.0' }}</p>
-      <p>😀 {{ selectedPet.happiness | number : '3.0' }}</p>
-      <p>💦 {{ selectedPet.cleanliness | number : '3.0' }}</p>
-    </div>
-    <div class="buttons">
-      <div (click)="feed()">Feed</div>
-      <div (click)="play()">Play</div>
-      <div (click)="clean()">Clean</div>
-    </div>
-  </div>
-
-  <div *ngIf="selectedPet && (selectedPet.hunger >= 100 || selectedPet.happiness <= 0 || selectedPet.cleanliness <= 0)" class="center-content">
-    <h1>{{ selectedPet.name }} is dead.</h1>
-    <img [src]="'assets/virtual_pet/' + selectedPet.type.toLowerCase() + '_dead.png'" alt="Virtual Pet Image" class="pet-image">
-    <div class="buttons">
-      <div (click)="restart()">Restart</div>
-    </div>
-  </div>
-  
-  <div *ngIf="message" class="center-content">
-    <p>{{ message }}</p>
-  </div>
-
-  <div *ngIf="pets.length" class="center-content">
-    <h2>Other Pets</h2>
-    <div class="selection">
-      <div *ngFor="let pet of pets" class="pet-container">
-        <img [src]="'assets/virtual_pet/' + pet.type.toLowerCase() + '.png'" alt="" (click)="selectPet(pet.type)" class="pet-selection-image" (error)="onImageError($event, pet)">
-        <div class="pet-type">{{ pet.type }}</div>
+      <img [src]="currentPet.getImageUrl()">
+      <div class="stats">
+        <div class="stat">
+          @if(currentPet.isDead) {
+            <p> 💀 </p>
+          }
+          @else {
+            <p> 😀 </p>
+          }
+          <p>{{currentPet.happiness | number : '3.0'}}</p>
+        </div>
+        <div class="stat">
+          <p> 🍖 </p>
+          <p>{{currentPet.hunger | number : '3.0'}}</p>
+        </div>
+        <div class="stat">
+          <p> 💦 </p>
+          <p>{{currentPet.cleanliness | number : '3.0'}}</p>
+        </div>
       </div>
     </div>
+    <div class="interface">
+      <header (click)="goControlRoom()">
+        <img src="assets/app_icons/arrow_left.png" />
+        <div class="button">Back to Control Room</div>
+      </header>
+      <p class="message">" {{currentPet.dialog}} "</p>
+    </div>
   </div>
-</div>
+
+  @if(!currentPet.isDead){
+    <div class="buttons">
+      <div class="button action" (click)="playPet(currentPet)">Play</div>
+      <div class="button action" (click)="feedPet(currentPet)">Feed</div>
+      <div class="button action" (click)="cleanPet(currentPet)">Clean</div>
+    </div>
+  }
+}
+
+<app-button-top />
