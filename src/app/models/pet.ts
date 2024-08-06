@@ -1,4 +1,12 @@
 export class Pet {
+  private happinessInterval: any;
+  private hungerInterval: any;
+  private cleanlinessInterval: any;
+  static availableBackgrounds: { [key: string]: string[] } = {
+    monster: ['space', 'beach', 'forest', 'house', 'yard'],
+    dog: ['niche', 'house', 'yard', 'beach', 'forest']
+  };
+
   constructor(
     public type: string,
     public happiness: number,
@@ -6,15 +14,23 @@ export class Pet {
     public cleanliness: number,
     public name: string = '',
     public dialog: string = '',
+    public background: string = '',
     public isDead: boolean = false
   ) {
+    this.background = Pet.availableBackgrounds[type][0];
     this.updateDialog();
+    this.startConsumption();
+  }
+
+  static createPet(type: string): Pet {
+    return new Pet(type, 100, 0, 100, '', type === 'monster' ? 'roar ?' : 'Wif wif !');
   }
 
   checkLimits() {
     if (this.happiness <= 0 || this.hunger >= 100 || this.cleanliness <= 0) {
       this.isDead = true;
       this.updateDialog();
+      this.clearIntervals();
     }
   }
 
@@ -86,6 +102,10 @@ export class Pet {
     }
   }
 
+  getBackgroundUrl(): string {
+    return `assets/virtual_pet/back-${this.background}.png`;
+  }
+
   updateDialog() {
     if (this.isDead) {
       this.dialog = `${this.name} is dead.`;
@@ -124,5 +144,33 @@ export class Pet {
   updateState() {
     this.checkLimits();
     this.updateDialog();
+  }
+
+  startConsumption() {
+    this.clearIntervals();
+
+    this.happinessInterval = setInterval(() => {
+      if (!this.isDead) this.decreaseHappiness();
+    }, 1000);
+
+    this.hungerInterval = setInterval(() => {
+      if (!this.isDead) this.increaseHunger();
+    }, 2000);
+
+    this.cleanlinessInterval = setInterval(() => {
+      if (!this.isDead) this.decreaseCleanliness();
+    }, 3000);
+  }
+
+  clearIntervals() {
+    if (this.happinessInterval) {
+      clearInterval(this.happinessInterval);
+    }
+    if (this.hungerInterval) {
+      clearInterval(this.hungerInterval);
+    }
+    if (this.cleanlinessInterval) {
+      clearInterval(this.cleanlinessInterval);
+    }
   }
 }

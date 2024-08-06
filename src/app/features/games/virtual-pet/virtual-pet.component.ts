@@ -17,18 +17,18 @@ export class VirtualPetComponent implements OnDestroy {
   controlRoom: boolean = false;
   petDetails: boolean = false;
   initialPets: Pet[] = [
-    new Pet('Monster', 100, 0, 100, '', 'roar ?'),
-    new Pet('Dog', 100, 0, 100, '', 'Wif wif !'),
+    Pet.createPet('monster'),
+    Pet.createPet('dog')
   ];
   currentPet!: Pet;
   currentPets: Pet[] = [];
-  private happinessInterval: any;
-  private hungerInterval: any;
-  private cleanlinessInterval: any;
+  availableBackgrounds = Pet.availableBackgrounds;
 
   startSelection() {
     this.petSelection = true;
     this.controlRoom = false;
+    this.petNaming = false;
+    this.petDetails = false;
   }
 
   SelectPet(pet: Pet) {
@@ -42,66 +42,47 @@ export class VirtualPetComponent implements OnDestroy {
       this.currentPet.name = this.capitalize(newName);
     }
     this.currentPet.updateDialog();
+    this.addPet(this.currentPet);
     this.petNaming = false;
     this.controlRoom = true;
   }
 
-  capitalize(string: string) {
+  capitalize(string: string): string {
     if (!string) return '';
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    return string.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
   }
 
   addPet(pet: Pet) {
-    this.currentPets.push(pet);
+    if (!this.currentPets.includes(pet)) {
+      this.currentPets.push(pet);
+    }
   }
 
   goDetails(pet: Pet) {
     this.currentPet = pet;
     this.controlRoom = false;
     this.petDetails = true;
-    this.startConsumption();
   }
 
   goControlRoom() {
     this.petDetails = false;
     this.controlRoom = true;
-    this.clearIntervals();
+  }
+
+  changeBackground(background: string) {
+    this.currentPet.background = background;
   }
 
   clonePet(pet: Pet): Pet {
-    return new Pet(pet.type, pet.happiness, pet.hunger, pet.cleanliness, pet.name, pet.dialog);
+    return Pet.createPet(pet.type);
   }
 
-  startConsumption() {
-    this.clearIntervals();
-
-    this.happinessInterval = setInterval(() => {
-      if(!this.currentPet.isDead) this.currentPet.decreaseHappiness();
-    }, 1000);
-
-    this.hungerInterval = setInterval(() => {
-      if(!this.currentPet.isDead) this.currentPet.increaseHunger();
-    }, 2000);
-
-    this.cleanlinessInterval = setInterval(() => {
-      if(!this.currentPet.isDead) this.currentPet.decreaseCleanliness();
-    }, 3000);
-  }
-
-  clearIntervals() {
-    if (this.happinessInterval) {
-      clearInterval(this.happinessInterval);
-    }
-    if (this.hungerInterval) {
-      clearInterval(this.hungerInterval);
-    }
-    if (this.cleanlinessInterval) {
-      clearInterval(this.cleanlinessInterval);
-    }
+  trackByPets(index: number, pet: Pet): string {
+    return pet.type + pet.name;
   }
 
   ngOnDestroy() {
-    this.clearIntervals();
+    this.currentPets.forEach(pet => pet.clearIntervals());
   }
 
   feedPet(pet: Pet) {

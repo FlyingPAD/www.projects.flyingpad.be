@@ -1,4 +1,4 @@
-@if(!petSelection && !petNaming &&!controlRoom && !petDetails){
+@if(!petSelection && !petNaming && !controlRoom && !petDetails){
   <div class="title-screen">
     <img src="assets/virtual_pet/title-screen.png" (click)="startSelection()">
   </div>
@@ -7,11 +7,11 @@
   </div>
 }
 
-@if (petSelection){
+@if(petSelection){
   <h2>Select your Pet</h2>
   <div class="selection-screen">
-    @for (pet of initialPets; track $index) {
-      <img [src]="pet.getImageUrl()" (click)="SelectPet(pet)">
+    @for(pet of initialPets; track $index) {
+      <img [src]="'assets/virtual_pet/' + pet.type + '_normal.png'" (click)="SelectPet(pet)">
     }
   </div>
 }
@@ -29,11 +29,15 @@
 
 @if(controlRoom){
   <h2>Control Room</h2>
+  <p>Click on a card to see details.</p>
   <div class="control-room">
-    @for (pet of currentPets; track $index) {
+    @for(pet of currentPets; track $index) {
       <div class="card" (click)="goDetails(pet)">
         <p class="name">{{ pet.name }}</p>
-        <img [src]="pet.getImageUrl()">
+        <div class="images">
+          <img [src]="pet.getBackgroundUrl()">
+          <img [src]="pet.getImageUrl()">
+        </div>
         <div class="stat">
           @if(pet.isDead) {
             <p> 💀 </p>
@@ -41,15 +45,15 @@
           @else {
             <p> 😀 </p>
           }
-          <p>{{pet.happiness | number : '3.0'}}</p>
+          <p>{{pet.happiness | number: '3.0'}}</p>
         </div>
         <div class="stat">
           <p> 🍖 </p>
-          <p>{{pet.hunger | number : '3.0'}}</p>
+          <p>{{pet.hunger | number: '3.0'}}</p>
         </div>
         <div class="stat">
           <p> 💦 </p>
-          <p>{{pet.cleanliness | number : '3.0'}}</p>
+          <p>{{pet.cleanliness | number: '3.0'}}</p>
         </div>
       </div>
     }
@@ -63,7 +67,10 @@
   <div class="pet-details">
     <h2>{{currentPet.name}}</h2>
     <div class="display">
-      <img [src]="currentPet.getImageUrl()">
+      <div class="images">
+        <img [src]="currentPet.getBackgroundUrl()">
+        <img [src]="currentPet.getImageUrl()">
+      </div>
       <div class="stats">
         <div class="stat">
           @if(currentPet.isDead) {
@@ -72,15 +79,15 @@
           @else {
             <p> 😀 </p>
           }
-          <p>{{currentPet.happiness | number : '3.0'}}</p>
+          <p>{{currentPet.happiness | number: '3.0'}}</p>
         </div>
         <div class="stat">
           <p> 🍖 </p>
-          <p>{{currentPet.hunger | number : '3.0'}}</p>
+          <p>{{currentPet.hunger | number: '3.0'}}</p>
         </div>
         <div class="stat">
           <p> 💦 </p>
-          <p>{{currentPet.cleanliness | number : '3.0'}}</p>
+          <p>{{currentPet.cleanliness | number: '3.0'}}</p>
         </div>
       </div>
     </div>
@@ -90,6 +97,14 @@
         <div class="button">Back to Control Room</div>
       </header>
       <p class="message">" {{currentPet.dialog}} "</p>
+    </div>
+    <div class="background-selection">
+      <h3>Select Background</h3>
+      <div class="background-options">
+        @for(bg of availableBackgrounds[currentPet.type]; track bg) {
+          <img [src]="'assets/virtual_pet/back-' + bg + '.png'" (click)="changeBackground(bg)">
+        }
+      </div>
     </div>
   </div>
 
