@@ -2,6 +2,39 @@
 // - USED IN DICE ROLL : 
 // -------------------------------------------------------------------------------
 
+.title-screen {
+    img {
+        display: block;
+        width: 500px;
+        margin: auto;
+    }
+    @media (max-width: 500px){
+        width: 90%;
+    }
+
+    p {
+        display: block;
+        width: 100px;
+        margin: auto;
+        background-color: rgba(107, 82, 64, 0.5);
+        border: 5px solid rgba(107, 82, 64, 0.3);
+        border-radius: 10px;
+
+        padding: 15px;
+        color: white;
+        letter-spacing: 2px;
+        text-align: center;
+    }
+
+    p:hover {
+        cursor: pointer;
+        color: #6b5240;
+        background-color: rgba(255, 255, 255, 0.4);
+        border: 5px solid rgb(107, 82, 64);
+        transition-duration: 500ms;
+    }
+}
+
 .dice-roll{
     display: flex;
     justify-content: center;

@@ -14,12 +14,21 @@ export class HigherOrLowerComponent {
   refLevel: number = 10;
   valueToFind: number = 0;
   userInputValue: number = 0;
-  message: string = 'Please select your level';
-  gameStart: boolean = false;
+  message: string = 'Select your level';
   level: string = '0';
-  levelSelected: boolean = false;
   moves: number = 0;
-  showTitleScreen: boolean = true;
+  title: boolean = true;
+  configuration: boolean = false;
+  gameStart: boolean = false;
+  gameEnd: boolean = false;
+
+  config(): void {
+    this.message = 'Select your level'
+    this.title = false;
+    this.configuration = true;
+    this.gameStart = false
+    this.gameEnd = false
+  }
 
   generateRandom(): void {
     const min = 1;
@@ -27,33 +36,35 @@ export class HigherOrLowerComponent {
     this.valueToFind = Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  process() {
+  process(): void {
     if (this.userInputValue > this.valueToFind) {
       this.message = 'Lower';
     } else if (this.userInputValue < this.valueToFind) {
       this.message = 'Higher';
     } else {
       this.message = 'Correct!';
+      this.checkGameStatus();
     }
     this.moves += 1;
-    this.checkGameStatus();
   }
 
-  startGame() {
+  startGame(): void {
     if (this.level === '0') {
       this.message = 'You need to select a level first!';
       return;
     }
     this.generateRandom();
+    this.configuration = false
     this.gameStart = true;
-    this.message = 'Let\'s Go!!!';
+    this.message = "Let's Go!!!";
     this.moves = 0;
   }
 
-  checkGameStatus() {
+  checkGameStatus(): void {
     if (this.valueToFind === this.userInputValue) {
       this.message = 'VICTORY!';
       this.gameStart = false;
+      this.gameEnd = true;
     }
   }
 
@@ -61,26 +72,14 @@ export class HigherOrLowerComponent {
     if (level === 1) {
       this.refLevel = 10;
       this.level = '1';
-    } else if (level === 2) {
+    }
+    if (level === 2) {
       this.refLevel = 100;
       this.level = '2';
-    } else if (level === 3) {
+    }
+    if (level === 3) {
       this.refLevel = 1000;
       this.level = '3';
     }
-    this.levelSelected = true;
-    this.gameStart = false;
-    this.message = `Level ${this.level}`;
-  }
-
-  confirmLevel() {
-    this.levelSelected = false;
-    this.message = `Level ${this.level}. Let's start!`;
-    this.startGame();
-  }
-
-  goToLevelSelection() {
-    this.showTitleScreen = false;
-    this.message = 'Please select your level';
   }
 }

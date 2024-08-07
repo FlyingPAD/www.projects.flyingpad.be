@@ -37,6 +37,10 @@ export class TrainerNotesComponent implements OnInit, OnDestroy
   audioService = inject(AudioOldService)
   storageService = inject(StorageService)
 
+  title : boolean = true
+  toggleTitle(){
+    this.title = !this.title
+  }
   timer : number = 15
   intervalId : any | undefined = undefined
   run : number = 0

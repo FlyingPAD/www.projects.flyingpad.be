@@ -13,6 +13,10 @@ export class DiceRollComponent
   // ----------------------------------------------------------------
   // - Properties :
 
+  title : boolean = true
+  toggleTitle(){
+    this.title = !this.title
+  }
   intro! : boolean
 
   messageFemale! : string | undefined
