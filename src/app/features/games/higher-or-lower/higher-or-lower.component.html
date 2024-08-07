@@ -1,4 +1,4 @@
-<h2>Guess the Right Number</h2>
+<img class="title" src="assets/guess/title-screen.png" />
 <div class="higher-or-lower">
     <p>{{ message }}</p>
     <div *ngIf="!gameStart">
@@ -20,3 +20,5 @@
     </div>
     <p *ngIf="moves !== 0"><u>Moves</u> : {{ moves }}</p>
 </div>
+
+<app-button-top />

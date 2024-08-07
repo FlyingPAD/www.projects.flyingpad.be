@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ButtonTopComponent } from '../../../components/button-top/button-top.component';
 
 @Component({
   selector: 'app-higher-or-lower',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ButtonTopComponent],
   templateUrl: './higher-or-lower.component.html',
   styleUrl: './higher-or-lower.component.scss'
 })
