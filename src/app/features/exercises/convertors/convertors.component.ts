@@ -5,6 +5,7 @@ import { ConvertTemperaturePipe } from '../../../pipes/convert-temperature.pipe'
 import { ConvertDistancePipe } from '../../../pipes/convert-distance.pipe';
 import { ConvertMassPipe } from '../../../pipes/convert-mass.pipe';
 import { ConvertVolumePipe } from '../../../pipes/convert-volume.pipe';
+import { ButtonTopComponent } from '../../../components/button-top/button-top.component';
 
 @Component({
   selector: 'app-convertors',
@@ -17,7 +18,8 @@ import { ConvertVolumePipe } from '../../../pipes/convert-volume.pipe';
     ConvertTemperaturePipe,
     ConvertDistancePipe,
     ConvertMassPipe,
-    ConvertVolumePipe
+    ConvertVolumePipe,
+    ButtonTopComponent
   ],
 })
 export class ConvertorsComponent {

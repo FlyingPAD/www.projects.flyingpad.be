@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ButtonTopComponent } from '../../../components/button-top/button-top.component';
 
 interface Events {
   id: number;
@@ -13,7 +14,7 @@ interface Events {
 @Component({
   selector: 'app-countdown',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ButtonTopComponent],
   templateUrl: './countdown.component.html',
   styleUrls: ['./countdown.component.scss']
 })

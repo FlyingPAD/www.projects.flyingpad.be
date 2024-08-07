@@ -91,6 +91,13 @@
         </div>
       </div>
     </div>
+    @if(!currentPet.isDead){
+      <div class="buttons">
+        <div class="button action" (click)="playPet(currentPet)">Play</div>
+        <div class="button action" (click)="feedPet(currentPet)">Feed</div>
+        <div class="button action" (click)="cleanPet(currentPet)">Clean</div>
+      </div>
+    }
     <div class="interface">
       <header (click)="goControlRoom()">
         <img src="assets/app_icons/arrow_left.png" />
@@ -98,23 +105,17 @@
       </header>
       <p class="message">" {{currentPet.dialog}} "</p>
     </div>
-    <div class="background-selection">
-      <h3>Select Background</h3>
-      <div class="background-options">
-        @for(bg of availableBackgrounds[currentPet.type]; track bg) {
-          <img [src]="'assets/virtual_pet/back-' + bg + '.png'" (click)="changeBackground(bg)">
-        }
+    @if(!currentPet.isDead){
+      <div class="background-selection">
+        <h3>Select Background</h3>
+        <div class="background-options">
+          @for(bg of availableBackgrounds[currentPet.type]; track bg) {
+            <img [src]="'assets/virtual_pet/back-' + bg + '.png'" (click)="changeBackground(bg)">
+          }
+        </div>
       </div>
-    </div>
+    }
   </div>
-
-  @if(!currentPet.isDead){
-    <div class="buttons">
-      <div class="button action" (click)="playPet(currentPet)">Play</div>
-      <div class="button action" (click)="feedPet(currentPet)">Feed</div>
-      <div class="button action" (click)="cleanPet(currentPet)">Clean</div>
-    </div>
-  }
 }
 
 <app-button-top />
