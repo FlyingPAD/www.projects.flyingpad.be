@@ -1,8 +1,14 @@
 <div class="guitar-tuner">
   <h2>Guitar Tuner</h2>
-  <div class="box">
-    <p> ▸ Guitar Type : 6 strings</p>
-    <p> ▸ Tuning :
+  <div class="settings">
+    <div class="option">
+      <p>Instrument</p>
+      <select>
+        <option value="Guitar ( 6 strings )">Guitar ( 6 strings )</option>
+      </select>
+    </div>
+    <div class="option">
+      <p>Tuning</p>
       <select (change)="onTuningChange($event)">
         <option value="standard">Standard</option>
         <option value="dropC">Drop C</option>
@@ -11,12 +17,12 @@
         <option value="DADADF#">DADADF#</option>
         <option value="DADADA">DADADA</option>
       </select>
-    </p>
+    </div>
   </div>
   <div class="display">
-    <p><b>{{ currentFrequency | number : '2.2' }}</b> Hz</p>
-    <p><b>{{ frequencyDifference | number : '2.2' }}</b> Hz</p>
-    <div class="indicator" [style.background]="getIndicatorColor()"></div>
+    <!-- <p><b>{{ currentFrequency | number : '2.2' }}</b> Hz</p> -->
+    <p><b>{{ frequencyDifference | number : '3.2' }}</b> Hz</p>
+    <!-- <div class="indicator" [style.background]="getIndicatorColor()"></div> -->
   </div>
 </div>
 
