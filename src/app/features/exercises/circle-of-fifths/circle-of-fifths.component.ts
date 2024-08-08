@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 
 export class WheelKey
 {
@@ -19,8 +19,6 @@ export class WheelKey
 })
 export class CircleOfFifthsComponent 
 {
-  // Properties
-
   @ViewChild('wheel', {static: false}) wheel! : ElementRef;
 
   currentAngle :    number = 0
@@ -88,7 +86,6 @@ export class CircleOfFifthsComponent
     const angleDiff = (targetAngle - this.currentAngle % 360 + 360) % 360
     this.currentAngle += (angleDiff > 180) ? angleDiff - 360 : angleDiff
     this.wheel.nativeElement.style.transform = `rotate(${this.currentAngle}deg)`
-  
   }
 
   // Rotate to Right :
@@ -119,10 +116,8 @@ export class CircleOfFifthsComponent
   // Keyboard Shortcuts :
 
   @HostListener('window:keydown', ['$event'])
-  onKeyPress(event: KeyboardEvent) 
-  {
-    switch (event.key) 
-    {
+  onKeyPress(event: KeyboardEvent) {
+    switch (event.key) {
       case '0':
         this.randomPosition()
         break
