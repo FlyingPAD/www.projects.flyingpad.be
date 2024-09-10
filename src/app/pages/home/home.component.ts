@@ -1,22 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AboutComponent } from '../../features/home/about/about.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, AboutComponent],
+  imports: [CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  showAbout: boolean = false;
   showSquare: boolean = false;
   intervalId!: any;
-
-  toggleShowAbout(): void {
-    this.showAbout = !this.showAbout;
-  }
 
   ngOnInit(): void {
     this.startSquare();

@@ -2,11 +2,3 @@
     <h1>Home</h1>
     <p>Coding portfolio ... <span *ngIf="showSquare"> ▮ </span></p>
 </div>
-
-<div class="icons-container">
-    <div class="icon" [class.active]="showAbout" (click)="toggleShowAbout()">
-        <img src="assets/app_icons/icon_about_001.png" />
-    </div>
-</div>
-
-<app-about *ngIf="showAbout === true" />
