@@ -1,51 +1,150 @@
-// ========================================================================================================================
-// Flying PAD | MoodBoard | SCSS Global Variables
+:root {   
+    --texture001: url('../../public/assets/back-default.jpg');
+    --colorBackground: #fff;
+    --colorMain: rgb(107, 82, 64, 1);
+    --colorMainOpacity1: rgb(107, 82, 64, 0.1);
+    --colorMainOpacity2: rgb(107, 82, 64, 0.2);
+    --colorMainOpacity3: rgb(107, 82, 64, 0.3);
+    --colorMainOpacity4: rgb(107, 82, 64, 0.4);
+    --colorMainOpacity5: rgb(107, 82, 64, 0.5);
+    --colorMainOpacity6: rgb(107, 82, 64, 0.6);
+    --colorMainOpacity7: rgb(107, 82, 64, 0.7);
+    --colorMainOpacity8: rgb(107, 82, 64, 0.8);
+    --colorMainOpacity9: rgb(107, 82, 64, 0.9);
+    --colorWhite : #fff;
+    --colorWhiteOpacity1 : rgba(255, 255, 255, 0.1);
+    --colorWhiteOpacity2 : rgba(255, 255, 255, 0.2);
+    --colorWhiteOpacity3 : rgba(255, 255, 255, 0.3);
+    --colorWhiteOpacity4 : rgba(255, 255, 255, 0.4);
+    --colorWhiteOpacity5 : rgba(255, 255, 255, 0.5);
+    --colorWhiteOpacity6 : rgba(255, 255, 255, 0.6);
+    --colorWhiteOpacity7 : rgba(255, 255, 255, 0.7);
+    --colorWhiteOpacity8 : rgba(255, 255, 255, 0.8);
+    --colorWhiteOpacity9 : rgba(255, 255, 255, 0.9);
+    --colorFooter: rgb(55, 55, 55);
+    --fontFamily: 'Open Sans', sans-serif;
+}
 
-:root 
-{
-    // Break Points :
+.dark {
+    --texture001: url(../../public/assets/back-dark.jpg);
+    --colorBackground: #121212; /* Un noir très foncé pour le fond */
+    --colorMain: #bb86fc; /* Violet clair pour la couleur principale, apporte de la clarté */
+    --colorMainOpacity1: rgba(187, 134, 252, 0.1);
+    --colorMainOpacity2: rgba(187, 134, 252, 0.2);
+    --colorMainOpacity3: rgba(187, 134, 252, 0.3);
+    --colorMainOpacity4: rgba(187, 134, 252, 0.4);
+    --colorMainOpacity5: rgba(187, 134, 252, 0.5);
+    --colorMainOpacity6: rgba(187, 134, 252, 0.6);
+    --colorMainOpacity7: rgba(187, 134, 252, 0.7);
+    --colorMainOpacity8: rgba(187, 134, 252, 0.8);
+    --colorMainOpacity9: rgba(187, 134, 252, 0.9);
 
-    --mobile :          450px;
-    --tablet-small :    768px;
-    --tablet :          992px;
-    --desktop :         1024px;
+    --colorWhite: #e0e0e0; /* Blanc cassé pour les textes */
+    --colorWhiteOpacity1: rgba(224, 224, 224, 0.1);
+    --colorWhiteOpacity2: rgba(224, 224, 224, 0.2);
+    --colorWhiteOpacity3: rgba(224, 224, 224, 0.3);
+    --colorWhiteOpacity4: rgba(224, 224, 224, 0.4);
+    --colorWhiteOpacity5: rgba(224, 224, 224, 0.5);
+    --colorWhiteOpacity6: rgba(224, 224, 224, 0.6);
+    --colorWhiteOpacity7: rgba(224, 224, 224, 0.7);
+    --colorWhiteOpacity8: rgba(224, 224, 224, 0.8);
+    --colorWhiteOpacity9: rgba(224, 224, 224, 0.9);
 
-    // Theme Colors :
+    --colorBackgroundOpacity5: rgba(18, 18, 18, 0.5); /* Utilisation d’un noir transparent */
+    --colorFooter: #1f1f1f; /* Un gris très foncé pour le footer */
+    --fontFamily: 'Open Sans', sans-serif;
+}
 
-    --colorMain :        #6b5240;
-    --colorWhite :       #fff;
+.blue {
+    --texture001: url(../../public/assets/back-blue.jpg);
+    --colorMain: #40526b;
+    --colorMainOpacity1: rgba(64, 82, 107, 0.1);
+    --colorMainOpacity2: rgba(64, 82, 107, 0.2);
+    --colorMainOpacity3: rgba(64, 82, 107, 0.3);
+    --colorMainOpacity4: rgba(64, 82, 107, 0.4);
+    --colorMainOpacity5: rgba(64, 82, 107, 0.5);
+    --colorMainOpacity6: rgba(64, 82, 107, 0.6);
+    --colorMainOpacity7: rgba(64, 82, 107, 0.7);
+    --colorMainOpacity8: rgba(64, 82, 107, 0.8);
+    --colorMainOpacity9: rgba(64, 82, 107, 0.9);
+    --colorFooter: rgb(49, 49, 85);
+    --fontFamily: 'Open Sans', sans-serif;
+}
 
-    // CRUD Colors :
+.pink {
+    --texture001: url(../../public/assets/back-pink.jpg);
+    --colorMain: #6b4055;
+    --colorMainOpacity1: rgba(107, 64, 85, 0.1);
+    --colorMainOpacity2: rgba(107, 64, 85, 0.2);
+    --colorMainOpacity3: rgba(107, 64, 85, 0.3);
+    --colorMainOpacity4: rgba(107, 64, 85, 0.4);
+    --colorMainOpacity5: rgba(107, 64, 85, 0.5);
+    --colorMainOpacity6: rgba(107, 64, 85, 0.6);
+    --colorMainOpacity7: rgba(107, 64, 85, 0.7);
+    --colorMainOpacity8: rgba(107, 64, 85, 0.8);
+    --colorMainOpacity9: rgba(107, 64, 85, 0.9);
+    --colorFooter: rgb(122, 48, 83);
+    --fontFamily: 'Open Sans', sans-serif;
+}
 
-    --colorGreen :       green;
-    --colorOrange :      orange;
-    --colorRed :         red;
+.green {
+    --texture001: url(../../public/assets/back-green.jpg);
+    --colorMain: #007004;
+    --colorMainOpacity1: rgba(0, 112, 4, 0.1);
+    --colorMainOpacity2: rgba(0, 112, 4, 0.2);
+    --colorMainOpacity3: rgba(0, 112, 4, 0.3);
+    --colorMainOpacity4: rgba(0, 112, 4, 0.4);
+    --colorMainOpacity5: rgba(0, 112, 4, 0.5);
+    --colorMainOpacity6: rgba(0, 112, 4, 0.6);
+    --colorMainOpacity7: rgba(0, 112, 4, 0.7);
+    --colorMainOpacity8: rgba(0, 112, 4, 0.8);
+    --colorMainOpacity9: rgba(0, 112, 4, 0.9);
 
+    --colorWhite: #fff;
+    --colorWhiteOpacity1: rgba(255, 255, 255, 0.1);
+    --colorWhiteOpacity2: rgba(255, 255, 255, 0.2);
+    --colorWhiteOpacity3: rgba(255, 255, 255, 0.3);
+    --colorWhiteOpacity4: rgba(255, 255, 255, 0.4);
+    --colorWhiteOpacity5: rgba(255, 255, 255, 0.5);
+    --colorWhiteOpacity6: rgba(255, 255, 255, 0.6);
+    --colorWhiteOpacity7: rgba(255, 255, 255, 0.7);
+    --colorWhiteOpacity8: rgba(255, 255, 255, 0.8);
+    --colorWhiteOpacity9: rgba(255, 255, 255, 0.9);
 
-    // Fonts & Typography : 
+    --colorBackground: #e8f5e9;
+    --colorBackgroundOpacity5: rgba(232, 245, 233, 0.5);
 
-    --fontFamily : 'Open Sans', sans-serif;
+    --colorFooter: #004d00;
+    --fontFamily: 'Open Sans', sans-serif;
+}
 
-    $sizeH1 : 17px;
-    $sizeH2 : 16px;
-    $sizeH3 : 15px;
+.orange {
+    --texture001: url(../../public/assets/back-orange.jpg);
+    --colorMain: #9f5f00;
+    --colorMainOpacity1: rgba(159, 95, 0, 0.1);
+    --colorMainOpacity2: rgba(159, 95, 0, 0.2);
+    --colorMainOpacity3: rgba(159, 95, 0, 0.3);
+    --colorMainOpacity4: rgba(159, 95, 0, 0.4);
+    --colorMainOpacity5: rgba(159, 95, 0, 0.5);
+    --colorMainOpacity6: rgba(159, 95, 0, 0.6);
+    --colorMainOpacity7: rgba(159, 95, 0, 0.7);
+    --colorMainOpacity8: rgba(159, 95, 0, 0.8);
+    --colorMainOpacity9: rgba(159, 95, 0, 0.9);
 
-    // Logos : 
+    --colorWhite: #fff;
+    --colorWhiteOpacity1: rgba(255, 255, 255, 0.1);
+    --colorWhiteOpacity2: rgba(255, 255, 255, 0.2);
+    --colorWhiteOpacity3: rgba(255, 255, 255, 0.3);
+    --colorWhiteOpacity4: rgba(255, 255, 255, 0.4);
+    --colorWhiteOpacity5: rgba(255, 255, 255, 0.5);
+    --colorWhiteOpacity6: rgba(255, 255, 255, 0.6);
+    --colorWhiteOpacity7: rgba(255, 255, 255, 0.7);
+    --colorWhiteOpacity8: rgba(255, 255, 255, 0.8);
+    --colorWhiteOpacity9: rgba(255, 255, 255, 0.9);
 
-    --logoFull : url(../../public/assets/app_logos/fp_logo_02.png);
-    --logoSmall : url(../../public/assets/app_logos/fp_logo_03.png);
+    --colorBackground: #fbe9e7;
+    --colorBackgroundOpacity5: rgba(251, 233, 231, 0.5);
 
-    // Icons :
-
-    --hamburger : url(../../public/assets/app_icons/icon_hamburger_001.png);
-    --hamburgerLeft : url(../../public/assets/app_icons/icon_hamburger_left_001.png);
-    --hamburgerRight : url(../../public/assets/app_icons/icon_hamburger_right_001.png);
-
-    // Backgrounds & Textures :
-
-    --texture001 : url(../../public/assets/app_backgrounds/texture_001.jpg);
-
-    // - Borders :
-
-    --border : 1px;
+    --colorFooter: #8c3e00;
+    --fontFamily: 'Open Sans', sans-serif;
 }

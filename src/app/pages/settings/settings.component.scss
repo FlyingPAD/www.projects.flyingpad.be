@@ -1,0 +1,76 @@
+.settings-table {
+    border: 1px solid var(--colorMain);
+    margin: 15px;
+
+    background-color: var(--colorMainOpacity1);
+    border-radius: 5px;
+
+    .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin: 5px;
+        padding: 15px;
+        padding-top: 0;
+        padding-bottom: 0;
+        border: 1px solid var(--colorMain);
+        border-radius: 5px;
+
+        background-color: var(--colorBackgroundOpacity5);
+        color: var(--colorMain);
+
+        .row-title {
+            width: 300px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 800px) {
+            .row-title {
+                width: 190px;
+            }
+        }
+
+        .row-value {
+            width: 250px;
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 14px;
+        }
+
+        span {
+            display: inline-block;
+            width: 75px;
+            background-color: var(--colorMainOpacity1);
+            border: 1px solid var(--colorMain);
+            border-radius: 5px;
+            padding: 7px;
+            margin-right: 10px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        span:not(.span-active):hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transition-duration: 300ms;
+            cursor: pointer;
+        }
+
+        .span-active {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        select {
+            width: 90px;
+            padding: 7px;
+
+            background-color: var(--colorMainOpacity1);
+            border: 1px solid var(--colorMain);
+            border-radius: 5px;
+
+            color: var(--colorMain);
+            font-size: 13px;
+            text-align: center;
+        }
+    }
+}

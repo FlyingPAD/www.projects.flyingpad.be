@@ -1,0 +1,118 @@
+.layout {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    border: 3px solid rgb(0, 0, 0);
+    background: url('/assets/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    overflow-x: hidden;
+  
+    .button.stop-all {
+        background-color: red;
+        border: 3px solid darkred;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        width: 100px;
+        height: 50px;
+        margin: auto;
+        line-height: 50px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        transition: transform 0.2s;
+    }
+  
+    .button.stop-all:hover {
+        transform: scale(1.1);
+    }
+  
+    .characters-container {
+        box-sizing: border-box;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end; // Positionne les personnages à la base du conteneur
+  
+        .character {
+            box-sizing: border-box;
+            border: 2px dashed transparent;
+            width: 15%; // Taille ajustable
+            transition: border-color 0.2s;
+  
+            img {
+                width: 100%;
+                height: auto; // Conserve les proportions
+            }
+  
+            &.droppable {
+                border-color: #42a5f5; // Couleur du survol
+            }
+        }
+    }
+  
+    .buttons-container {
+        box-sizing: border-box;
+        margin-top: 25px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+  
+        .button {
+            cursor: grab;
+            box-sizing: border-box;
+            border: 2px solid black;
+            border-radius: 10px;
+            width: 60px;
+            height: 60px;
+            margin: 5px;
+            transition: transform 0.2s, opacity 0.2s;
+  
+            &.active {
+                transform: scale(1.1);
+            }
+  
+            &.disabled {
+                cursor: not-allowed;
+                opacity: 0.5;
+            }
+  
+            &:active {
+                cursor: grabbing;
+            }
+  
+            &::after {
+                content: attr(data-name);
+                display: block;
+                text-align: center;
+                font-size: 12px;
+                margin-top: 5px;
+                color: black;
+            }
+        }
+    }
+  }
+  
+  .character.playing {
+    animation: pulse 1s infinite ease-in-out;
+  }
+  
+  @keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+  
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+    }
+  
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+  }

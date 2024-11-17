@@ -1,0 +1,22 @@
+{
+  "title": {
+    "projects": "Projets",
+    "back": "Retour",
+    "settings": "Paramètres",
+    "display-mode": "Mode d'affichage",
+    "window-size": "Taille de la fenêtre",
+    "full-screen": "Plein écran",
+    "language": "Langue",
+    "theme": "Thème",
+    "defaults": "Défauts",
+    "desktop": "Bureau",
+    "mobile": "Mobile",
+    "enable": "Activer",
+    "disable": "Désactiver",
+    "landscape" : "Paysage",
+    "square" : "Carré ( 1:1 )"
+  },
+  "message": {
+    "settings-short": "Editez vos paramètres de navigation."
+  }
+}
