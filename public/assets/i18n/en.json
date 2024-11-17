@@ -1,0 +1,22 @@
+{
+  "title": {
+    "projects": "Projects",
+    "back": "Back",
+    "settings": "Settings",
+    "display-mode": "Display Mode",
+    "window-size": "Window Size",
+    "full-screen": "Full Screen",
+    "language": "Language",
+    "theme": "Theme",
+    "defaults": "Defaults",
+    "desktop": "Desktop",
+    "mobile": "Mobile",
+    "enable": "Enable",
+    "disable": "Disable",
+    "landscape" : "Landscape",
+    "square" : "Square ( 1:1 )"
+  },
+  "message": {
+    "settings-short": "Edit your navigation settings."
+  }
+}

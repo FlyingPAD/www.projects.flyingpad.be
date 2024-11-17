@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Note } from '../models/note';
+import { Note } from '../interfaces/note';
 import { Chord } from '../models/chord';
 import { Key } from '../models/key';
 import { Scale } from '../models/scale';

@@ -1,32 +1,43 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StorageService 
-{
-  // Save any value under any key
-  setItem(key : string, value : any) : void 
-  {
-    localStorage.setItem(key, JSON.stringify(value))
+export class StorageService {
+  #toastr = inject(ToastrService);
+
+  setItem(key: string, value: any): void {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      this.#toastr.error(`Error saving item ${key}`, 'Error');
+    }
   }
 
-  // Retrieve the value by key
-  getItem<T>(key : string) : T | null 
-  {
-    let item = localStorage.getItem(key)
-    return item ? JSON.parse(item) as T : null
+  getItem<T>(key: string): T | null {
+    try {
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) as T : null;
+    } catch (error) {
+      this.#toastr.error(`Error retrieving item ${key}`, 'Error');
+      return null;
+    }
   }
 
-  // Remove an item by key
-  removeItem(key : string) : void 
-  {
-    localStorage.removeItem(key)
+  removeItem(key: string): void {
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      this.#toastr.error(`Error removing item ${key}`, 'Error');
+    }
   }
 
-  // Optional : Clear all local storage
-  clearAll() : void 
-  {
-    localStorage.clear()
+  clearAll(): void {
+    try {
+      localStorage.clear();
+    } catch (error) {
+      this.#toastr.error('Error clearing all items', 'Error');
+    }
   }
 }

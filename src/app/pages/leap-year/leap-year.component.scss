@@ -1,0 +1,77 @@
+.leap-year {
+    width: 200px;
+
+    margin: auto;
+    padding: 25px;
+
+    background-color: rgb(107, 82, 64, 0.2);
+    border: 5px solid #6b5240;
+    border-radius: 15px 15px 0 0;
+    border-bottom: 0;
+
+    p {
+        text-align: center;
+        font-size: 17px;
+    }
+
+    .red {
+        color: darkred;
+    }
+
+    .green {
+        color: darkgreen;
+    }
+
+    input {
+        width: calc(100% - 25px);
+        padding: 10px;
+        border-radius: 5px;
+        text-align: left;
+        font-size: 20px;
+    }
+
+    input:focus {
+        outline: none;
+        border: 2px solid #6b5240;
+    }
+
+    a {
+        display: block;
+        width: 120px;
+        margin: auto;
+        text-decoration: none;
+        background-color: rgb(107, 82, 64, 0.2);
+        color: #6b5240;
+        border-radius: 5px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    a:hover {
+        background-color: rgb(107, 82, 64, 0.2);
+        color: white;
+        transition-duration: 500ms;
+        cursor: pointer;
+    }
+
+    .active {
+        background-color: rgb(107, 82, 64, 0.4);
+        color: white;
+    }
+}
+
+img {
+    display: block;
+    width: 500px;
+    margin: auto;
+
+    border: 5px solid #6b5240;
+    border-radius: 5px;
+    box-shadow: 0 3px 4px 0px rgba(80, 42, 14, 0.3);
+}
+
+@media (max-width: 500px) {
+    img {
+        width: 90%;
+    }
+}

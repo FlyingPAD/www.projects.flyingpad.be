@@ -1,0 +1,25 @@
+<div class="layout">
+    <!-- Bouton STOP -->
+    <div class="button stop-all" (click)="stopAllTracks()">STOP</div>
+  
+    <!-- Conteneur des personnages -->
+    <div class="characters-container">
+      @for (character of characters; track character.id) {
+      <div class="character" (drop)="onDrop($event, $index)" (dragover)="onDragOver($event)"
+        [class.droppable]="isDragging && !character.assignedButton" [class.playing]="character.assignedButton"
+        [style.border-color]="character.color">
+        <img [src]="'assets/' + character.fileName + '.png'" [alt]="character.name" />
+      </div>
+      }
+    </div>
+  
+    <!-- Conteneur des boutons -->
+    <div class="buttons-container">
+      @for (button of buttons; track button.name) {
+      <div class="button" [style.backgroundColor]="button.color" draggable="true"
+        [class.active]="draggedButton === button" [class.disabled]="isButtonAssigned(button)"
+        (dragstart)="!isButtonAssigned(button) && onDragStart($event, button)" (dragend)="onDragEnd()"
+        [attr.data-name]="button.name"></div>
+      }
+    </div>
+  </div>
