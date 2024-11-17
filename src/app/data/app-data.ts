@@ -1,5 +1,5 @@
-import { Button } from "../models/button"
-import { Character } from "../models/character"
+import { Button } from "../interfaces/button"
+import { Character } from "../interfaces/character"
 
 export const BUTTONS: Button[] = [
     { name: 'Voice', color: '#99f877', fileName: 'Voice' },
