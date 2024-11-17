@@ -5,10 +5,10 @@ import { BUTTONS, CHARACTERS } from '../../data/app-data';
 import { AudioLoopService } from '../../services/audio-loop.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-flying-loop',
   standalone: true,
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  templateUrl: './flying-loop.component.html',
+  styleUrls: ['./flying-loop.component.scss'],
 })
 export class FlyingLoopComponent implements OnInit {
   audioService = inject(AudioLoopService)
