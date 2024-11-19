@@ -4,11 +4,12 @@ import { Character } from '../../models/character'
 import { BUTTONS, CHARACTERS } from '../../data/app-data'
 import { AudioLoopService } from '../../services/audio-loop.service'
 import { CommonModule } from '@angular/common'
+import { RouterModule } from '@angular/router'
 
 @Component({
   selector: 'app-flying-loop',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './flying-loop.component.html',
   styleUrls: ['./flying-loop.component.scss']
 })
