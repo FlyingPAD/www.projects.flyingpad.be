@@ -4,6 +4,11 @@
 @if(!isLoading) {
   <div class="layout">
     <div class="controls-container">
+      <div class="character-controls">
+        <button (click)="decreaseCharacterCount()" [disabled]="characterCount <= minCharacters">-</button>
+        <span>{{ characterCount | number : '2.0' }}</span>
+        <button (click)="increaseCharacterCount()" [disabled]="characterCount >= maxCharacters">+</button>
+      </div>
       <div class="button-stop" (click)="stopAllTracks()"> ⬛ </div>
     </div>
     <div class="screen">
