@@ -9,7 +9,6 @@ import { DiceRollComponent } from './pages/dice-roll/dice-roll.component';
 import { VirtualPetComponent } from './pages/virtual-pet/virtual-pet.component';
 import { CountdownComponent } from './pages/countdown/countdown.component';
 import { FlyingLoopComponent } from './pages/flying-loop/flying-loop.component';
-import { TestComponent } from './pages/test/test.component';
 
 export const routes: Routes = 
 [ 
@@ -24,6 +23,5 @@ export const routes: Routes =
     { path : 'virtual-pet', component : VirtualPetComponent, title : 'Projects | Virtual Pet' },
     { path : 'countdowns', component : CountdownComponent, title : 'Projects | Countdowns' },
     { path : 'flying-loop', component : FlyingLoopComponent, title : 'Project | Flying Loop' },
-    { path : 'test', component : TestComponent, title : 'Project | Test' },
     { path : '**', redirectTo : 'projects'}
 ]
