@@ -1,89 +1,135 @@
 .layout {
-    box-sizing: border-box;
-    width: 100vw;
-    height: 100vh;
-    border: 3px solid rgb(0, 0, 0);
-    background: url('/assets/background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    overflow-x: hidden;
-  
-    .button.stop-all {
-        background-color: red;
-        border: 3px solid darkred;
-        border-radius: 10px;
-        color: white;
-        font-weight: bold;
-        text-align: center;
-        cursor: pointer;
-        width: 100px;
-        height: 50px;
-        margin: auto;
-        line-height: 50px;
-        margin-top: 10px;
-        margin-bottom: 15px;
-        transition: transform 0.2s;
-    }
-  
-    .button.stop-all:hover {
-        transform: scale(1.1);
-    }
-  
-    .characters-container {
-        box-sizing: border-box;
+    background: radial-gradient(circle, #959595, #707070, #4f4f4f, #000000);
+    min-height: 100vh;
+    .controls-container {
         width: 100%;
         display: flex;
         justify-content: center;
-        align-items: flex-end; // Positionne les personnages à la base du conteneur
-  
-        .character {
+        align-items: center;
+
+        .button-stop {
+            background-color: white;
             box-sizing: border-box;
-            border: 2px dashed transparent;
-            width: 15%; // Taille ajustable
-            transition: border-color 0.2s;
-  
-            img {
-                width: 100%;
-                height: auto; // Conserve les proportions
+            border: 5px solid rgb(0, 0, 0);
+            border-radius: 15px;
+            height: 50px;
+            width: 50px;
+            margin: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            transition-duration: 500ms;
+        }
+
+        .button-stop:hover {
+            cursor: pointer;
+            border: 5px solid rgb(255, 0, 0);
+        }
+    }
+
+    .screen {
+        aspect-ratio: 69 / 25;
+        width: 100%;
+        box-sizing: border-box;
+        border: 5px solid rgb(0, 0, 0);
+        border-radius: 15px;
+        overflow: hidden;
+        position: relative;
+        background-color: #000;
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+          
+            img,
+            video {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%; // Prendre toute la largeur
+              height: 100%; // Adapter à la hauteur du conteneur
+              object-fit: cover; // Couvrir tout en préservant les proportions
             }
-  
-            &.droppable {
-                border-color: #42a5f5; // Couleur du survol
+          }
+
+        .characters-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+
+            .character {
+                z-index: 5;
+                width: calc(100% / 7);
+                animation: slide-in 0.5s ease-out;
+
+                img {
+                    width: 100%;
+                    display: block;
+                    margin: 0;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &.exiting {
+                    animation: slide-out 0.2s ease-in forwards;
+                }
+
+                &.entering {
+                    animation: slide-in 0.2s ease-out;
+                }
+
+                &.neutral {
+                    &:hover {
+                        cursor: initial;
+                    }
+                }
             }
         }
     }
-  
+
     .buttons-container {
-        box-sizing: border-box;
-        margin-top: 25px;
         width: 100%;
+        margin-top: 15px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-  
+
         .button {
             cursor: grab;
             box-sizing: border-box;
-            border: 2px solid black;
+            border: 5px solid black;
             border-radius: 10px;
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             margin: 5px;
             transition: transform 0.2s, opacity 0.2s;
-  
+
             &.active {
                 transform: scale(1.1);
             }
-  
+
             &.disabled {
                 cursor: not-allowed;
                 opacity: 0.5;
             }
-  
+
             &:active {
                 cursor: grabbing;
             }
-  
+
             &::after {
                 content: attr(data-name);
                 display: block;
@@ -94,25 +140,64 @@
             }
         }
     }
-  }
-  
-  .character.playing {
-    animation: pulse 1s infinite ease-in-out;
-  }
-  
-  @keyframes pulse {
+}
+
+.background-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+
+    .background-button {
+        width: 50px;
+        height: 50px;
+        background-size: cover;
+        background-position: center;
+        border: 2px solid black;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.2s, border-color 0.2s;
+
+        &.video {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        &.active {
+            border-color: red;
+            transform: scale(1.1);
+        }
+
+        &:hover {
+            border-color: blue;
+        }
+    }
+}
+
+@keyframes slide-in {
     0% {
-        transform: scale(1);
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        transform: translateY(100%);
+        opacity: 0;
     }
-  
-    50% {
-        transform: scale(1.1);
-        box-shadow: 0 0 20px rgba(255, 255, 255, 1);
-    }
-  
+
     100% {
-        transform: scale(1);
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        transform: translateY(0);
+        opacity: 1;
     }
-  }
+}
+
+@keyframes slide-out {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}

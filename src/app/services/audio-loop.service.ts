@@ -4,18 +4,18 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AudioLoopService {
-  private audioContext: AudioContext;
-  private tracks: { [key: string]: AudioBuffer } = {};
-  private sources: { [key: string]: AudioBufferSourceNode } = {};
-  private bpm = 105;
-  private measureDuration: number;
-  private loopStartTime: number | null = null;
-  private loopDuration: number;
+  private audioContext: AudioContext
+  private tracks: { [key: string]: AudioBuffer } = {}
+  private sources: { [key: string]: AudioBufferSourceNode } = {}
+  private bpm = 105
+  private measureDuration: number
+  private loopStartTime: number | null = null
+  private loopDuration: number
 
   constructor() {
-    this.audioContext = new AudioContext();
-    this.measureDuration = (60 / this.bpm) * 4;
-    this.loopDuration = this.measureDuration * 4;
+    this.audioContext = new AudioContext()
+    this.measureDuration = (60 / this.bpm) * 4
+    this.loopDuration = this.measureDuration * 4
   }
 
   async loadAllTracks(trackNames: string[]): Promise<void> {
@@ -42,17 +42,6 @@ export class AudioLoopService {
     }
   }
 
-  playTrackForCharacter(trackName: string): void {
-    const formattedTrackName = `${trackName}.mp3`;
-    if (!this.tracks[formattedTrackName]) {
-      this.loadTrack(`assets/audio/${formattedTrackName}`, formattedTrackName)
-        .then(() => this.startLoop(formattedTrackName))
-        .catch((err) => console.error(`Failed to load and play ${formattedTrackName}`, err));
-    } else {
-      this.startLoop(formattedTrackName);
-    }
-  }
-
   private startLoop(trackName: string): void {
     const trackBuffer = this.tracks[trackName];
     if (!trackBuffer) return;
@@ -73,32 +62,33 @@ export class AudioLoopService {
     console.log(`Track ${trackName} started with offset: ${elapsedTime}`);
   }
 
-  private stopTrack(trackName: string): void {
-    const source = this.sources[trackName];
+  public playTrack(trackName: string): void {
+    const formattedTrackName = `${trackName}.mp3`
+    const trackBuffer = this.tracks[formattedTrackName]
+  
+    if (!trackBuffer) {
+      console.warn(`Track ${formattedTrackName} is not loaded.`)
+      return
+    }
+  
+    this.startLoop(formattedTrackName)
+    console.log(`Track ${formattedTrackName} started.`)
+  }
+  
+  public stopTrack(trackName: string): void {
+    const formattedTrackName = `${trackName}.mp3`
+    const source = this.sources[formattedTrackName]
+  
     if (source) {
-      source.stop();
-      delete this.sources[trackName];
-      console.log(`Track ${trackName} stopped.`);
-    }
-  }
-
-  toggleTrack(trackName: string, isEnabled: boolean): void {
-    const formattedTrackName = `${trackName}.mp3`;
-
-    if (isEnabled) {
-      if (!this.tracks[formattedTrackName]) {
-        console.warn(`Track ${formattedTrackName} is not loaded.`);
-        return;
-      }
-      this.startLoop(formattedTrackName);
-      console.log(`Track ${formattedTrackName} started.`);
+      source.stop()
+      delete this.sources[formattedTrackName]
+      console.log(`Track ${formattedTrackName} stopped.`)
     } else {
-      this.stopTrack(formattedTrackName);
-      console.log(`Track ${formattedTrackName} stopped.`);
+      console.warn(`Track ${formattedTrackName} is not playing.`)
     }
   }
 
-  stopAllTracks(): void {
+  public stopAllTracks(): void {
     Object.keys(this.sources).forEach((trackName) => {
       const source = this.sources[trackName];
       if (source) {
