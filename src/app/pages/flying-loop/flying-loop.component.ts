@@ -28,9 +28,11 @@ export class FlyingLoopComponent implements OnInit {
     { url: '/assets/flying-loop/back-05.mp4', type: 'video' }
   ];
   
+  isLoading: boolean = true
   currentBackground: { url: string; type: 'image' | 'video' } = this.backgrounds[0];
 
   ngOnInit(): void {
+    this.preloadAssets(); // Précharge toutes les ressources
     const trackNames = this.buttons.map(button => `${button.name}.mp3`)
     this.audioService.loadAllTracks(trackNames)
       .then(() => console.log('All tracks loaded'))
@@ -164,4 +166,39 @@ export class FlyingLoopComponent implements OnInit {
   isButtonAssigned(button: Button): boolean {
     return this.characters.some(character => character.assignedButton === button.name)
   }
+
+  preloadAssets(): void {
+    const preloadPromises: Promise<void>[] = [];
+  
+    // Précharger les backgrounds
+    this.backgrounds.forEach(background => {
+      preloadPromises.push(new Promise<void>(resolve => {
+        if (background.type === 'image') {
+          const img = new Image();
+          img.src = background.url;
+          img.onload = () => resolve();
+        } else if (background.type === 'video') {
+          const video = document.createElement('video');
+          video.src = background.url;
+          video.onloadeddata = () => resolve();
+        }
+      }));
+    });
+  
+    // Précharger les images des personnages
+    this.characters.forEach(character => {
+      preloadPromises.push(new Promise<void>(resolve => {
+        const img = new Image();
+        img.src = `/assets/flying-loop/${character.fileName}.png`;
+        img.onload = () => resolve();
+      }));
+    });
+  
+    // Marquer le préchargement comme terminé une fois toutes les ressources chargées
+    Promise.all(preloadPromises).then(() => {
+      this.isLoading = false; // Chargement terminé
+      console.log('All assets preloaded');
+    });
+  }
+  
 }
