@@ -1,44 +1,49 @@
-<div class="layout">
-  <div class="controls-container">
-    <div class="button-stop" (click)="stopAllTracks()"> ⬛ </div>
-  </div>
-  <div class="screen">
-    <div class="background">
-      @if(currentBackground.type === 'image') {
-        <img [src]="currentBackground.url" alt="Background" />
-      }
-      @if(currentBackground.type === 'video') {
-        <video [src]="currentBackground.url" autoplay loop muted></video>
+@if(isLoading) {
+  <p>Loading assets...</p>
+}
+@if(!isLoading) {
+  <div class="layout">
+    <div class="controls-container">
+      <div class="button-stop" (click)="stopAllTracks()"> ⬛ </div>
+    </div>
+    <div class="screen">
+      <div class="background">
+        @if(currentBackground.type === 'image') {
+          <img [src]="currentBackground.url" alt="Background" />
+        }
+        @if(currentBackground.type === 'video') {
+          <video [src]="currentBackground.url" autoplay loop muted></video>
+        }
+      </div>
+      <div class="characters-container">
+        @for (character of characters; track character.id) {
+        <div class="character" (click)="resetCharacter(character)" (drop)="onDrop($event, $index)"
+          (dragover)="onDragOver($event)" [class.droppable]="isDragging && !character.assignedButton"
+          [class.entering]="character.entering" [class.exiting]="character.exiting"
+          [class.neutral]="!character.assignedButton" [style.border-color]="character.color">
+          <img [src]="'assets/flying-loop/' + character.fileName + '.png'" [alt]="character.name" />
+        </div>
+        }
+      </div>
+    </div>
+    <div class="buttons-container">
+      @for (button of buttons; track button.name) {
+      <div class="button" [style.backgroundColor]="button.color" [attr.data-name]="button.name"
+        [class.active]="draggedButton === button" [class.disabled]="isButtonAssigned(button)" draggable="true"
+        (dragstart)="!isButtonAssigned(button) && onDragStart($event, button)" (dragend)="onDragEnd()">
+      </div>
       }
     </div>
-    <div class="characters-container">
-      @for (character of characters; track character.id) {
-      <div class="character" (click)="resetCharacter(character)" (drop)="onDrop($event, $index)"
-        (dragover)="onDragOver($event)" [class.droppable]="isDragging && !character.assignedButton"
-        [class.entering]="character.entering" [class.exiting]="character.exiting"
-        [class.neutral]="!character.assignedButton" [style.border-color]="character.color">
-        <img [src]="'assets/flying-loop/' + character.fileName + '.png'" [alt]="character.name" />
+    <div class="background-buttons">
+      @for (background of backgrounds; track background.url) {
+      <div
+        class="background-button"
+        [style.backgroundImage]="background.type === 'image' ? 'url(' + background.url + ')' : ''"
+        [class.video]="background.type === 'video'"
+        [class.active]="currentBackground.url === background.url"
+        (click)="changeBackground(background)">
       </div>
       }
     </div>
   </div>
-  <div class="buttons-container">
-    @for (button of buttons; track button.name) {
-    <div class="button" [style.backgroundColor]="button.color" [attr.data-name]="button.name"
-      [class.active]="draggedButton === button" [class.disabled]="isButtonAssigned(button)" draggable="true"
-      (dragstart)="!isButtonAssigned(button) && onDragStart($event, button)" (dragend)="onDragEnd()">
-    </div>
-    }
-  </div>
-  <div class="background-buttons">
-    @for (background of backgrounds; track background.url) {
-    <div
-      class="background-button"
-      [style.backgroundImage]="background.type === 'image' ? 'url(' + background.url + ')' : ''"
-      [class.video]="background.type === 'video'"
-      [class.active]="currentBackground.url === background.url"
-      (click)="changeBackground(background)">
-    </div>
-    }
-  </div>
-</div>
+}
