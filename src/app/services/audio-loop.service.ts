@@ -4,101 +4,134 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AudioLoopService {
-  private audioContext: AudioContext
-  private tracks: { [key: string]: AudioBuffer } = {}
-  private sources: { [key: string]: AudioBufferSourceNode } = {}
-  private bpm = 105
-  private measureDuration: number
-  private loopStartTime: number | null = null
-  private loopDuration: number
+  private ctx: AudioContext;
+  private tracks: { [key: string]: AudioBuffer } = {};
+  private sources: { [key: string]: AudioBufferSourceNode } = {};
+  private gainNodes: { [key: string]: GainNode } = {};
+  private bpm = 105;
+  private measureDuration: number;
+  private loopStart: number | null = null;
+  private loopDuration: number;
 
   constructor() {
-    this.audioContext = new AudioContext()
-    this.measureDuration = (60 / this.bpm) * 4
-    this.loopDuration = this.measureDuration * 4
+    this.ctx = new AudioContext();
+    this.measureDuration = (60 / this.bpm) * 4;
+    this.loopDuration = this.measureDuration * 4;
   }
 
   async loadAllTracks(trackNames: string[]): Promise<void> {
-    for (const trackName of trackNames) {
-      const formattedTrackName = trackName.endsWith('.mp3') ? trackName : `${trackName}.mp3`;
-      await this.loadTrack(`assets/audio/${formattedTrackName}`, formattedTrackName);
+    for (const name of trackNames) {
+      const fileName = name.endsWith('.mp3') ? name : `${name}.mp3`;
+      await this.loadTrack(`assets/audio/${fileName}`, fileName);
     }
-    console.log('Final tracks:', Object.keys(this.tracks));
+    console.log('Tracks loaded:', Object.keys(this.tracks));
   }
 
-  private async loadTrack(url: string, trackName: string): Promise<void> {
+  private async loadTrack(url: string, name: string): Promise<void> {
     try {
-      console.log(`Loading track: ${url}`);
+      console.log(`Loading: ${url}`);
       const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP error loading ${url}: Status ${response.status}`);
-      }
-      const arrayBuffer = await response.arrayBuffer();
-      const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
-      this.tracks[trackName] = audioBuffer;
-      console.log(`Loaded track: ${trackName}`);
-    } catch (error) {
-      console.error(`Failed to load track ${trackName}:`, error);
+      if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+      const buffer = await response.arrayBuffer();
+      const audioBuffer = await this.ctx.decodeAudioData(buffer);
+      this.tracks[name] = audioBuffer;
+      // Création d'un gain node pour le contrôle du volume
+      const gainNode = this.ctx.createGain();
+      gainNode.gain.value = 1;
+      gainNode.connect(this.ctx.destination);
+      this.gainNodes[name] = gainNode;
+      console.log(`Loaded: ${name}`);
+    } catch (err) {
+      console.error(`Error loading track ${name}:`, err);
     }
   }
 
-  private startLoop(trackName: string): void {
-    const trackBuffer = this.tracks[trackName];
-    if (!trackBuffer) return;
-
-    const currentTime = this.audioContext.currentTime;
-    const elapsedTime = (currentTime - (this.loopStartTime ?? 0)) % this.loopDuration;
-
-    const loopSource = this.audioContext.createBufferSource();
-    loopSource.buffer = trackBuffer;
-    loopSource.loop = true;
-    loopSource.loopStart = 0;
-    loopSource.loopEnd = this.loopDuration;
-    loopSource.connect(this.audioContext.destination);
-
-    loopSource.start(this.audioContext.currentTime, elapsedTime);
-    this.sources[trackName] = loopSource;
-
-    console.log(`Track ${trackName} started with offset: ${elapsedTime}`);
+  private startLoop(name: string): void {
+    const buffer = this.tracks[name];
+    if (!buffer) return;
+    const currentTime = this.ctx.currentTime;
+    const elapsed = (currentTime - (this.loopStart ?? 0)) % this.loopDuration;
+    const source = this.ctx.createBufferSource();
+    source.buffer = buffer;
+    source.loop = true;
+    source.loopStart = 0;
+    source.loopEnd = this.loopDuration;
+    // Connexion via le gain node associé
+    source.connect(this.gainNodes[name]);
+    source.start(currentTime, elapsed);
+    this.sources[name] = source;
+    console.log(`Started ${name} with offset ${elapsed}`);
   }
 
-  public playTrack(trackName: string): void {
-    const formattedTrackName = `${trackName}.mp3`
-    const trackBuffer = this.tracks[formattedTrackName]
-  
-    if (!trackBuffer) {
-      console.warn(`Track ${formattedTrackName} is not loaded.`)
-      return
+  public playTrack(name: string): void {
+    const trackName = `${name}.mp3`;
+    if (!this.tracks[trackName]) {
+      console.warn(`${trackName} not loaded.`);
+      return;
     }
-  
-    this.startLoop(formattedTrackName)
-    console.log(`Track ${formattedTrackName} started.`)
+    this.startLoop(trackName);
+    console.log(`Playing ${trackName}`);
   }
-  
-  public stopTrack(trackName: string): void {
-    const formattedTrackName = `${trackName}.mp3`
-    const source = this.sources[formattedTrackName]
-  
-    if (source) {
-      source.stop()
-      delete this.sources[formattedTrackName]
-      console.log(`Track ${formattedTrackName} stopped.`)
+
+  public stopTrack(name: string): void {
+    const trackName = `${name}.mp3`;
+    const src = this.sources[trackName];
+    if (src) {
+      src.stop();
+      delete this.sources[trackName];
+      console.log(`Stopped ${trackName}`);
     } else {
-      console.warn(`Track ${formattedTrackName} is not playing.`)
+      console.warn(`${trackName} is not playing.`);
     }
   }
 
   public stopAllTracks(): void {
-    Object.keys(this.sources).forEach((trackName) => {
-      const source = this.sources[trackName];
-      if (source) {
-        source.stop();
-        delete this.sources[trackName];
-        console.log(`Track ${trackName} stopped.`);
+    Object.keys(this.sources).forEach(name => {
+      const src = this.sources[name];
+      if (src) {
+        src.stop();
+        delete this.sources[name];
+        console.log(`Stopped ${name}`);
       }
     });
-
-    this.loopStartTime = null;
+    this.loopStart = null;
     console.log('All tracks stopped.');
+  }
+
+  public muteTrack(name: string): void {
+    const trackName = `${name}.mp3`;
+    const gain = this.gainNodes[trackName];
+    if (gain) {
+      gain.gain.value = 0;
+      console.log(`Muted ${trackName}`);
+    } else {
+      console.warn(`Gain node for ${trackName} not found.`);
+    }
+  }
+
+  public soloTrack(name: string): void {
+    const trackName = `${name}.mp3`;
+    Object.keys(this.gainNodes).forEach(key => {
+      this.gainNodes[key].gain.value = key === trackName ? 1 : 0;
+    });
+    console.log(`Solo mode: Only ${trackName} is active.`);
+  }
+
+  public unmuteTrack(name: string): void {
+    const trackName = `${name}.mp3`;
+    const gain = this.gainNodes[trackName];
+    if (gain) {
+      gain.gain.value = 1;
+      console.log(`Unmuted ${trackName}`);
+    } else {
+      console.warn(`Gain node for ${trackName} not found.`);
+    }
+  }
+  
+  public unsoloTrack(): void {
+    Object.keys(this.gainNodes).forEach(key => {
+      this.gainNodes[key].gain.value = 1;
+    });
+    console.log('Solo mode deactivated: all tracks active.');
   }
 }

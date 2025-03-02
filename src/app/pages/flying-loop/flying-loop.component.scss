@@ -1,3 +1,16 @@
+.loading {
+    width: 250px;
+    margin: auto;
+
+    p {
+        text-align: center;
+    }
+
+    img {
+        width: 100%;
+    }
+}
+
 .layout {
     background: radial-gradient(circle, #959595, #707070, #4f4f4f, #000000);
     min-height: 100vh;
@@ -16,11 +29,9 @@
             height: 50px;
             width: 50px;
             margin: 10px;
-
             display: flex;
             justify-content: center;
             align-items: center;
-
             transition-duration: 500ms;
 
             img {
@@ -37,7 +48,8 @@
 
     .screen {
         aspect-ratio: 69 / 25;
-        width: 100%;
+        width: 90%;
+        margin: auto;
         box-sizing: border-box;
         border: 5px solid rgb(0, 0, 0);
         border-radius: 15px;
@@ -57,9 +69,9 @@
                 position: absolute;
                 top: 0;
                 left: 0;
-                width: 100%; // Prendre toute la largeur
-                height: 100%; // Adapter à la hauteur du conteneur
-                object-fit: cover; // Couvrir tout en préservant les proportions
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
             }
         }
 
@@ -73,7 +85,17 @@
             justify-content: center;
             align-items: flex-end;
 
+            &.solo-active {
+                .character:not(.solo) {
+                    img {
+                        filter: grayscale(100%);
+                        opacity: 0.3;
+                    }
+                }
+            }
+
             .character {
+                position: relative;
                 z-index: 5;
                 width: calc(100% / 7);
                 animation: slide-in 0.5s ease-out;
@@ -82,6 +104,7 @@
                     width: 100%;
                     display: block;
                     margin: 0;
+                    transition: filter 0.3s ease, opacity 0.3s ease;
                 }
 
                 &:hover {
@@ -101,66 +124,154 @@
                         cursor: initial;
                     }
                 }
+
+                &.muted img {
+                    filter: grayscale(100%);
+                    opacity: 0.5;
+                }
+
+                &.solo img {
+                    filter: none;
+                    opacity: 1;
+                }
+
+                .control-overlay {
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    width: 50%;
+                    transform: translateX(-50%);
+
+                    background: rgba(0, 0, 0, 0.6);
+                    border-radius: 5px;
+
+                    display: flex;
+                    justify-content: center;
+
+                    gap: 5px;
+                    padding: 10px;
+
+                    opacity: 0;
+                    transition: opacity 0.2s ease;
+                    pointer-events: none;
+                }
+
+                &:hover .control-overlay {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+
+                .control-overlay button {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    height: 30px;
+                    width: 30px;
+
+                    background: #fff;
+                    border: none;
+                    padding: 8px;
+                    font-size: 20px;
+                    cursor: pointer;
+                    border-radius: 3px;
+                    transition: background 0.2s;
+                }
+
+                .control-overlay button:hover {
+                    background: #ccc;
+                }
             }
         }
     }
 
-    .buttons-container {
-        width: 100%;
-        margin-top: 15px;
+    .categories {
         display: flex;
-        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
 
-        .button {
-            cursor: grab;
-            box-sizing: border-box;
-            border: 5px solid black;
-            border-radius: 10px;
-            width: 80px;
-            height: 80px;
+        .category {
+            background-color: rgb(0, 0, 0, 0.3);
+            border: 5px solid rgb(0, 0, 0);
+            border-radius: 15px;
+            padding: 5px;
             margin: 5px;
-            transition: transform 0.2s, opacity 0.2s;
 
-            &.active {
-                transform: scale(1.1);
-            }
-
-            &.disabled {
-                cursor: not-allowed;
-                opacity: 0.5;
-            }
-
-            &:active {
-                cursor: grabbing;
-            }
-
-            &::after {
-                content: attr(data-name);
-                display: block;
+            h2 {
+                font-size: 15px;
+                margin: 0;
+                color: white;
                 text-align: center;
-                font-size: 12px;
+            }
+
+            .buttons-container {
+                width: 100%;
                 margin-top: 5px;
-                color: black;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+
+                .button {
+                    cursor: grab;
+                    box-sizing: border-box;
+                    border: 5px solid black;
+                    border-radius: 10px;
+                    width: 65px;
+                    height: 65px;
+                    margin: 5px;
+                    transition: transform 0.2s, opacity 0.2s;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 10px;
+
+                    &.active {
+                        transform: scale(1.1);
+                    }
+
+                    &.disabled {
+                        cursor: not-allowed;
+                        opacity: 0.5;
+                    }
+
+                    &:active {
+                        cursor: grabbing;
+                    }
+
+                    &::after {
+                        content: attr(data-name);
+                        display: block;
+                        text-align: center;
+                        font-size: 12px;
+                        margin-top: 5px;
+                        color: black;
+                    }
+                }
             }
         }
     }
 }
 
 .background-buttons {
+    width: 350px;
+    margin: auto;
     display: flex;
     gap: 10px;
     justify-content: center;
-    margin-top: 10px;
+    background-color: rgb(0, 0, 0, 0.3);
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    padding: 15px;
 
     .background-button {
         width: 50px;
         height: 50px;
         background-size: cover;
         background-position: center;
-        border: 2px solid black;
-        border-radius: 5px;
+        border: 5px solid black;
+        border-radius: 10px;
         cursor: pointer;
         transition: transform 0.2s, border-color 0.2s;
 
