@@ -1,55 +1,101 @@
 @if(isLoading) {
-  <p>Loading assets...</p>
+<div class="loading">
+  <p>Loading assets... {{ progress }}%</p>
+  <progress [value]="progress" max="100"></progress>
+  <img src="assets/app_icons/spinner.gif" alt="spinner" />
+</div>
 }
 @if(!isLoading) {
-  <div class="layout">
-    <div class="controls-container">
-      <div class="button-stop" routerLink="/"><img src="/assets/app_icons/arrow_left.png" /></div>
-      <div class="character-controls">
-        <button (click)="decreaseCharacterCount()" [disabled]="characterCount <= minCharacters">-</button>
-        <span>{{ characterCount | number : '2.0' }}</span>
-        <button (click)="increaseCharacterCount()" [disabled]="characterCount >= maxCharacters">+</button>
-      </div>
-      <div class="button-stop" (click)="stopAllTracks()"><img src="/assets/app_icons/stop.png" /></div>
+<div class="layout">
+  <div class="controls-container">
+    <div class="button-stop" routerLink="/"><img src="/assets/app_icons/arrow_left.png" /></div>
+    <div class="character-controls">
+      <button (click)="decCharCount()" [disabled]="charCount <= minChars">-</button>
+      <span>{{ charCount | number:'2.0' }}</span>
+      <button (click)="incCharCount()" [disabled]="charCount >= maxChars">+</button>
     </div>
-    <div class="screen">
-      <div class="background">
-        @if(currentBackground.type === 'image') {
-          <img [src]="currentBackground.url" alt="Background" />
-        }
-        @if(currentBackground.type === 'video') {
-          <video [src]="currentBackground.url" autoplay loop muted></video>
-        }
-      </div>
-      <div class="characters-container">
-        @for (character of characters; track character.id) {
-        <div class="character" (click)="resetCharacter(character)" (drop)="onDrop($event, $index)"
-          (dragover)="onDragOver($event)" [class.droppable]="isDragging && !character.assignedButton"
-          [class.entering]="character.entering" [class.exiting]="character.exiting"
-          [class.neutral]="!character.assignedButton" [style.border-color]="character.color">
-          <img [src]="'assets/flying-loop/' + character.fileName + '.png'" [alt]="character.name" />
-        </div>
-        }
-      </div>
-    </div>
-    <div class="buttons-container">
-      @for (button of buttons; track button.name) {
-      <div class="button" [style.backgroundColor]="button.color" [attr.data-name]="button.name"
-        [class.active]="draggedButton === button" [class.disabled]="isButtonAssigned(button)" draggable="true"
-        (dragstart)="!isButtonAssigned(button) && onDragStart($event, button)" (dragend)="onDragEnd()">
-      </div>
+    <div class="button-stop" (click)="stopAll()"><img src="/assets/app_icons/stop.png" /></div>
+  </div>
+  <div class="screen">
+    <div class="background">
+      @if(currentBg.type === 'image') {
+      <img [src]="currentBg.url" alt="Background" />
+      }
+      @if(currentBg.type === 'video') {
+      <video [src]="currentBg.url" autoplay loop muted></video>
       }
     </div>
-    <div class="background-buttons">
-      @for (background of backgrounds; track background.url) {
-      <div
-        class="background-button"
-        [style.backgroundImage]="background.type === 'image' ? 'url(' + background.url + ')' : ''"
-        [class.video]="background.type === 'video'"
-        [class.active]="currentBackground.url === background.url"
-        (click)="changeBackground(background)">
+    <div class="characters-container" [class.solo-active]="isSoloActive()">
+      @for (char of activeChars; track char.id) {
+      <div class="character" (click)="resetChar(char)" (drop)="onDrop($event, $index)" (dragover)="onDragOver($event)"
+        [class.droppable]="isDragging && !char.assignedButton" [class.entering]="char.entering"
+        [class.exiting]="char.exiting" [class.neutral]="!char.assignedButton" [class.muted]="char.isMuted"
+        [class.solo]="char.isSolo" [style.border-color]="char.color">
+        <img [src]="'assets/flying-loop/' + char.fileName + '.png'" [alt]="char.name" />
+        @if(char.assignedButton) {
+        <div class="control-overlay">
+          <button (click)="muteChar(char); $event.stopPropagation()" class="mute-btn">
+            {{ char.isMuted ? '🔈' : '🔇' }}
+          </button>
+          <button (click)="soloChar(char); $event.stopPropagation()" class="solo-btn">
+            {{ char.isSolo ? '👥' : '👤' }}
+          </button>
+        </div>
+        }
       </div>
       }
     </div>
   </div>
+  <div class="categories">
+    <div class="category">
+      <h2>Percussive</h2>
+      <div class="buttons-container">
+        @for (btn of availChars; track btn.name) {
+        @if(btn.category === 'Percussive') {
+        <div class="button" [style.backgroundColor]="btn.color" [class.active]="draggedChar === btn"
+          [class.disabled]="isAssigned(btn)" draggable="true" (dragstart)="!isAssigned(btn) && onDragStart($event, btn)"
+          (dragend)="onDragEnd()">
+          {{ btn.name }}
+        </div>
+        }
+        }
+      </div>
+    </div>
+    <div class="category">
+      <h2>Harmonic</h2>
+      <div class="buttons-container">
+        @for (btn of availChars; track btn.name) {
+        @if(btn.category === 'Harmonic') {
+        <div class="button" [style.backgroundColor]="btn.color" [class.active]="draggedChar === btn"
+          [class.disabled]="isAssigned(btn)" draggable="true" (dragstart)="!isAssigned(btn) && onDragStart($event, btn)"
+          (dragend)="onDragEnd()">
+          {{ btn.name }}
+        </div>
+        }
+        }
+      </div>
+    </div>
+    <div class="category">
+      <h2>Melodic</h2>
+      <div class="buttons-container">
+        @for (btn of availChars; track btn.name) {
+        @if(btn.category === 'Melodic') {
+        <div class="button" [style.backgroundColor]="btn.color" [class.active]="draggedChar === btn"
+          [class.disabled]="isAssigned(btn)" draggable="true" (dragstart)="!isAssigned(btn) && onDragStart($event, btn)"
+          (dragend)="onDragEnd()">
+          {{ btn.name }}
+        </div>
+        }
+        }
+      </div>
+    </div>
+  </div>
+  <div class="background-buttons">
+    @for (bg of bgList; track bg.url) {
+    <div class="background-button" [style.backgroundImage]="bg.type == 'image' ? 'url(' + bg.url + ')' : ''"
+      [class.video]="bg.type == 'video'" [class.active]="currentBg.url == bg.url" (click)="changeBg(bg)">
+    </div>
+    }
+  </div>
+</div>
 }

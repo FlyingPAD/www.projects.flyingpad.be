@@ -39,7 +39,6 @@ export class ThemeService {
 
     setTimeout(() => {
       document.body.classList.remove('dark', 'blue', 'pink', 'green', 'orange')
-
       document.body.classList.add(theme)
 
       setTimeout(() => {
