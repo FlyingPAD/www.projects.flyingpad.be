@@ -15,8 +15,7 @@ interface Events {
 @Component({
   selector: 'app-countdown',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonTopComponent,
-    ButtonBackComponent],
+  imports: [CommonModule, FormsModule, ButtonTopComponent, ButtonBackComponent],
   templateUrl: './countdown.component.html',
   styleUrls: ['./countdown.component.scss']
 })
