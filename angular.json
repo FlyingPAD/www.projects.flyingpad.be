@@ -36,6 +36,7 @@
               "src/design/02_global_variables.scss",
               "src/design/03_global_settings.scss",
               "src/design/animations.scss",
+              "src/design/bottom-bar.scss",
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
