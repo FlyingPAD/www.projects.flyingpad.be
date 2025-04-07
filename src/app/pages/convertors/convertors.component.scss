@@ -7,13 +7,13 @@
     margin: auto;
     padding: 10px;
 
-    border: 3px solid #6b5240;
+    border: 3px solid var(--colorMain);
     border-radius: 10px;
-    background-color: rgb(107, 82, 64, 0.2);
+    background-color: var(--colorMainOpacity2);
 
     margin-bottom: 15px;
 
-    color: #6b5240;
+    color: var(--colorMain);
     cursor: pointer;
 
     span {
@@ -22,55 +22,50 @@
 }
 
 .toggle:hover {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--colorWhite);
 }
 
 .toggle-active {
     border-radius: 10px 10px 0 0;
     border-bottom: none;
     margin-bottom: 0;
-    background-color: rgb(255, 255, 255, 0.5);
+    background-color: var(--colorWhiteOpacity5);
 }
 
 .convertors {
-    margin-top: 25px;
-
     .convertor {
         width: 280px;
-    
-        border: 3px solid #6b5240;
+        margin: auto;
+
+        margin-bottom: 15px;
+
+        border: 3px solid var(--colorMain);
         border-radius: 10px;
-        background-color: rgb(255, 255, 255, 0.5);
-    
+        background-color: var(--colorWhiteOpacity5);
+
         padding: 15px;
-        color: #6b5240;
-    
+        color: var(--colorMain);
+
         input {
             width: calc(100% - 25px);
-    
+
             margin-top: 15px;
             padding: 10px;
-    
+
             border-radius: 5px;
-    
+
             text-align: right;
             font-size: 20px;
-            color: #6b5240;
+            color: var(--colorMain);
         }
-    
+
         input:focus {
             outline: none;
-            border: 2px solid #6b5240;
+            border: 2px solid var(--colorMain);
         }
-    
+
         p {
             font-size: 19px;
-        }
-    }
-    
-    @media (max-width: 500px) {
-        .convertor {
-            width: 80%;
         }
     }
 }

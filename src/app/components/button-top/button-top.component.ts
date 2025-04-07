@@ -4,11 +4,10 @@ import { ThemeService } from '../../services/theme.service';
 import { Theme } from '../../enumerations/themes';
 
 @Component({
-  selector: 'app-button-top',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './button-top.component.html',
-  styleUrl: './button-top.component.scss'
+    selector: 'app-button-top',
+    imports: [CommonModule],
+    templateUrl: './button-top.component.html',
+    styleUrl: './button-top.component.scss'
 })
 export class ButtonTopComponent {
   #themeService = inject(ThemeService)

@@ -3,9 +3,9 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
-import { StorageService } from './storage.service';
 import { StorageProperties } from '../enumerations/storage-properties';
 import { SupportedLanguages } from '../enumerations/supported-languages';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class LanguageService {
 
   private readonly DEFAULT_LANGUAGE: SupportedLanguages = SupportedLanguages.FR
   #currentLanguage = new BehaviorSubject<string>(this.DEFAULT_LANGUAGE)
-  public currentLanguage: Signal<string | undefined> = toSignal(this.#currentLanguage)
+  public currentLanguage: Signal<string> = toSignal(this.#currentLanguage, {initialValue : this.DEFAULT_LANGUAGE })
 
   constructor() {
     let storedLanguage: string | null = this.#storageService.getItem(StorageProperties.Language)

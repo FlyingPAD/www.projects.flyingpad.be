@@ -2,16 +2,18 @@ import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Pet } from '../../models/pet';
-import { ButtonTopComponent } from '../../components/button-top/button-top.component';
-import { ButtonBackComponent } from '../../components/button-back/button-back.component';
+import { BottomBarComponent } from "../../components/bottom-bar/bottom-bar.component";
+import { BottomIconBackComponent } from "../../components/bottom-bar-icons/bottom-icon-back/bottom-icon-back.component";
+import { BottomToggleEntityInfoComponent } from "../../components/bottom-bar-icons/bottom-toggle-entity-info/bottom-icon-about.component";
+import { BottomIconSettingsComponent } from "../../components/bottom-bar-icons/bottom-icon-settings/bottom-icon-settings.component";
+import { BottomIconToTopComponent } from "../../components/bottom-bar-icons/bottom-icon-to-top/bottom-icon-to-top.component";
+import { SpacerComponent } from "../../components/spacer/spacer.component";
 
 @Component({
   selector: 'app-virtual-pet',
-  standalone: true,
   templateUrl: './virtual-pet.component.html',
   styleUrls: ['./virtual-pet.component.scss'],
-  imports: [CommonModule, FormsModule, ButtonTopComponent,
-    ButtonBackComponent]
+  imports: [CommonModule, FormsModule, BottomBarComponent, BottomIconBackComponent, BottomToggleEntityInfoComponent, BottomIconSettingsComponent, BottomIconToTopComponent, SpacerComponent]
 })
 export class VirtualPetComponent implements OnDestroy {
   petSelection: boolean = false;

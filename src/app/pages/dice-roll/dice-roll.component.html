@@ -1,8 +1,8 @@
 @if(title){
-    <div class="title-screen">
-        <img src="assets/dice_roll/title-screen.png" />
-        <p (click)="toggleTitle()">START</p>
-    </div>
+<div class="title-screen">
+    <img src="assets/dice_roll/title-screen.png" />
+    <p (click)="toggleTitle()">START</p>
+</div>
 }
 @else {
 <div class="dice-roll">
@@ -93,6 +93,10 @@
         </div>
     </div>
 </div>
-
-
 }
+
+<app-bottom-bar>
+    <app-bottom-icon-back />
+    <app-bottom-icon-about />
+    <app-bottom-icon-settings />
+</app-bottom-bar>

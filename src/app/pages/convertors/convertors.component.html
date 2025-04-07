@@ -1,78 +1,88 @@
 <h1 class="h1">Convertors</h1>
-<div class="row-white">
-  <div class="buttons">
-    <app-button-back></app-button-back>
-  </div>
-</div>
-<div class="toggle" [class.toggle-active]="temperature" (click)="temperatureToggle()">
+
+<div class="toggle" [class.toggle-active]="activeConverter === 'temperature'" (click)="toggleConverter('temperature')">
   <span><b>Temperature</b></span>
   <span>°C / °F</span>
 </div>
+
 <div class="convertors">
-  @if(temperature){
+  @if(activeConverter === 'temperature'){
     <div class="convertor">
       <form [formGroup]="temperatureForm">
         <label for="tempFromUnit">From </label>
         <select id="tempFromUnit" formControlName="fromUnit">
-          <option *ngFor="let unit of temperatureUnits" [value]="unit"> {{unit}}</option>
+          <option *ngFor="let unit of temperatureUnits" [value]="unit"> {{unit}} </option>
         </select>
-        <label for="tempToUnit"> to {{ toTemperatureUnit }}</label>
-        <input id="tempValue" formControlName="value" type="number">
-        <p> = {{ temperatureForm.value.value | convertTemperature :
-          temperatureForm.value.fromUnit:temperatureForm.value.toUnit }}</p>
+        <label for="tempToUnit"> to {{ temperatureForm.value.toUnit }}</label>
+        <input id="tempValue" formControlName="value" type="number" />
+        <p> = {{ temperatureForm.value.value |
+          convertTemperature:temperatureForm.value.fromUnit:temperatureForm.value.toUnit }}</p>
       </form>
     </div>
-    }
-    <div class="toggle" [class.toggle-active]="distance" (click)="distanceToggle()">
-      <span><b>Distance</b></span>
-      <span>km / mi</span>
-    </div>
-    @if(distance){
+  }
+
+  <div class="toggle" [class.toggle-active]="activeConverter === 'distance'" (click)="toggleConverter('distance')">
+    <span><b>Distance</b></span>
+    <span>km / mi</span>
+  </div>
+
+  @if(activeConverter === 'distance'){
     <div class="convertor">
       <form [formGroup]="distanceForm">
         <label for="distFromUnit">From </label>
         <select id="distFromUnit" formControlName="fromUnit">
-          <option *ngFor="let unit of distanceUnits" [value]="unit"> {{unit}}</option>
+          <option *ngFor="let unit of distanceUnits" [value]="unit"> {{unit}} </option>
         </select>
-        <label for="distToUnit"> to {{ toDistanceUnit }}</label>
-        <input id="distValue" formControlName="value" type="number">
+        <label for="distToUnit"> to {{ distanceForm.value.toUnit }}</label>
+        <input id="distValue" formControlName="value" type="number" />
         <p> = {{ distanceForm.value.value | convertDistance:distanceForm.value.fromUnit:distanceForm.value.toUnit }}</p>
       </form>
     </div>
-    }
-    <div class="toggle" [class.toggle-active]="mass" (click)="massToggle()">
-      <span><b>Mass</b></span>
-      <span>kg / lb</span>
-    </div>
-    @if(mass){
+  }
+
+  <div class="toggle" [class.toggle-active]="activeConverter === 'mass'" (click)="toggleConverter('mass')">
+    <span><b>Mass</b></span>
+    <span>kg / lb</span>
+  </div>
+
+  @if(activeConverter === 'mass'){
     <div class="convertor">
       <form [formGroup]="massForm">
         <label for="massFromUnit">From </label>
         <select id="massFromUnit" formControlName="fromUnit">
-          <option *ngFor="let unit of massUnits" [value]="unit"> {{unit}}</option>
+          <option *ngFor="let unit of massUnits" [value]="unit"> {{unit}} </option>
         </select>
-        <label for="massToUnit"> to {{ toMassUnit }}</label>
-        <input id="massValue" formControlName="value" type="number">
+        <label for="massToUnit"> to {{ massForm.value.toUnit }}</label>
+        <input id="massValue" formControlName="value" type="number" />
         <p> = {{ massForm.value.value | convertMass:massForm.value.fromUnit:massForm.value.toUnit }}</p>
       </form>
     </div>
-    }
-    <div class="toggle" [class.toggle-active]="volume" (click)="volumeToggle()">
-      <span><b>Volume</b></span>
-      <span>l / gal</span>
-    </div>
-    @if(volume){
+  }
+
+  <div class="toggle" [class.toggle-active]="activeConverter === 'volume'" (click)="toggleConverter('volume')">
+    <span><b>Volume</b></span>
+    <span>l / gal</span>
+  </div>
+
+  @if(activeConverter === 'volume'){
     <div class="convertor">
       <form [formGroup]="volumeForm">
         <label for="volumeFromUnit">From </label>
         <select id="volumeFromUnit" formControlName="fromUnit">
-          <option *ngFor="let unit of volumeUnits" [value]="unit"> {{unit}}</option>
+          <option *ngFor="let unit of volumeUnits" [value]="unit"> {{unit}} </option>
         </select>
-        <label for="volumeToUnit"> to {{ toVolumeUnit }}</label>
-        <input id="volumeValue" formControlName="value" type="number">
+        <label for="volumeToUnit"> to {{ volumeForm.value.toUnit }}</label>
+        <input id="volumeValue" formControlName="value" type="number" />
         <p> = {{ volumeForm.value.value | convertVolume:volumeForm.value.fromUnit:volumeForm.value.toUnit }}</p>
       </form>
     </div>
-    }
+  }
 </div>
+
 <app-button-top />
+
+<app-bottom-bar>
+  <app-bottom-icon-back />
+  <app-bottom-icon-about />
+  <app-bottom-icon-settings />
+</app-bottom-bar>

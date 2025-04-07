@@ -2,7 +2,6 @@ import { Component, inject, Input } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 
 @Component({
-  standalone: true,
   selector: 'app-icon-settings',
   templateUrl: './icon-settings.component.html'
 })

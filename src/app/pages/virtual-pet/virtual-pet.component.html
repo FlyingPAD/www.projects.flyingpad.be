@@ -8,7 +8,7 @@
 }
 
 @if(petSelection){
-  <h2>Select your Pet</h2>
+  <h2 class="h2">Select your Pet</h2>
   <div class="selection-screen">
     @for(pet of initialPets; track $index) {
       <img [src]="'assets/virtual_pet/' + pet.type + '_normal.png'" (click)="SelectPet(pet)">
@@ -17,7 +17,7 @@
 }
 
 @if(petNaming){
-  <h2>Name your Pet</h2>
+  <h2 class="h2">Name your Pet</h2>
   <div class="naming-screen">
     <img [src]="currentPet.getImageUrl()">
   </div>
@@ -28,34 +28,34 @@
 }
 
 @if(controlRoom){
-  <h2>Control Room</h2>
-  <p>Click on a card to see details.</p>
+  <h2 class="h2">Control Room</h2>
+  <p class="p">( Click on a card to see details ).</p>
   <div class="control-room">
     @for(pet of currentPets; track $index) {
-      <div class="card" (click)="goDetails(pet)">
-        <p class="name">{{ pet.name }}</p>
-        <div class="images">
-          <img [src]="pet.getBackgroundUrl()">
-          <img [src]="pet.getImageUrl()">
-        </div>
-        <div class="stat">
-          @if(pet.isDead) {
-            <p> 💀 </p>
-          }
-          @else {
-            <p> 😀 </p>
-          }
-          <p>{{pet.happiness | number: '3.0'}}</p>
-        </div>
-        <div class="stat">
-          <p> 🍖 </p>
-          <p>{{pet.hunger | number: '3.0'}}</p>
-        </div>
-        <div class="stat">
-          <p> 💦 </p>
-          <p>{{pet.cleanliness | number: '3.0'}}</p>
-        </div>
+    <div class="card" (click)="goDetails(pet)">
+      <p class="name">{{ pet.name }}</p>
+      <div class="images">
+        <img [src]="pet.getBackgroundUrl()">
+        <img [src]="pet.getImageUrl()">
       </div>
+      <div class="stat">
+        @if(pet.isDead) {
+          <p> 💀 </p>
+        }
+        @else {
+          <p> 😀 </p>
+        }
+        <p>{{pet.happiness | number: '3.0'}}</p>
+      </div>
+      <div class="stat">
+        <p> 🍖 </p>
+        <p>{{pet.hunger | number: '3.0'}}</p>
+      </div>
+      <div class="stat">
+        <p> 💦 </p>
+        <p>{{pet.cleanliness | number: '3.0'}}</p>
+      </div>
+    </div>
     }
   </div>
   <div class="buttons">
@@ -64,58 +64,65 @@
 }
 
 @if(petDetails){
-  <div class="pet-details">
-    <h2>{{currentPet.name}}</h2>
-    <div class="display">
-      <div class="images">
-        <img [src]="currentPet.getBackgroundUrl()">
-        <img [src]="currentPet.getImageUrl()">
+<div class="pet-details">
+  <h2 class="h1">{{currentPet.name}}</h2>
+  <div class="display">
+    <div class="images">
+      <img [src]="currentPet.getBackgroundUrl()">
+      <img [src]="currentPet.getImageUrl()">
+    </div>
+    <div class="stats">
+      <div class="stat">
+        @if(currentPet.isDead) {
+          <p> 💀 </p>
+        }
+        @else {
+          <p> 😀 </p>
+        }
+        <p>{{currentPet.happiness | number: '3.0'}}</p>
       </div>
-      <div class="stats">
-        <div class="stat">
-          @if(currentPet.isDead) {
-            <p> 💀 </p>
-          }
-          @else {
-            <p> 😀 </p>
-          }
-          <p>{{currentPet.happiness | number: '3.0'}}</p>
-        </div>
-        <div class="stat">
-          <p> 🍖 </p>
-          <p>{{currentPet.hunger | number: '3.0'}}</p>
-        </div>
-        <div class="stat">
-          <p> 💦 </p>
-          <p>{{currentPet.cleanliness | number: '3.0'}}</p>
-        </div>
+      <div class="stat">
+        <p> 🍖 </p>
+        <p>{{currentPet.hunger | number: '3.0'}}</p>
+      </div>
+      <div class="stat">
+        <p> 💦 </p>
+        <p>{{currentPet.cleanliness | number: '3.0'}}</p>
       </div>
     </div>
-    @if(!currentPet.isDead){
-      <div class="buttons">
-        <div class="button action" (click)="playPet(currentPet)">Play</div>
-        <div class="button action" (click)="feedPet(currentPet)">Feed</div>
-        <div class="button action" (click)="cleanPet(currentPet)">Clean</div>
-      </div>
-    }
-    <div class="interface">
-      <header (click)="goControlRoom()">
-        <img src="assets/app_icons/arrow_left.png" />
-        <div class="button">Back to Control Room</div>
-      </header>
-      <p class="message">" {{currentPet.dialog}} "</p>
-    </div>
-    @if(!currentPet.isDead){
-      <div class="background-selection">
-        <h3>Select Background</h3>
-        <div class="background-options">
-          @for(bg of availableBackgrounds[currentPet.type]; track bg) {
-            <img [src]="'assets/virtual_pet/back-' + bg + '.png'" (click)="changeBackground(bg)">
-          }
-        </div>
-      </div>
-    }
   </div>
+  @if(!currentPet.isDead){
+    <div class="buttons">
+      <div class="button action" (click)="playPet(currentPet)">Play</div>
+      <div class="button action" (click)="feedPet(currentPet)">Feed</div>
+      <div class="button action" (click)="cleanPet(currentPet)">Clean</div>
+    </div>
+  }
+  <div class="interface">
+    <header (click)="goControlRoom()">
+      <img src="assets/app_icons/arrow_left.png" />
+      <div class="button">Back to Control Room</div>
+    </header>
+    <p class="message">" {{currentPet.dialog}} "</p>
+  </div>
+  @if(!currentPet.isDead){
+  <div class="background-selection">
+    <h3>Select Background</h3>
+    <div class="background-options">
+      @for(bg of availableBackgrounds[currentPet.type]; track bg) {
+      <img [src]="'assets/virtual_pet/back-' + bg + '.png'" (click)="changeBackground(bg)">
+      }
+    </div>
+  </div>
+  }
+</div>
 }
 
-<app-button-top />
+<app-spacer height="175px" />
+
+<app-bottom-bar>
+  <app-bottom-icon-back />
+  <app-bottom-icon-about />
+  <app-bottom-icon-settings />
+  <app-bottom-icon-to-top />
+</app-bottom-bar>
