@@ -1,18 +1,7 @@
 <h1 class="h1">{{ 'title.projects' | translate }}</h1>
+
 <div class="row-white">
     <div class="icons">
-        <div class="icon">
-            <img src="assets/icons/high-low.png" routerLink="/guess-the-right-number" />
-            <span>Guess the right number</span>
-        </div>
-        <div class="icon">
-            <img src="assets/icons/dice-roll.png" routerLink="/dice-roll" />
-            <span>Dice Roll</span>
-        </div>
-        <div class="icon">
-            <img src="assets/icons/virtual-pet.png" routerLink="/virtual-pet" />
-            <span>Virtual Pet</span>
-        </div>
         <div class="icon">
             <img src="assets/icons/countdowns.png" routerLink="/countdowns" />
             <span>Countdowns</span>
@@ -22,18 +11,32 @@
             <span>Convertors</span>
         </div>
         <div class="icon">
-            <img src="assets/icons/leap-year.png" routerLink="/leap-year" />
-            <span>Leap Year</span>
+            <img src="assets/icons/virtual-pet.png" routerLink="/virtual-pet" />
+            <span>Virtual Pet</span>
+        </div>
+        <div class="icon">
+            <img src="assets/icons/high-low.png" routerLink="/guess-the-right-number" />
+            <span>Guess the right number</span>
         </div>
         <div class="icon">
             <img src="assets/icons/flying-loop.png" routerLink="/flying-loop" />
             <span>Flying Loop</span>
         </div>
+        <div class="icon">
+            <img src="assets/icons/dice-roll.png" routerLink="/dice-roll" />
+            <span>Dice Roll</span>
+        </div>
+        <div class="icon">
+            <img src="assets/icons/leap-year.png" routerLink="/leap-year" />
+            <span>Leap Year</span>
+        </div>
     </div>
 </div>
-<div class="spacer-75"></div>
+
+<app-spacer />
 
 <app-bottom-bar>
     <app-bottom-icon-about />
     <app-bottom-icon-settings />
+    <app-bottom-icon-to-top />
 </app-bottom-bar>

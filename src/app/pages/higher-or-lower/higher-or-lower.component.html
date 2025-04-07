@@ -1,50 +1,56 @@
 @if (title) {
-    <img class="title" src="assets/guess/title-screen.png" />
-    <div class="button" (click)="config()">PLAY</div>
-  }
-  
-  @if (configuration && !gameStart) {
-    <div>
-      <h2>{{message}}</h2>
-      <div class="higher-or-lower">
-        <div class="buttons-level">
-          <button (click)="selectLevel(1)">1</button>
-          <button (click)="selectLevel(2)">2</button>
-          <button (click)="selectLevel(3)">3</button>
-        </div>
-        @if (level !== '0') {
-            @if(level === '1'){
-                <h2>( 1 ) Beginner</h2>
-            }
-            @if(level === '2'){
-                <h2>( 2 ) Intermediate</h2>
-            }
-            @if(level === '3'){
-                <h2>( 3 ) Expert</h2>
-            }
-          <p>(between 1 and {{ refLevel }})</p>
-          <div class="button" (click)="startGame()">START</div>
-        }
+  <img class="title" src="assets/guess/title-screen.png" />
+  <div class="button" (click)="config()">PLAY</div>
+}
+
+@if (configuration && !gameStart) {
+  <div>
+    <h1 class="h1">{{message}}</h1>
+    <div class="higher-or-lower">
+
+      <div class="buttons-level">
+        <button (click)="selectLevel(1)">1</button>
+        <button (click)="selectLevel(2)">2</button>
+        <button (click)="selectLevel(3)">3</button>
       </div>
+
+      @if (level !== '0') {
+        <h2 class="h2" *ngIf="level === '1'"> ▸ Level - 1 : Beginner</h2>
+        <h2 class="h2" *ngIf="level === '2'"> ▸ Level - 2 : Intermediate</h2>
+        <h2 class="h2" *ngIf="level === '3'"> ▸ Level - 3 : Expert</h2>
+
+        <p>( between 1 and {{ refLevel }} )</p>
+        <div class="button" (click)="startGame()">START</div>
+      }
     </div>
-  }
+  </div>
+}
+
+@if (gameStart && !configuration) {
+  <h2 class="h2">{{ message }}</h2>
+
+  <div class="higher-or-lower">
+    <p>Level {{level}}</p>
+    <input type="number" [(ngModel)]="userInputValue">
+    <div class="button" (click)="process()">Process</div>
+    <p *ngIf="moves !== 0"><u>Moves</u>: {{ moves }}</p>
+  </div>
+}
+
+@if (gameEnd) {
+  <h2 class="h2">{{ message }}</h2>
+
+  <div class="higher-or-lower">
+    <p *ngIf="moves !== 0"><u>Moves</u>: {{ moves }}</p>
+  </div>
   
-  @if (gameStart && !configuration) {
-    <h2>{{ message }}</h2>
-    <div class="higher-or-lower">
-        <p>Level {{level}}</p>
-        <input type="number" [(ngModel)]="userInputValue">
-        <div class="button" (click)="process()">Process</div>
-        <p *ngIf="moves !== 0"><u>Moves</u>: {{ moves }}</p>
-    </div>
-  }
-  
-  @if (gameEnd) {
-    <h2>{{ message }}</h2>
-    <div class="higher-or-lower">
-        <p *ngIf="moves !== 0"><u>Moves</u>: {{ moves }}</p>
-    </div>
-    <div class="button" (click)="config()">Restart</div>
-  }
-  
-  <app-button-top></app-button-top>
+  <div class="button" (click)="config()">Restart</div>
+}
+
+<app-button-top />
+
+<app-bottom-bar>
+  <app-bottom-icon-back />
+  <app-bottom-icon-about />
+  <app-bottom-icon-settings />
+</app-bottom-bar>

@@ -1,19 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ButtonTopComponent } from '../../components/button-top/button-top.component';
-import { ButtonBackComponent } from '../../components/button-back/button-back.component';
+import { BottomIconBackComponent } from "../../components/bottom-bar-icons/bottom-icon-back/bottom-icon-back.component";
+import { BottomToggleEntityInfoComponent } from "../../components/bottom-bar-icons/bottom-toggle-entity-info/bottom-icon-about.component";
+import { BottomIconSettingsComponent } from "../../components/bottom-bar-icons/bottom-icon-settings/bottom-icon-settings.component";
+import { BottomBarComponent } from "../../components/bottom-bar/bottom-bar.component";
+import { SpacerComponent } from "../../components/spacer/spacer.component";
+import { BottomIconToTopComponent } from "../../components/bottom-bar-icons/bottom-icon-to-top/bottom-icon-to-top.component";
 
 @Component({
-  selector: 'app-leap-year',
-  templateUrl: './leap-year.component.html',
-  styleUrls: ['./leap-year.component.scss'],
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonTopComponent, ButtonBackComponent]
+    selector: 'app-leap-year',
+    templateUrl: './leap-year.component.html',
+    styleUrls: ['./leap-year.component.scss'],
+    imports: [CommonModule, ReactiveFormsModule, BottomIconBackComponent, BottomToggleEntityInfoComponent, BottomIconSettingsComponent, BottomBarComponent, SpacerComponent, BottomIconToTopComponent]
 })
 export class LeapYearComponent implements OnInit {
-  isALeapYear: boolean | undefined;
-  form: FormGroup = new FormGroup({
+  public isALeapYear: boolean | undefined
+  public form: FormGroup = new FormGroup({
     year: new FormControl(new Date().getFullYear(), [
       Validators.required,
       Validators.min(-4500000000),
@@ -22,19 +25,17 @@ export class LeapYearComponent implements OnInit {
   })
 
   ngOnInit() {
-    this.checkLeapYear(this.form.get('year')?.value);
+    this.checkLeapYear(this.form.get('year')?.value)
     this.form.get('year')?.valueChanges.subscribe(year => {
       this.checkLeapYear(year)
     })
   }
 
   private checkLeapYear(year: string): void {
-    const numericYear = parseInt(year, 10)
-    if (!isNaN(numericYear)) {
-      this.isALeapYear = this.isLeapYear(numericYear)
-    } else {
-      this.isALeapYear = undefined
-    }
+    let numericYear = parseInt(year, 10)
+
+    if (!isNaN(numericYear)) this.isALeapYear = this.isLeapYear(numericYear)
+    else this.isALeapYear = undefined
   }
 
   private isLeapYear(year: number): boolean {

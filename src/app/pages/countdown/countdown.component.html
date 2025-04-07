@@ -1,5 +1,6 @@
+<h1 class="h1">Countdowns</h1>
+
 <div class="countdown">
-  <h2>Countdowns</h2>
   <div class="event-buttons">
     <div *ngFor="let event of events">
       <img [src]="'assets/events/' + event.thumbnail" [class.active]="event.isActive" (click)="handleEventClick(event.date, event.id, event.name)" />
@@ -7,10 +8,8 @@
   </div>
   <div class="countdown-display">
     <header *ngFor="let event of events">
-      @if(event.isActive)
-      {
-        <img [src]="'assets/events/' + event.thumbnail" [class.active]="event.isActive" 
-          (click)="handleEventClick(event.date, event.id, event.name)" />
+      @if(event.isActive) {
+        <img [src]="'assets/events/' + event.thumbnail" [class.active]="event.isActive" (click)="handleEventClick(event.date, event.id, event.name)" />
         <div>
           <h1>{{ event.name }}</h1>
           <h2> ▸ {{ event.date | date : 'dd MMMM yyyy'}}</h2>
@@ -24,13 +23,22 @@
         <h2> ▸ {{ birthday | date : 'dd MMMM yyyy'}}</h2>
       </div>
     </header>
+
     <p>{{ countdownMessage }}</p>
     <h4><b>{{ countdown.months }}</b> months, <b>{{ countdown.days }}</b> days, <b>{{ countdown.hours }}</b> hours, <b>{{ countdown.minutes }}</b> minutes, <b>{{ countdown.seconds }}</b> seconds</h4>
   </div>
+  
   <div class="date-picker">
     <span>Custom :</span>
     <input type="date" [(ngModel)]="birthday" (ngModelChange)="handleDateChange()" />
   </div>
 </div>
 
-<app-button-top />
+<app-spacer />
+
+<app-bottom-bar>
+  <app-bottom-icon-back />
+  <app-bottom-icon-about />
+  <app-bottom-icon-settings />
+  <app-bottom-icon-to-top />
+</app-bottom-bar>

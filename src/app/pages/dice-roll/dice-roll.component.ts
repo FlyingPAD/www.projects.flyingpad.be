@@ -1,56 +1,52 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ButtonBackComponent } from '../../components/button-back/button-back.component';
+import { BottomBarComponent } from "../../components/bottom-bar/bottom-bar.component";
+import { BottomIconBackComponent } from "../../components/bottom-bar-icons/bottom-icon-back/bottom-icon-back.component";
+import { BottomToggleEntityInfoComponent } from "../../components/bottom-bar-icons/bottom-toggle-entity-info/bottom-icon-about.component";
+import { BottomIconSettingsComponent } from "../../components/bottom-bar-icons/bottom-icon-settings/bottom-icon-settings.component";
 
 @Component({
   selector: 'app-dice-roll',
-  standalone: true, 
-  imports: [CommonModule,
-    ButtonBackComponent],
+  imports: [CommonModule, BottomBarComponent, BottomIconBackComponent, BottomToggleEntityInfoComponent, BottomIconSettingsComponent],
   templateUrl: './dice-roll.component.html',
   styleUrls: ['./dice-roll.component.scss']
 })
-export class DiceRollComponent 
-{
-  // ----------------------------------------------------------------
-  // - Properties :
-
-  title : boolean = true
-  toggleTitle(){
+export class DiceRollComponent {
+  title: boolean = true
+  toggleTitle() {
     this.title = !this.title
   }
-  intro! : boolean
+  intro!: boolean
 
-  messageFemale! : string | undefined
-  messageMale! : string | undefined
+  messageFemale!: string | undefined
+  messageMale!: string | undefined
 
-  currentDiceRoll! : number
+  currentDiceRoll!: number
 
-  turn! : boolean
+  turn!: boolean
 
-  diceRollVictoryResult! : number | undefined
+  diceRollVictoryResult!: number | undefined
 
-  resultFemale! : number | undefined
-  resultMale! : number | undefined
+  resultFemale!: number | undefined
+  resultMale!: number | undefined
 
-  messageResult! : string
+  messageResult!: string
 
-  victoryF! : boolean
-  victoryM! : boolean
+  victoryF!: boolean
+  victoryM!: boolean
 
-  imageFName! : string
-  imageMName! : string
+  imageFName!: string
+  imageMName!: string
 
-  emptyF! : string
-  emptyM! : string
-  overlayF! : string
-  overlayM! : string
-  
+  emptyF!: string
+  emptyM!: string
+  overlayF!: string
+  overlayM!: string
+
   // ----------------------------------------------------------------
   // - Methods :
 
-  ngOnInit(): void 
-  {
+  ngOnInit(): void {
     this.intro = true
     this.victoryF = false
     this.victoryM = false
@@ -64,59 +60,47 @@ export class DiceRollComponent
     this.overlayM = "empty"
   }
 
-  femaleStartRoll()
-  {
+  femaleStartRoll() {
     this.resultFemale = this.diceRoll(6) + 1
     this.messageMale = "Prepare yourself !!"
     this.imageMName = "draw"
-    if(this.resultFemale >= 3)
-    {
+    if (this.resultFemale >= 3) {
       this.imageFName = "up"
       this.messageFemale = "Yeah !"
     }
-    else 
-    {
+    else {
       this.imageFName = "down"
       this.messageFemale = "Damn !!"
     }
   }
-  femaleStartRollMobile()
-  {
+  femaleStartRollMobile() {
     this.femaleStartRoll()
   }
 
-  maleStartRoll()
-  {
+  maleStartRoll() {
     this.resultMale = this.diceRoll(6) + 1
-    if(this.resultMale >= 3)
-    {
+    if (this.resultMale >= 3) {
       this.imageMName = "up"
       this.messageMale = "Good !"
     }
-    else
-    {
+    else {
       this.imageMName = "down"
       this.messageMale = "Shit !"
-    } 
+    }
     this.diceRollCheck()
   }
-  maleStartRollMobile()
-  {
+  maleStartRollMobile() {
     this.maleStartRoll()
   }
 
-  diceRoll(max : number)
-  {
+  diceRoll(max: number) {
     this.currentDiceRoll = Math.floor(Math.random() * max);
     return this.currentDiceRoll
   }
 
-  diceRollCheck()
-  {
-    if(this.resultFemale != undefined && this.resultMale != undefined)
-    {
-      if(this.resultFemale > this.resultMale)
-      {
+  diceRollCheck() {
+    if (this.resultFemale != undefined && this.resultMale != undefined) {
+      if (this.resultFemale > this.resultMale) {
         this.diceRollVictoryResult = 1
         this.messageFemale = "Victoryyy !"
         this.messageMale = "Damn !"
@@ -127,9 +111,8 @@ export class DiceRollComponent
         this.emptyM = "empty"
         this.overlayF = "overlay"
         this.overlayM = "empty"
-      } 
-      if(this.resultFemale < this.resultMale)
-      {
+      }
+      if (this.resultFemale < this.resultMale) {
         this.diceRollVictoryResult = 2
         this.messageFemale = "Sob ..."
         this.messageMale = "Great !"
@@ -140,21 +123,19 @@ export class DiceRollComponent
         this.emptyF = "empty"
         this.overlayF = "empty"
         this.overlayM = "overlay"
-      } 
-      if(this.resultFemale == this.resultMale)
-      {
+      }
+      if (this.resultFemale == this.resultMale) {
         this.diceRollVictoryResult = 3
         this.messageFemale = "What ?"
         this.messageMale = "..."
         this.messageResult = "DRAW Game"
         this.imageFName = "draw"
         this.imageMName = "draw"
-      } 
+      }
     }
   }
 
-  diceRollRestart()
-  {
+  diceRollRestart() {
     this.resultFemale = undefined
     this.resultMale = undefined
     this.diceRollVictoryResult = undefined

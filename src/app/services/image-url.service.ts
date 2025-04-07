@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { ThemeService } from './theme.service';
-import { Theme } from './../enumerations/themes';
+import { Theme } from '../enumerations/themes';
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +13,9 @@ export class ImageUrlService {
     let theme: Theme = this.currentTheme() ?? Theme.Default
 
     return `assets/${folderName}/${theme}/${imageName}.${imageExtension}`
+  }
+
+  public getImageURLNoTheme(folderName: string, imageName: string, imageExtension: string): string {
+    return `assets/${folderName}/${imageName}.${imageExtension}`
   }
 }

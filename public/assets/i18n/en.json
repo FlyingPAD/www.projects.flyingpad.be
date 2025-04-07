@@ -14,7 +14,9 @@
     "enable": "Enable",
     "disable": "Disable",
     "landscape" : "Landscape",
-    "square" : "Square ( 1:1 )"
+    "square" : "Square ( 1:1 )",
+    "default-settings": "Default Settings",
+    "restore": "Restore"
   },
   "message": {
     "settings-short": "Edit your navigation settings."

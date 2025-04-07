@@ -32,7 +32,7 @@ p {
     height: 185px;
     width: 185px;
 
-    border: 5px solid rgba(107, 82, 64, 0.3);
+    border: 5px solid var(--colorMainOpacity3);
     border-radius: 5px;
 
     margin: 5px;
@@ -40,7 +40,7 @@ p {
   }
 
   img:hover {
-    border: 5px solid #6b5240;
+    border: 5px solid var(--colorMain);
     cursor: pointer;
   }
 }
@@ -56,7 +56,7 @@ p {
     height: 200px;
     width: 200px;
 
-    border: 5px solid rgba(107, 82, 64, 0.3);
+    border: 5px solid var(--colorMainOpacity3);
     border-radius: 5px;
 
     margin: 5px;
@@ -72,12 +72,12 @@ input {
   padding: 10px;
   border-radius: 5px;
   font-size: 20px;
-  border: 5px solid rgba(107, 82, 64, 0.3);
+  border: 5px solid var(--colorMainOpacity3);
 }
 
 input:focus {
   outline: none;
-  border: 5px solid #6b5240;
+  border: 5px solid var(--colorMain);
 }
 
 .control-room {
@@ -87,7 +87,7 @@ input:focus {
   flex-wrap: wrap;
 
   .card {
-    border: 5px solid rgba(107, 82, 64, 0.3);
+    border: 5px solid var(--colorMainOpacity3);
     border-radius: 15px;
     padding: 15px;
     margin: 15px;
@@ -101,14 +101,14 @@ input:focus {
 
     .name {
       width: 200px;
-      background-color: rgba(107, 82, 64, 0.2);
+      background-color: var(--colorMainOpacity2);
       border-radius: 5px;
 
       padding: 5px;
 
       font-weight: bold;
       font-size: 18px;
-      color: #6b5240;
+      color: var(--colorMain);
 
       margin-bottom: 10px;
       white-space: nowrap;
@@ -138,7 +138,7 @@ input:focus {
       justify-content: space-between;
       align-items: center;
 
-      background-color: rgba(107, 82, 64, 0.2);
+      background-color: var(--colorMainOpacity2);
       border-radius: 5px;
 
       padding: 10px;
@@ -149,7 +149,7 @@ input:focus {
   }
 
   .card:hover {
-    border: 5px solid #6b5240;
+    border: 5px solid var(--colorMain);
     cursor: pointer;
   }
 
@@ -177,8 +177,8 @@ input:focus {
     margin: 0;
     margin: auto;
 
-    background-color: rgba(255, 255, 255, 0.6);
-    border: 5px solid #6b5240;
+    background-color: var(--colorWhiteOpacity6);
+    border: 5px solid var(--colorMain);
     border-radius: 15px 15px 0 0;
     border-bottom: 0;
 
@@ -189,14 +189,15 @@ input:focus {
   }
 
   .display {
-    border: 5px solid #6b5240;
+    border: 5px solid var(--colorMain);
     border-radius: 15px;
     overflow: hidden;
 
     .images {
       width: 100%;
       position: relative;
-      padding-top: 100%; /* This creates a 1:1 aspect ratio box */
+      padding-top: 100%;
+      /* This creates a 1:1 aspect ratio box */
 
       img {
         position: absolute;
@@ -231,7 +232,7 @@ input:focus {
 
   .interface {
     margin-top: 15px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--colorWhiteOpacity5);
     border: 5px solid rgba(107, 82, 64, 0.3);
     border-radius: 15px;
 
@@ -239,11 +240,11 @@ input:focus {
       display: flex;
       align-items: center;
 
-      background-color: rgba(107, 82, 64, 0.3);
+      background-color: var(--colorMainOpacity3);
       border-radius: 10px 10px 0 0;
       padding: 10px;
 
-      color: #6b5240;
+      color: var(--colorMain);
 
       img {
         height: 30px;
@@ -253,7 +254,7 @@ input:focus {
     }
 
     header:hover {
-      background-color: rgba(107, 82, 64, 0.5);
+      background-color: var(--colorMainOpacity5);
       color: white;
       cursor: pointer;
     }
@@ -279,8 +280,8 @@ input:focus {
   align-items: center;
 
   .button {
-    background-color: rgba(107, 82, 64, 0.5);
-    border: 5px solid rgba(107, 82, 64, 0.3);
+    background-color: var(--colorMainOpacity5);
+    border: 5px solid var(--colorMainOpacity3);
     border-radius: 10px;
 
     padding: 15px;
@@ -290,9 +291,9 @@ input:focus {
 
   .button:hover {
     cursor: pointer;
-    color: #6b5240;
-    background-color: rgba(255, 255, 255, 0.4);
-    border: 5px solid rgb(107, 82, 64);
+    color: var(--colorMain);
+    background-color: var(--colorWhiteOpacity4);
+    border: 5px solid var(--colorMain);
     transition-duration: 500ms;
   }
 
@@ -305,7 +306,7 @@ input:focus {
 
 .background-selection {
   h3 {
-    color: #6b5240;
+    color: var(--colorMain);
     text-indent: 15px;
   }
 

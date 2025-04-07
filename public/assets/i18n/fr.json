@@ -14,7 +14,9 @@
     "enable": "Activer",
     "disable": "Désactiver",
     "landscape" : "Paysage",
-    "square" : "Carré ( 1:1 )"
+    "square" : "Carré ( 1:1 )",
+    "default-settings": "Paramètres par défaut",
+    "restore": "Restaurer"
   },
   "message": {
     "settings-short": "Editez vos paramètres de navigation."

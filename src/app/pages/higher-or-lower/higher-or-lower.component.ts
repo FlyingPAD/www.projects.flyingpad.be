@@ -2,15 +2,16 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonTopComponent } from '../../components/button-top/button-top.component';
-import { ButtonBackComponent } from '../../components/button-back/button-back.component';
+import { BottomBarComponent } from "../../components/bottom-bar/bottom-bar.component";
+import { BottomIconBackComponent } from "../../components/bottom-bar-icons/bottom-icon-back/bottom-icon-back.component";
+import { BottomToggleEntityInfoComponent } from "../../components/bottom-bar-icons/bottom-toggle-entity-info/bottom-icon-about.component";
+import { BottomIconSettingsComponent } from "../../components/bottom-bar-icons/bottom-icon-settings/bottom-icon-settings.component";
 
 @Component({
-  selector: 'app-higher-or-lower',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ButtonTopComponent,
-    ButtonBackComponent],
-  templateUrl: './higher-or-lower.component.html',
-  styleUrls: ['./higher-or-lower.component.scss']
+    selector: 'app-higher-or-lower',
+    imports: [CommonModule, FormsModule, ButtonTopComponent, BottomBarComponent, BottomIconBackComponent, BottomToggleEntityInfoComponent, BottomIconSettingsComponent],
+    templateUrl: './higher-or-lower.component.html',
+    styleUrls: ['./higher-or-lower.component.scss']
 })
 export class HigherOrLowerComponent {
   refLevel: number = 10;

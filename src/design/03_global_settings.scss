@@ -97,51 +97,6 @@ body.fade-background::before {
     background-color: rgba(255, 255, 255, 0.4);
 }
 
-// Spacers.
-.spacer-75 {
-    height: 75px;
-}
-.spacer-150 {
-    height: 150px;
-}
-
-// Buttons.
-.buttons {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-
-    .button {
-        display: block;
-        width: 100px;
-
-        background-color: var(--colorMain);
-        border: 1px solid var(--colorMain);
-        border-radius: 5px;
-        box-shadow: 0px 2px 4px var(--colorMainOpacity2);
-
-        padding: 8px;
-        margin: 8px;
-
-        text-align: center;
-        letter-spacing: 1px;
-        color: #ffffff;
-        font-size: 14px;
-    }
-
-    .button:hover {
-        background-color: var(--colorWhite);
-        color: var(--colorMain);
-        cursor: pointer;
-        transition-duration: 500ms;
-    }
-
-    .button-active {
-        background-color: rgb(255, 255, 255);
-        color: var(--colorMain);
-    }
-}
-
 .box {
     width: 500px;
     margin: auto;

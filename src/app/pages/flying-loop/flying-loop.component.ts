@@ -8,11 +8,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-flying-loop',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './flying-loop.component.html',
-  styleUrls: ['./flying-loop.component.scss']
+    selector: 'app-flying-loop',
+    imports: [CommonModule, RouterModule],
+    templateUrl: './flying-loop.component.html',
+    styleUrls: ['./flying-loop.component.scss']
 })
 export class FlyingLoopComponent implements OnInit {
   audioSvc = inject(AudioLoopService);
