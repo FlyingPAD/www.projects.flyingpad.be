@@ -5,7 +5,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ProjectShellComponent } from '../../components/project-shell/project-shell.component';
 import { DisplayService } from '../../services/display.service';
 import { FullScreenService } from '../../services/full-screen.service';
-import { ImageUrlService } from '../../services/image-url.service';
 import { LanguageService } from '../../services/language.service';
 import { ThemeService } from '../../services/theme.service';
 import { SupportedLanguages } from '../../enumerations/supported-languages';
@@ -22,7 +21,6 @@ export class SettingsComponent {
   #displayService = inject(DisplayService);
   #fullScreenService = inject(FullScreenService);
   #themeService = inject(ThemeService);
-  #imageUrlService = inject(ImageUrlService);
 
   public currentLanguage = this.#languageService.currentLanguage;
   public displayInfos = this.#displayService.displayInfo;
@@ -65,9 +63,4 @@ export class SettingsComponent {
     this.isLanguageMenuON = !this.isLanguageMenuON;
   }
 
-  public getImageURL(theme: boolean, folderName: string, imageName: string, imageExtension: string): string {
-    return theme
-      ? this.#imageUrlService.getImageURL(folderName, imageName, imageExtension)
-      : this.#imageUrlService.getImageURLNoTheme(folderName, imageName, imageExtension);
-  }
 }
