@@ -1,59 +1,50 @@
-<h1 class="h1">Leap Year</h1>
+<div class="project-page">
+  <header class="site-header">
+    <a class="identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
+    <nav><a routerLink="/projects">Projects</a><a routerLink="/about">About</a><a routerLink="/settings">Settings</a></nav>
+  </header>
 
-<div class="leap-info">
-    <p> ▸ The Earth ( 🌍 ) takes ± 365.25 days to orbit the Sun.</p>
-    <p>Which is known as a <b>solar year</b> !</p>
-    <hr>
-    <p> ▸ However, a calendar year has <u>365 days</u> ...</p>
-    <p>The remaining 0.25 days accumulate each year ...</p>
-    <p>So that after 4 years, we have an extra day</p>
-    <p>( 0.25 days x 4 = 1 day ).</p>
-    <hr>
-    <p> ▸ To compensate for this difference, we add a day to the month of February every 4 years, making it 29 days instead of 28.</p>
-    <hr>
-    <p> ▸ This is called a <b>leap year</b>.</p>
+  <main>
+    <section class="intro">
+      <span class="kicker">08 / Calendar logic</span>
+      <h1>Leap<br><span>Year.</span></h1>
+      <p>A tiny calendar rule with a surprisingly precise job: keeping civil time aligned with Earth's orbit.</p>
+    </section>
+
+    <section class="workspace">
+      <div class="section-heading"><span>Year test</span><span>Gregorian rule</span></div>
+
+      <div class="calculator" [formGroup]="form">
+        <label for="year">Enter a year</label>
+        <input id="year" type="number" formControlName="year" aria-label="Year input">
+
+        @if(form.get('year')?.errors?.['required']) { <p class="error">Year is required.</p> }
+        @if(form.get('year')?.errors?.['min']) { <p class="error">Please enter a year above -4500000000.</p> }
+        @if(form.get('year')?.errors?.['max']) { <p class="error">Please enter a year below 5000000000.</p> }
+
+        <div class="result" [class.yes]="isALeapYear === true" [class.no]="isALeapYear === false">
+          <span>Result</span>
+          @if(isALeapYear === true) { <strong>{{ form.get('year')?.value }} is a leap year.</strong> }
+          @if(isALeapYear === false) { <strong>{{ form.get('year')?.value }} is not a leap year.</strong> }
+          @if(isALeapYear === undefined) { <strong>Enter a valid year.</strong> }
+        </div>
+      </div>
+
+      <div class="rule-grid">
+        <article><span>01</span><strong>Divisible by 4</strong><p>Usually a leap year.</p></article>
+        <article><span>02</span><strong>Divisible by 100</strong><p>Usually not a leap year.</p></article>
+        <article><span>03</span><strong>Divisible by 400</strong><p>Leap year again.</p></article>
+      </div>
+
+      <div class="orbit-card">
+        <img src="assets/img/sun.webp" alt="" />
+        <div>
+          <span>Why it exists</span>
+          <p>Earth takes about 365.2425 days to orbit the Sun. The leap-year rules correct the drift between that cycle and a 365-day calendar.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>FlyingPAD Projects</span><span>08 / Leap Year</span></footer>
 </div>
-
-<div class="leap-year" [formGroup]="form">
-    <input type="number" formControlName="year" aria-label="Year input">
-    <div *ngIf="form.get('year')?.errors?.['required']" class="error">Year is required.</div>
-    <div *ngIf="form.get('year')?.errors?.['min']" class="error">Please enter a valid year below 5000000000.</div>
-    <div *ngIf="form.get('year')?.errors?.['max']" class="error">Please enter a valid year above -4500000000.</div>
-
-    <p *ngIf="isALeapYear === true">{{ form.get('year')?.value }} <span class="green">is a leap year!</span></p>
-    <p *ngIf="isALeapYear === false">{{ form.get('year')?.value }} <span class="red">is not a leap year!</span></p>
-    <p *ngIf="isALeapYear === undefined">Please, enter a valid year...</p>
-</div>
-
-<img src="assets/img/sun.webp" />
-
-<app-spacer height=" 25px" />
-
-<div class="leap-info">
-    <p> ▸ A year is a leap year <u>if it is divisible by 4</u>...</p>
-    <hr>
-    <p> ▸ However, if the year is divisible by 100,</p>
-    <p><b>it is not</b> a leap year unless <u>it is also divisible by 400</u>.</p>
-    <hr>
-    <p> ▸ This rule exists because 🌍 takes about 365.2425 days to orbit the Sun, <u>not exactly</u> 365.25 days.</p>
-    <hr>
-    <p> ▸ If we only used the rule of being divisible by 4,</p>
-    <p>we would add too many extra days over centuries ( 0.0075 days per year ).</p>
-    <hr>
-    <p> ▸ By skipping leap years that are divisible by 100,</p>
-    <p>we correct this overcompensation.</p>
-    <hr>
-    <p> ▸ But we also need to account for the fact that we slightly undercorrect,</p>
-    <p>so years divisible by 400 are leap years to adjust accurately.</p>
-    <hr>
-    <p> ▸ This fine-tuning keeps our calendar in sync with 🌍 orbit over long periods.</p>
-</div>
-
-<app-spacer />
-
-<app-bottom-bar>
-    <app-bottom-icon-back />
-    <app-bottom-icon-about />
-    <app-bottom-icon-settings />
-    <app-bottom-icon-to-top />
-</app-bottom-bar>
