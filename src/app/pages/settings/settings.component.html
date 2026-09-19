@@ -1,76 +1,118 @@
-<h1 class="h1">{{ 'title.settings' | translate }}</h1>
-<hr class="dialog-hr">
-<p class="p">{{ 'message.settings-short' | translate }}</p>
+<div class="settings-page">
+  <header class="site-header">
+    <a class="identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
+    <nav class="header-nav" aria-label="Secondary navigation">
+      <a routerLink="/projects">Projects</a>
+      <a routerLink="/about">About</a>
+    </nav>
+  </header>
 
-<div class="settings">
-    <div class="row">
-        <p><b>{{ 'title.display-mode' | translate }}</b></p>
-        <p *ngIf="displayInfos().mode === 'Desktop'">{{ 'title.desktop' | translate }}</p>
-        <p *ngIf="displayInfos().mode === 'Mobile'">{{ 'title.mobile' | translate }}</p>
-    </div>
+  <main class="settings-main">
+    <section class="intro" aria-labelledby="settings-title">
+      <span class="kicker">Interface</span>
+      <h1 id="settings-title">{{ 'title.settings' | translate }}<span>.</span></h1>
+      <p>{{ 'message.settings-short' | translate }}</p>
+    </section>
 
-    <div class="row">
-        <p><b>{{ 'title.window-size' | translate }}</b></p>
-        <p>{{ displayInfos().width }} x {{ displayInfos().height }} px</p>
-    </div>
+    <section class="settings-panel" aria-label="Settings">
+      <div class="section-heading">
+        <span>System</span>
+        <span>{{ displayInfos().mode }}</span>
+      </div>
 
-    <div class="row">
-        <p><b>Orientation</b></p>
-        <p *ngIf="displayInfos().orientation === 'Landscape'">{{ 'title.landscape' | translate }}</p>
-        <p *ngIf="displayInfos().orientation === 'Portrait'">Portrait</p>
-        <p *ngIf="displayInfos().orientation === 'Square'">{{ 'title.square' | translate }}</p>
-    </div>
-
-    @if(displayInfos().mode === 'Desktop') {
-        <div class="row">
-            <p><b>{{ 'title.full-screen' | translate }}</b></p>
-            <p class="button" *ngIf="isFullScreen() === true" (click)="toggleFullScreen()">{{ 'title.disable' | translate }}
-            </p>
-            <p class="button" *ngIf="isFullScreen() === false" (click)="toggleFullScreen()">{{ 'title.enable' | translate }}
-            </p>
+      <div class="settings-list">
+        <div class="setting-row read-only">
+          <div>
+            <span class="setting-label">{{ 'title.display-mode' | translate }}</span>
+            <strong *ngIf="displayInfos().mode === 'Desktop'">{{ 'title.desktop' | translate }}</strong>
+            <strong *ngIf="displayInfos().mode === 'Mobile'">{{ 'title.mobile' | translate }}</strong>
+          </div>
+          <span class="status-dot"></span>
         </div>
-    }
 
-    <div class="row">
-        <p><b>{{ 'title.language' | translate }}</b></p>
-        <div class="dropdown-wrapper">
-            <div class="button languages" (click)="languageMenuToggle()">
-                <img [src]="getImageURL(false, 'icons-flags', currentLanguage(), 'png')" alt="flag" />
-                <p>
-                    {{ currentLanguage() === 'fr' ? 'Français' : 'English' }}
-                </p>
-                <span class="arrow" [class.active]="isLanguageMenuON"></span>
+        <div class="setting-row read-only">
+          <div>
+            <span class="setting-label">{{ 'title.window-size' | translate }}</span>
+            <strong>{{ displayInfos().width }} × {{ displayInfos().height }} px</strong>
+          </div>
+          <span class="setting-meta">{{ displayInfos().orientation }}</span>
+        </div>
+
+        @if (displayInfos().mode === 'Desktop') {
+          <div class="setting-row">
+            <div>
+              <span class="setting-label">{{ 'title.full-screen' | translate }}</span>
+              <strong>{{ isFullScreen() ? ('title.enable' | translate) : ('title.disable' | translate) }}</strong>
             </div>
+            <button class="action-button" type="button" (click)="toggleFullScreen()">
+              {{ isFullScreen() ? ('title.disable' | translate) : ('title.enable' | translate) }}
+            </button>
+          </div>
+        }
 
-            @if(isLanguageMenuON) {
-                <div class="dropdown-menu">
-                    <div class="dropdown-item" *ngFor="let language of supportedLanguages"
-                        [class.active]="currentLanguage() === language" (click)="switchLanguage(language)">
-                        <img [src]="getImageURL(false, 'icons-flags', language, 'png')" />
-                        <span>{{ language === 'fr' ? 'Français' : 'English' }}</span>
-                    </div>
-                </div>
+        <div class="setting-row">
+          <div>
+            <span class="setting-label">{{ 'title.language' | translate }}</span>
+            <strong>{{ currentLanguage() === 'fr' ? 'Français' : 'English' }}</strong>
+          </div>
+
+          <div class="dropdown-wrapper">
+            <button class="choice-button" type="button" (click)="languageMenuToggle()" [attr.aria-expanded]="isLanguageMenuON">
+              <img [src]="getImageURL(false, 'icons-flags', currentLanguage(), 'png')" alt="" />
+              <span>{{ currentLanguage().toUpperCase() }}</span>
+              <span class="chevron" [class.active]="isLanguageMenuON">⌄</span>
+            </button>
+
+            @if (isLanguageMenuON) {
+              <div class="dropdown-menu">
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  *ngFor="let language of supportedLanguages"
+                  [class.active]="currentLanguage() === language"
+                  (click)="switchLanguage(language)"
+                >
+                  <img [src]="getImageURL(false, 'icons-flags', language, 'png')" alt="" />
+                  <span>{{ language === 'fr' ? 'Français' : 'English' }}</span>
+                </button>
+              </div>
             }
+          </div>
         </div>
-    </div>
 
-    <div class="row">
-        <p><b>{{ 'title.theme' | translate }}</b></p>
-        <select id="themeSelect" class="button" [ngModel]="currentThemeKey()" (ngModelChange)="changeTheme($event)">
+        <div class="setting-row">
+          <div>
+            <span class="setting-label">{{ 'title.theme' | translate }}</span>
+            <strong>{{ currentThemeKey() }}</strong>
+          </div>
+
+          <select
+            id="themeSelect"
+            class="select-control"
+            [ngModel]="currentThemeKey()"
+            (ngModelChange)="changeTheme($event)"
+          >
             <option *ngFor="let themeKey of themeKeys" [ngValue]="themeKey">
-                {{ themeKey }}
+              {{ themeKey }}
             </option>
-        </select>
-    </div>
+          </select>
+        </div>
 
-    <div class="row">
-        <p><b>{{ 'title.default-settings' | translate }}</b></p>
-        <p class="button" (click)="factorySettings()">{{ 'title.restore' | translate }}</p>
-    </div>
+        <div class="setting-row">
+          <div>
+            <span class="setting-label">{{ 'title.default-settings' | translate }}</span>
+            <strong>{{ 'title.restore' | translate }}</strong>
+          </div>
+          <button class="action-button danger" type="button" (click)="factorySettings()">
+            {{ 'title.restore' | translate }}
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>FlyingPAD Projects</span>
+    <span>Settings</span>
+  </footer>
 </div>
-
-<app-spacer height="175px" />
-
-<app-bottom-bar>
-    <app-bottom-icon-back />
-</app-bottom-bar>
