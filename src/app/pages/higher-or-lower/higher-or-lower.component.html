@@ -41,9 +41,43 @@
             <span>Hint</span>
             <strong>{{ message }}</strong>
           </div>
-          <label for="guess">Your guess · 1 to {{ refLevel }}</label>
-          <input id="guess" type="number" [(ngModel)]="userInputValue">
-          <button type="button" class="primary" (click)="process()">Process</button>
+
+          <div class="range-line">
+            <span>Search range</span>
+            <strong>1 — {{ refLevel }}</strong>
+          </div>
+
+          <label for="guess">Your guess</label>
+          <div class="guess-control">
+            <button
+              type="button"
+              class="step-button"
+              aria-label="Decrease guess"
+              [disabled]="userInputValue <= 1"
+              (click)="adjustGuess(-1)"
+            >−</button>
+
+            <input
+              id="guess"
+              type="number"
+              min="1"
+              [max]="refLevel"
+              [(ngModel)]="userInputValue"
+              (keydown.enter)="process()"
+            >
+
+            <button
+              type="button"
+              class="step-button"
+              aria-label="Increase guess"
+              [disabled]="userInputValue >= refLevel"
+              (click)="adjustGuess(1)"
+            >+</button>
+          </div>
+
+          <button type="button" class="primary submit-guess" (click)="process()">Submit guess</button>
+          <span class="enter-hint">Enter to submit</span>
+
           <div class="moves">Moves <strong>{{ moves }}</strong></div>
         </div>
       }
