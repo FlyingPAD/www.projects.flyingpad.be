@@ -1,19 +1,19 @@
 // flying-loop.component.ts
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Character } from '../../models/character';
 import { available_characters as availChars, displayed_characters as activeChars } from '../../data/app-data';
 import { AudioLoopService } from '../../services/audio-loop.service';
 import { PreloadService, Asset } from '../../services/preload.service';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ProjectShellComponent } from '../../components/project-shell/project-shell.component';
 
 @Component({
     selector: 'app-flying-loop',
-    imports: [CommonModule, RouterModule],
+    imports: [CommonModule, ProjectShellComponent],
     templateUrl: './flying-loop.component.html',
     styleUrls: ['./flying-loop.component.scss']
 })
-export class FlyingLoopComponent implements OnInit {
+export class FlyingLoopComponent implements OnInit, OnDestroy {
   audioSvc = inject(AudioLoopService);
   preloadSvc = inject(PreloadService);
 
@@ -69,6 +69,10 @@ export class FlyingLoopComponent implements OnInit {
       .then(() => console.log('All tracks loaded'))
       .catch(error => console.error('Error loading tracks:', error));
   }  
+
+  ngOnDestroy(): void {
+    this.audioSvc.stopAllTracks();
+  }
 
   generateChars(): void {
     const existing = [...this.activeChars];
