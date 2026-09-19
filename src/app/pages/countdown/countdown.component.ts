@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ProjectShellComponent } from '../../components/project-shell/project-shell.component';
 import { CountdownEvent } from '../../interfaces/countdown-event';
 
 type CountdownValue = {
@@ -21,7 +21,7 @@ type EventDefinition = {
 
 @Component({
   selector: 'app-countdown',
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, ProjectShellComponent],
   templateUrl: './countdown.component.html',
   styleUrl: './countdown.component.scss'
 })
