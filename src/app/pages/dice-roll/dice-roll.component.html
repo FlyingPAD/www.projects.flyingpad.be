@@ -1,102 +1,81 @@
-@if(title){
-<div class="title-screen">
-    <img src="assets/dice_roll/title-screen.png" />
-    <p (click)="toggleTitle()">START</p>
+<div class="project-page">
+  <header class="site-header">
+    <a class="identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
+    <nav><a routerLink="/projects">Projects</a><a routerLink="/about">About</a><a routerLink="/settings">Settings</a></nav>
+  </header>
+
+  <main>
+    <section class="intro">
+      <span class="kicker">07 / Dice game</span>
+      <h1>Dice<br><span>Roll.</span></h1>
+      <p>Two players. One roll each. Highest die wins.</p>
+    </section>
+
+    <section class="game-shell">
+      <div class="section-heading"><span>Turn-based mini game</span><span>D6</span></div>
+
+      @if(title) {
+        <div class="launch-screen">
+          <img src="assets/dice_roll/title-screen.png" alt="" />
+          <button type="button" (click)="toggleTitle()">Start</button>
+        </div>
+      } @else {
+        <div class="match">
+          <article class="team">
+            <div class="team-label"><span>Player 01</span><strong>Girl</strong></div>
+            <div class="avatar">
+              <img class="gender" src="assets/app_icons/gender/female.png" alt="" />
+              <img src="assets/dice_roll/girl/f_{{emptyF}}.gif" alt="" />
+              <img src="assets/dice_roll/girl/f_{{overlayF}}.png" alt="" />
+              <img src="assets/dice_roll/girl/f_{{imageFName}}.png" alt="" />
+            </div>
+            @if(messageFemale !== undefined) { <p class="message">{{ messageFemale }}</p> }
+
+            @if(resultFemale === undefined) {
+              <button type="button" class="roll-zone" (click)="femaleStartRoll()">
+                <img src="assets/dice_roll/dice_roll.gif" alt="" />
+                <span>Roll the dice</span>
+              </button>
+            } @else {
+              <div class="roll-result"><span>Result</span><img [src]="getDiceImagePath(resultFemale)" alt="" /></div>
+            }
+          </article>
+
+          <section class="versus">
+            <span class="vs">VS</span>
+            @if(diceRollVictoryResult !== undefined) {
+              <strong>{{ messageResult }}</strong>
+              @if(diceRollVictoryResult !== 3) { <img src="assets/dice_roll/winner.gif" alt="" /> }
+              <button type="button" (click)="diceRollRestart()">Restart</button>
+            } @else {
+              <p>{{ resultFemale === undefined ? 'Player 01 rolls first' : 'Player 02 turn' }}</p>
+            }
+          </section>
+
+          <article class="team">
+            <div class="team-label"><span>Player 02</span><strong>Boy</strong></div>
+            <div class="avatar">
+              <img class="gender" src="assets/app_icons/gender/male.png" alt="" />
+              <img src="assets/dice_roll/boy/m_{{emptyM}}.gif" alt="" />
+              <img src="assets/dice_roll/boy/m_{{overlayM}}.png" alt="" />
+              <img src="assets/dice_roll/boy/m_{{imageMName}}.png" alt="" />
+            </div>
+            @if(messageMale !== undefined) { <p class="message">{{ messageMale }}</p> }
+
+            @if(resultFemale && resultMale === undefined) {
+              <button type="button" class="roll-zone" (click)="maleStartRoll()">
+                <img src="assets/dice_roll/dice_roll.gif" alt="" />
+                <span>Roll the dice</span>
+              </button>
+            }
+            @if(resultMale) {
+              <div class="roll-result"><span>Result</span><img [src]="getDiceImagePath(resultMale)" alt="" /></div>
+            }
+          </article>
+        </div>
+      }
+    </section>
+  </main>
+
+  <footer><span>FlyingPAD Projects</span><span>07 / Dice Roll</span></footer>
 </div>
-}
-@else {
-<div class="dice-roll">
-    <div class="team">
-        <div id="avatar">
-            <div>
-                <img class="opacity" src="assets/app_icons/gender/female.png" />
-                <img src="assets/dice_roll/girl/f_{{emptyF}}.gif" />
-                <img src="assets/dice_roll/girl/f_{{overlayF}}.png" />
-                <img src="assets/dice_roll/girl/f_{{imageFName}}.png" />
-            </div>
-        </div>
-        <div *ngIf="messageFemale != undefined">
-            <div id="message">
-                <p>{{messageFemale}}</p>
-            </div>
-        </div>
-        <div *ngIf="resultFemale == undefined">
-            <div id="title">
-                <h1>Roll the Dice</h1>
-            </div>
-            <div id="dice_roll">
-                <img src="assets/dice_roll/dice_roll.gif" (click)="femaleStartRoll()" />
-            </div>
-        </div>
-        <div *ngIf="resultFemale">
-            <div class="flex">
-                <h1>Result</h1>
-                <img [src]="getDiceImagePath(resultFemale)" />
-            </div>
-        </div>
-    </div>
-
-    <div id="rpg">
-        <div class="win" *ngIf="diceRollVictoryResult == 1">
-            <h1>{{messageResult}} !!</h1>
-            <div id="interface_screen">
-                <div>
-                    <img src="assets/dice_roll/winner.gif" />
-                </div>
-            </div>
-            <h2 (click)="diceRollRestart()">Restart</h2>
-        </div>
-
-        <div class="win" *ngIf="diceRollVictoryResult == 2">
-            <h1>{{messageResult}} !!</h1>
-            <div id="interface_screen">
-                <div>
-                    <img src="assets/dice_roll/winner.gif" />
-                </div>
-            </div>
-            <h2 (click)="diceRollRestart()">Restart</h2>
-        </div>
-
-        <div class="win" *ngIf="diceRollVictoryResult == 3">
-            <h1>{{messageResult}} !</h1>
-            <h2 (click)="diceRollRestart()">Restart</h2>
-        </div>
-    </div>
-
-    <div class="team">
-        <div id="avatar">
-            <div>
-                <img class="opacity" src="assets/app_icons/gender/male.png" />
-                <img src="assets/dice_roll/boy/m_{{emptyM}}.gif" />
-                <img src="assets/dice_roll/boy/m_{{overlayM}}.png" />
-                <img src="assets/dice_roll/boy/m_{{imageMName}}.png" />
-            </div>
-        </div>
-        <div *ngIf="messageMale != undefined">
-            <div id="message">
-                <p>{{messageMale}}</p>
-            </div>
-        </div>
-        <div *ngIf="resultFemale && resultMale == undefined">
-            <div id="title">
-                <h1>Roll the Dice</h1>
-            </div>
-            <div id="dice_roll">
-                <img src="assets/dice_roll/dice_roll.gif" (click)="maleStartRoll()" />
-            </div>
-        </div>
-        <div *ngIf="resultMale">
-            <h1>Result</h1>
-            <div class="flex">
-                <img [src]="getDiceImagePath(resultMale)" />
-            </div>
-        </div>
-    </div>
-</div>
-}
-
-<app-bottom-bar>
-    <app-bottom-icon-back />
-    <app-bottom-icon-about />
-    <app-bottom-icon-settings />
-</app-bottom-bar>
