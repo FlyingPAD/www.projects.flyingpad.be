@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ProjectShellComponent } from '../../components/project-shell/project-shell.component';
 
 @Component({
   selector: 'app-leap-year',
   templateUrl: './leap-year.component.html',
   styleUrl: './leap-year.component.scss',
-  imports: [CommonModule, ReactiveFormsModule, RouterLink]
+  imports: [CommonModule, ReactiveFormsModule, ProjectShellComponent]
 })
 export class LeapYearComponent implements OnInit {
   public isALeapYear: boolean | undefined;
