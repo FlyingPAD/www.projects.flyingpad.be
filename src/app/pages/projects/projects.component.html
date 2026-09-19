@@ -1,42 +1,53 @@
-<h1 class="h1">{{ 'title.projects' | translate }}</h1>
+<div class="projects-page">
+  <header class="site-header">
+    <a class="identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
+    <nav class="header-nav" aria-label="Secondary navigation">
+      <a routerLink="/about">About</a>
+      <a routerLink="/settings">Settings</a>
+    </nav>
+  </header>
 
-<div class="row-white">
-    <div class="icons">
-        <div class="icon">
-            <img src="assets/icons/countdowns.png" routerLink="/countdowns" />
-            <span>Countdowns</span>
+  <main>
+    <section class="intro" aria-labelledby="projects-title">
+      <span class="kicker">FlyingPAD experiments</span>
+      <h1 id="projects-title">Projects<span>.</span></h1>
+      <p>Small tools, games and interactive experiments built to test ideas.</p>
+    </section>
+
+    <section class="system" aria-label="Project system">
+      <div class="system-heading">
+        <span>Project system</span>
+        <span>01 / 09</span>
+      </div>
+
+      <div class="system-grid">
+        <div class="project-card missing" aria-hidden="true">
+          <span class="project-index">01</span>
+          <span class="missing-core"></span>
         </div>
-        <div class="icon">
-            <img src="assets/icons/convertors.png" routerLink="/convertors" />
-            <span>Convertors</span>
-        </div>
-        <div class="icon">
-            <img src="assets/icons/virtual-pet.png" routerLink="/virtual-pet" />
-            <span>Virtual Pet</span>
-        </div>
-        <div class="icon">
-            <img src="assets/icons/high-low.png" routerLink="/guess-the-right-number" />
-            <span>Guess the right number</span>
-        </div>
-        <div class="icon">
-            <img src="assets/icons/flying-loop.png" routerLink="/flying-loop" />
-            <span>Flying Loop</span>
-        </div>
-        <div class="icon">
-            <img src="assets/icons/dice-roll.png" routerLink="/dice-roll" />
-            <span>Dice Roll</span>
-        </div>
-        <div class="icon">
-            <img src="assets/icons/leap-year.png" routerLink="/leap-year" />
-            <span>Leap Year</span>
-        </div>
-    </div>
+
+        @for (project of projects; track project.index) {
+          <a
+            class="project-card"
+            [class]="'project-card tone-' + project.tone"
+            [routerLink]="project.route"
+            [attr.aria-label]="project.name + ' — ' + project.detail"
+          >
+            <span class="project-index">{{ project.index }}</span>
+            <span class="project-signal" aria-hidden="true"></span>
+            <div class="project-copy">
+              <h2>{{ project.name }}</h2>
+              <p>{{ project.detail }}</p>
+            </div>
+            <span class="project-arrow" aria-hidden="true">→</span>
+          </a>
+        }
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>FlyingPAD Projects</span>
+    <span>Experiments · Tools · Play</span>
+  </footer>
 </div>
-
-<app-spacer />
-
-<app-bottom-bar>
-    <app-bottom-icon-about />
-    <app-bottom-icon-settings />
-    <app-bottom-icon-to-top />
-</app-bottom-bar>
