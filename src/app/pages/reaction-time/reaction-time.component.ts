@@ -1,11 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ProjectShellComponent } from '../../components/project-shell/project-shell.component';
 
 type ReactionState = 'idle' | 'waiting' | 'ready' | 'result' | 'too-soon';
 
 @Component({
   selector: 'app-reaction-time',
-  imports: [RouterLink],
+  imports: [ProjectShellComponent],
   templateUrl: './reaction-time.component.html',
   styleUrl: './reaction-time.component.scss'
 })
