@@ -1,52 +1,39 @@
-<main class="reaction-page">
-  <header>
-    <a routerLink="/projects" class="back">← Projects</a>
-    <span>Reaction Time</span>
+<div class="project-page">
+  <header class="site-header">
+    <a class="identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
+    <nav><a routerLink="/projects">Projects</a><a routerLink="/about">About</a><a routerLink="/settings">Settings</a></nav>
   </header>
 
-  <section class="reaction-shell" aria-live="polite">
-    <div class="copy">
-      <span class="index">09</span>
+  <main>
+    <section class="intro">
+      <span class="kicker">09 / Timing challenge</span>
       <h1>Reaction<br><span>Time.</span></h1>
       <p>Wait for the signal. Click as fast as you can.</p>
-
-      @if (bestTime !== null) {
-        <div class="best">Best this session <strong>{{ bestTime }} ms</strong></div>
+      @if(bestTime !== null) {
+        <div class="best"><span>Best this session</span><strong>{{ bestTime }} ms</strong></div>
       }
-    </div>
+    </section>
 
-    <button
-      type="button"
-      class="reaction-zone"
-      [class.waiting]="state === 'waiting'"
-      [class.ready]="state === 'ready'"
-      [class.failed]="state === 'too-soon'"
-      (click)="state === 'idle' || state === 'result' || state === 'too-soon' ? start() : react()"
-    >
-      @switch (state) {
-        @case ('idle') {
-          <span class="state-label">Start</span>
-          <strong>Click to begin</strong>
+    <section class="workspace">
+      <div class="section-heading"><span>Reaction test</span><span>{{ state }}</span></div>
+      <button
+        type="button"
+        class="reaction-zone"
+        [class.waiting]="state === 'waiting'"
+        [class.ready]="state === 'ready'"
+        [class.failed]="state === 'too-soon'"
+        (click)="state === 'idle' || state === 'result' || state === 'too-soon' ? start() : react()"
+      >
+        @switch(state) {
+          @case('idle') { <span>Start</span><strong>Click to begin</strong> }
+          @case('waiting') { <span>Wait</span><strong>Not yet...</strong> }
+          @case('ready') { <span>Now</span><strong>Click!</strong> }
+          @case('result') { <span>Result</span><strong>{{ reactionTime }} ms</strong><small>Click to try again</small> }
+          @case('too-soon') { <span>Too soon</span><strong>False start</strong><small>Click to restart</small> }
         }
-        @case ('waiting') {
-          <span class="state-label">Wait</span>
-          <strong>Not yet...</strong>
-        }
-        @case ('ready') {
-          <span class="state-label">Now</span>
-          <strong>Click!</strong>
-        }
-        @case ('result') {
-          <span class="state-label">Result</span>
-          <strong>{{ reactionTime }} ms</strong>
-          <small>Click to try again</small>
-        }
-        @case ('too-soon') {
-          <span class="state-label">Too soon</span>
-          <strong>False start</strong>
-          <small>Click to restart</small>
-        }
-      }
-    </button>
-  </section>
-</main>
+      </button>
+    </section>
+  </main>
+
+  <footer><span>FlyingPAD Projects</span><span>09 / Reaction Time</span></footer>
+</div>
