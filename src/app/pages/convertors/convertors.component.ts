@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ProjectShellComponent } from '../../components/project-shell/project-shell.component';
 import { ConvertTemperaturePipe } from '../../pipes/convert-temperature.pipe';
 import { ConvertDistancePipe } from '../../pipes/convert-distance.pipe';
 import { ConvertMassPipe } from '../../pipes/convert-mass.pipe';
@@ -14,7 +14,7 @@ import { ConvertVolumePipe } from '../../pipes/convert-volume.pipe';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterLink,
+    ProjectShellComponent,
     ConvertTemperaturePipe,
     ConvertDistancePipe,
     ConvertMassPipe,
