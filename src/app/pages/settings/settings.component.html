@@ -27,12 +27,12 @@
           <div><span class="setting-label">{{ 'title.language' | translate }}</span><strong>{{ currentLanguage() === 'fr' ? 'Français' : 'English' }}</strong></div>
           <div class="dropdown-wrapper">
             <button class="choice-button" type="button" (click)="languageMenuToggle()" [attr.aria-expanded]="isLanguageMenuON">
-              <img [src]="getImageURL(false, 'icons-flags', currentLanguage(), 'png')" alt="" /><span>{{ currentLanguage().toUpperCase() }}</span><span class="chevron" [class.active]="isLanguageMenuON">⌄</span>
+              <img [src]="'assets/icons-flags/' + currentLanguage() + '.png'" alt="" /><span>{{ currentLanguage().toUpperCase() }}</span><span class="chevron" [class.active]="isLanguageMenuON">⌄</span>
             </button>
             @if (isLanguageMenuON) {
               <div class="dropdown-menu">
                 <button class="dropdown-item" type="button" *ngFor="let language of supportedLanguages" [class.active]="currentLanguage() === language" (click)="switchLanguage(language)">
-                  <img [src]="getImageURL(false, 'icons-flags', language, 'png')" alt="" /><span>{{ language === 'fr' ? 'Français' : 'English' }}</span>
+                  <img [src]="'assets/icons-flags/' + language + '.png'" alt="" /><span>{{ language === 'fr' ? 'Français' : 'English' }}</span>
                 </button>
               </div>
             }
