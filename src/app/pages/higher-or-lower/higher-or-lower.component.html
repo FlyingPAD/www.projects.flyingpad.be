@@ -1,97 +1,23 @@
-<div class="project-page">
-  <header class="site-header">
-    <a class="identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
-    <nav><a routerLink="/projects">Projects</a><a routerLink="/about">About</a><a routerLink="/settings">Settings</a></nav>
-  </header>
-
-  <main>
-    <section class="intro">
-      <span class="kicker">05 / Guessing game</span>
-      <h1>Higher<br><span>/ Lower.</span></h1>
-      <p>Pick a range, find the hidden number and use the hints to close in on it.</p>
-    </section>
-
+<app-project-shell accent="#43dc78" footerLabel="05 / Higher / Lower">
+  <main class="project-main">
+    <section class="project-intro"><span class="project-kicker">05 / Guessing game</span><h1>Higher<br><span>/ Lower.</span></h1><p>Pick a range, find the hidden number and use the hints to close in on it.</p></section>
     <section class="game-panel">
-      <div class="section-heading"><span>Number search</span><span>Level {{ level }}</span></div>
-
-      @if(title) {
-        <div class="title-state">
-          <img src="assets/guess/title-screen.png" alt="" />
-          <button type="button" (click)="config()">Play</button>
-        </div>
-      }
-
+      <div class="project-section-heading"><span>Number search</span><span>Level {{ level }}</span></div>
+      @if(title) { <div class="title-state"><img src="assets/guess/title-screen.png" alt="" /><button type="button" (click)="config()">Play</button></div> }
       @if(configuration && !gameStart) {
-        <div class="config-state">
-          <span class="state-label">{{ message }}</span>
-          <div class="level-grid">
-            <button type="button" [class.active]="level === '1'" (click)="selectLevel(1)"><span>01</span><strong>Beginner</strong><small>1 — 10</small></button>
-            <button type="button" [class.active]="level === '2'" (click)="selectLevel(2)"><span>02</span><strong>Intermediate</strong><small>1 — 100</small></button>
-            <button type="button" [class.active]="level === '3'" (click)="selectLevel(3)"><span>03</span><strong>Expert</strong><small>1 — 1000</small></button>
-          </div>
-          @if(level !== '0') {
-            <button type="button" class="primary" (click)="startGame()">Start game</button>
-          }
-        </div>
+        <div class="config-state"><span class="state-label">{{ message }}</span><div class="level-grid">
+          <button type="button" [class.active]="level === '1'" (click)="selectLevel(1)"><span>01</span><strong>Beginner</strong><small>1 — 10</small></button>
+          <button type="button" [class.active]="level === '2'" (click)="selectLevel(2)"><span>02</span><strong>Intermediate</strong><small>1 — 100</small></button>
+          <button type="button" [class.active]="level === '3'" (click)="selectLevel(3)"><span>03</span><strong>Expert</strong><small>1 — 1000</small></button>
+        </div>@if(level !== '0') { <button type="button" class="primary" (click)="startGame()">Start game</button> }</div>
       }
-
       @if(gameStart && !configuration) {
-        <div class="play-state">
-          <div class="feedback">
-            <span>Hint</span>
-            <strong>{{ message }}</strong>
-          </div>
-
-          <div class="range-line">
-            <span>Search range</span>
-            <strong>1 — {{ refLevel }}</strong>
-          </div>
-
-          <label for="guess">Your guess</label>
-          <div class="guess-control">
-            <button
-              type="button"
-              class="step-button"
-              aria-label="Decrease guess"
-              [disabled]="userInputValue <= 1"
-              (click)="adjustGuess(-1)"
-            >−</button>
-
-            <input
-              id="guess"
-              type="number"
-              min="1"
-              [max]="refLevel"
-              [(ngModel)]="userInputValue"
-              (keydown.enter)="process()"
-            >
-
-            <button
-              type="button"
-              class="step-button"
-              aria-label="Increase guess"
-              [disabled]="userInputValue >= refLevel"
-              (click)="adjustGuess(1)"
-            >+</button>
-          </div>
-
-          <button type="button" class="primary submit-guess" (click)="process()">Submit guess</button>
-          <span class="enter-hint">Enter to submit</span>
-
-          <div class="moves">Moves <strong>{{ moves }}</strong></div>
+        <div class="play-state"><div class="feedback"><span>Hint</span><strong>{{ message }}</strong></div><div class="range-line"><span>Search range</span><strong>1 — {{ refLevel }}</strong></div><label for="guess">Your guess</label>
+          <div class="guess-control"><button type="button" class="step-button" aria-label="Decrease guess" [disabled]="userInputValue <= 1" (click)="adjustGuess(-1)">−</button><input id="guess" type="number" min="1" [max]="refLevel" [(ngModel)]="userInputValue" (keydown.enter)="process()"><button type="button" class="step-button" aria-label="Increase guess" [disabled]="userInputValue >= refLevel" (click)="adjustGuess(1)">+</button></div>
+          <button type="button" class="primary submit-guess" (click)="process()">Submit guess</button><span class="enter-hint">Enter to submit</span><div class="moves">Moves <strong>{{ moves }}</strong></div>
         </div>
       }
-
-      @if(gameEnd) {
-        <div class="result-state">
-          <span class="state-label">Result</span>
-          <strong class="victory">{{ message }}</strong>
-          <p>{{ valueToFind }} found in {{ moves }} moves.</p>
-          <button type="button" class="primary" (click)="config()">Restart</button>
-        </div>
-      }
+      @if(gameEnd) { <div class="result-state"><span class="state-label">Result</span><strong class="victory">{{ message }}</strong><p>{{ valueToFind }} found in {{ moves }} moves.</p><button type="button" class="primary" (click)="config()">Restart</button></div> }
     </section>
   </main>
-
-  <footer><span>FlyingPAD Projects</span><span>05 / Higher / Lower</span></footer>
-</div>
+</app-project-shell>
