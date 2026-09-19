@@ -1,36 +1,32 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonTopComponent } from '../../components/button-top/button-top.component';
-import { BottomBarComponent } from "../../components/bottom-bar/bottom-bar.component";
-import { BottomIconBackComponent } from "../../components/bottom-bar-icons/bottom-icon-back/bottom-icon-back.component";
-import { BottomToggleEntityInfoComponent } from "../../components/bottom-bar-icons/bottom-toggle-entity-info/bottom-icon-about.component";
-import { BottomIconSettingsComponent } from "../../components/bottom-bar-icons/bottom-icon-settings/bottom-icon-settings.component";
+import { RouterLink } from '@angular/router';
 
 @Component({
-    selector: 'app-higher-or-lower',
-    imports: [CommonModule, FormsModule, ButtonTopComponent, BottomBarComponent, BottomIconBackComponent, BottomToggleEntityInfoComponent, BottomIconSettingsComponent],
-    templateUrl: './higher-or-lower.component.html',
-    styleUrls: ['./higher-or-lower.component.scss']
+  selector: 'app-higher-or-lower',
+  imports: [CommonModule, FormsModule, RouterLink],
+  templateUrl: './higher-or-lower.component.html',
+  styleUrl: './higher-or-lower.component.scss'
 })
 export class HigherOrLowerComponent {
-  refLevel: number = 10;
-  valueToFind: number = 0;
-  userInputValue: number = 0;
-  message: string = 'Select your level';
-  level: string = '0';
-  moves: number = 0;
-  title: boolean = true;
-  configuration: boolean = false;
-  gameStart: boolean = false;
-  gameEnd: boolean = false;
+  refLevel = 10;
+  valueToFind = 0;
+  userInputValue = 0;
+  message = 'Select your level';
+  level = '0';
+  moves = 0;
+  title = true;
+  configuration = false;
+  gameStart = false;
+  gameEnd = false;
 
   config(): void {
-    this.message = 'Select your level'
+    this.message = 'Select your level';
     this.title = false;
     this.configuration = true;
-    this.gameStart = false
-    this.gameEnd = false
+    this.gameStart = false;
+    this.gameEnd = false;
   }
 
   generateRandom(): void {
@@ -40,11 +36,9 @@ export class HigherOrLowerComponent {
   }
 
   process(): void {
-    if (this.userInputValue > this.valueToFind) {
-      this.message = 'Lower';
-    } else if (this.userInputValue < this.valueToFind) {
-      this.message = 'Higher';
-    } else {
+    if (this.userInputValue > this.valueToFind) this.message = 'Lower';
+    else if (this.userInputValue < this.valueToFind) this.message = 'Higher';
+    else {
       this.message = 'Correct!';
       this.checkGameStatus();
     }
@@ -57,7 +51,7 @@ export class HigherOrLowerComponent {
       return;
     }
     this.generateRandom();
-    this.configuration = false
+    this.configuration = false;
     this.gameStart = true;
     this.message = "Let's Go!!!";
     this.moves = 0;
@@ -72,17 +66,8 @@ export class HigherOrLowerComponent {
   }
 
   selectLevel(level: number): void {
-    if (level === 1) {
-      this.refLevel = 10;
-      this.level = '1';
-    }
-    if (level === 2) {
-      this.refLevel = 100;
-      this.level = '2';
-    }
-    if (level === 3) {
-      this.refLevel = 1000;
-      this.level = '3';
-    }
+    if (level === 1) { this.refLevel = 10; this.level = '1'; }
+    if (level === 2) { this.refLevel = 100; this.level = '2'; }
+    if (level === 3) { this.refLevel = 1000; this.level = '3'; }
   }
 }
