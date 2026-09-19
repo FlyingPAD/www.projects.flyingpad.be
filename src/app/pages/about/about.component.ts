@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ProjectShellComponent } from '../../components/project-shell/project-shell.component';
 
 @Component({
   selector: 'app-about',
-  imports: [RouterLink],
+  imports: [ProjectShellComponent],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
