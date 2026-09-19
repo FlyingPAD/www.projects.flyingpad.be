@@ -1,21 +1,13 @@
-<div class="project-page">
-  <header class="site-header">
-    <a class="identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
-    <nav><a routerLink="/projects">Projects</a><a routerLink="/about">About</a><a routerLink="/settings">Settings</a></nav>
-  </header>
-
-  <main>
-    <section class="intro">
-      <span class="kicker">04 / State & interaction</span>
+<app-project-shell accent="#ffe14a" footerLabel="04 / Virtual Pet">
+  <main class="project-main project-main--wide">
+    <section class="project-intro">
+      <span class="project-kicker">04 / State & interaction</span>
       <h1>Virtual<br><span>Pet.</span></h1>
       <p>Adopt a pet, keep its needs in balance and watch its state evolve over time.</p>
     </section>
 
     <section class="pet-shell">
-      <div class="section-heading">
-        <span>Pet system</span>
-        <span>{{ currentPets.length | number:'2.0' }} active</span>
-      </div>
+      <div class="project-section-heading"><span>Pet system</span><span>{{ currentPets.length | number:'2.0' }} active</span></div>
 
       @if(!petSelection && !petNaming && !controlRoom && !petDetails) {
         <div class="start-state">
@@ -110,6 +102,4 @@
       }
     </section>
   </main>
-
-  <footer><span>FlyingPAD Projects</span><span>04 / Virtual Pet</span></footer>
-</div>
+</app-project-shell>
