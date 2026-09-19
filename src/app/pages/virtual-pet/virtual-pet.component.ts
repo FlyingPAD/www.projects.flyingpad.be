@@ -1,50 +1,40 @@
-import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { Pet } from '../../models/pet';
-import { BottomBarComponent } from "../../components/bottom-bar/bottom-bar.component";
-import { BottomIconBackComponent } from "../../components/bottom-bar-icons/bottom-icon-back/bottom-icon-back.component";
-import { BottomToggleEntityInfoComponent } from "../../components/bottom-bar-icons/bottom-toggle-entity-info/bottom-icon-about.component";
-import { BottomIconSettingsComponent } from "../../components/bottom-bar-icons/bottom-icon-settings/bottom-icon-settings.component";
-import { BottomIconToTopComponent } from "../../components/bottom-bar-icons/bottom-icon-to-top/bottom-icon-to-top.component";
-import { SpacerComponent } from "../../components/spacer/spacer.component";
 
 @Component({
   selector: 'app-virtual-pet',
   templateUrl: './virtual-pet.component.html',
-  styleUrls: ['./virtual-pet.component.scss'],
-  imports: [CommonModule, FormsModule, BottomBarComponent, BottomIconBackComponent, BottomToggleEntityInfoComponent, BottomIconSettingsComponent, BottomIconToTopComponent, SpacerComponent]
+  styleUrl: './virtual-pet.component.scss',
+  imports: [CommonModule, FormsModule, RouterLink]
 })
 export class VirtualPetComponent implements OnDestroy {
-  petSelection: boolean = false;
-  petNaming: boolean = false;
-  controlRoom: boolean = false;
-  petDetails: boolean = false;
-  initialPets: Pet[] = [
-    Pet.createPet('monster'),
-    Pet.createPet('dog')
-  ];
+  petSelection = false;
+  petNaming = false;
+  controlRoom = false;
+  petDetails = false;
+  initialPets: Pet[] = [Pet.createPet('monster'), Pet.createPet('dog')];
   currentPet!: Pet;
   currentPets: Pet[] = [];
   availableBackgrounds = Pet.availableBackgrounds;
 
-  startSelection() {
+  startSelection(): void {
     this.petSelection = true;
     this.controlRoom = false;
     this.petNaming = false;
     this.petDetails = false;
   }
 
-  SelectPet(pet: Pet) {
+  SelectPet(pet: Pet): void {
     this.currentPet = this.clonePet(pet);
     this.petSelection = false;
     this.petNaming = true;
   }
 
-  setName(newName: string) {
-    if (this.currentPet) {
-      this.currentPet.name = this.capitalize(newName);
-    }
+  setName(newName: string): void {
+    if (this.currentPet) this.currentPet.name = this.capitalize(newName);
     this.currentPet.updateDialog();
     this.addPet(this.currentPet);
     this.petNaming = false;
@@ -56,24 +46,22 @@ export class VirtualPetComponent implements OnDestroy {
     return string.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
   }
 
-  addPet(pet: Pet) {
-    if (!this.currentPets.includes(pet)) {
-      this.currentPets.push(pet);
-    }
+  addPet(pet: Pet): void {
+    if (!this.currentPets.includes(pet)) this.currentPets.push(pet);
   }
 
-  goDetails(pet: Pet) {
+  goDetails(pet: Pet): void {
     this.currentPet = pet;
     this.controlRoom = false;
     this.petDetails = true;
   }
 
-  goControlRoom() {
+  goControlRoom(): void {
     this.petDetails = false;
     this.controlRoom = true;
   }
 
-  changeBackground(background: string) {
+  changeBackground(background: string): void {
     this.currentPet.background = background;
   }
 
@@ -85,19 +73,11 @@ export class VirtualPetComponent implements OnDestroy {
     return pet.type + pet.name;
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.currentPets.forEach(pet => pet.clearIntervals());
   }
 
-  feedPet(pet: Pet) {
-    pet.feed();
-  }
-
-  cleanPet(pet: Pet) {
-    pet.clean();
-  }
-
-  playPet(pet: Pet) {
-    pet.play();
-  }
+  feedPet(pet: Pet): void { pet.feed(); }
+  cleanPet(pet: Pet): void { pet.clean(); }
+  playPet(pet: Pet): void { pet.play(); }
 }
