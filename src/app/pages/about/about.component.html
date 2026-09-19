@@ -1,51 +1,29 @@
-<div class="info-page">
-  <header class="site-header">
-    <a class="identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
-    <nav class="header-nav" aria-label="Secondary navigation">
-      <a routerLink="/projects">Projects</a>
-      <a routerLink="/settings">Settings</a>
-    </nav>
-  </header>
-
-  <main class="about-main">
-    <section class="intro" aria-labelledby="about-title">
-      <span class="kicker">FlyingPAD projects</span>
+<app-project-shell accent="#9abcc9" footerLabel="About" [chromatic]="true">
+  <main class="project-main">
+    <section class="project-intro" aria-labelledby="about-title">
+      <span class="project-kicker">FlyingPAD projects</span>
       <h1 id="about-title">About<span>.</span></h1>
       <p>A small collection of tools, games and interactive experiments.</p>
     </section>
 
     <section class="links" aria-label="FlyingPAD links">
-      <div class="section-heading">
+      <div class="project-section-heading">
         <span>Elsewhere</span>
         <span>02 links</span>
       </div>
 
       <div class="link-list">
         <a class="link-card tone-blue" href="https://cv.flyingpad.be" target="_blank" rel="noreferrer">
-          <span class="link-index">01</span>
-          <span class="link-signal" aria-hidden="true"></span>
-          <div class="link-copy">
-            <span class="link-label">Résumé</span>
-            <strong>cv.flyingpad.be</strong>
-          </div>
+          <span class="link-index">01</span><span class="link-signal" aria-hidden="true"></span>
+          <div class="link-copy"><span class="link-label">Résumé</span><strong>cv.flyingpad.be</strong></div>
           <span class="link-arrow" aria-hidden="true">↗</span>
         </a>
-
         <a class="link-card tone-violet" href="https://www.flyingpad.be" target="_blank" rel="noreferrer">
-          <span class="link-index">02</span>
-          <span class="link-signal" aria-hidden="true"></span>
-          <div class="link-copy">
-            <span class="link-label">FlyingPAD</span>
-            <strong>www.flyingpad.be</strong>
-          </div>
+          <span class="link-index">02</span><span class="link-signal" aria-hidden="true"></span>
+          <div class="link-copy"><span class="link-label">FlyingPAD</span><strong>www.flyingpad.be</strong></div>
           <span class="link-arrow" aria-hidden="true">↗</span>
         </a>
       </div>
     </section>
   </main>
-
-  <footer>
-    <span>FlyingPAD Projects</span>
-    <span>About</span>
-  </footer>
-</div>
+</app-project-shell>
