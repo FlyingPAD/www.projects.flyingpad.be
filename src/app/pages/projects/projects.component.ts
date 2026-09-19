@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ProjectShellComponent } from '../../components/project-shell/project-shell.component';
 
 type ProjectCard = {
   index: string;
@@ -11,7 +12,7 @@ type ProjectCard = {
 
 @Component({
   selector: 'app-projects',
-  imports: [RouterLink],
+  imports: [RouterLink, ProjectShellComponent],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })
