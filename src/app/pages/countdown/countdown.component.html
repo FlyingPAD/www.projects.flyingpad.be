@@ -1,105 +1,40 @@
-<div class="countdown-page">
-  <header class="site-header">
-    <a class="identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
-    <nav class="header-nav" aria-label="Secondary navigation">
-      <a routerLink="/projects">Projects</a>
-      <a routerLink="/about">About</a>
-      <a routerLink="/settings">Settings</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="intro" aria-labelledby="countdowns-title">
-      <span class="kicker">02 / Time</span>
+<app-project-shell accent="#ff3b38" footerLabel="02 / Countdowns">
+  <main class="project-main">
+    <section class="project-intro" aria-labelledby="countdowns-title">
+      <span class="project-kicker">02 / Time</span>
       <h1 id="countdowns-title">Countdowns<span>.</span></h1>
       <p>Pick an upcoming event or set your own date. The counter keeps the rest brutally simple.</p>
     </section>
 
     <section class="countdown-system" aria-label="Countdown">
-      <div class="section-heading">
-        <span>Target</span>
-        <span [class.past]="isPast">{{ countdownMessage }}</span>
-      </div>
-
+      <div class="project-section-heading"><span>Target</span><span [class.past]="isPast">{{ countdownMessage }}</span></div>
       <div class="event-strip" aria-label="Preset events">
         @for (event of events; track event.id) {
-          <button
-            type="button"
-            class="event-button"
-            [class.active]="event.isActive"
-            (click)="handleEventClick(event)"
-            [attr.aria-pressed]="event.isActive"
-          >
-            <img [src]="'assets/events/' + event.thumbnail" alt="" />
-            <span>{{ event.name }}</span>
+          <button type="button" class="event-button" [class.active]="event.isActive" (click)="handleEventClick(event)" [attr.aria-pressed]="event.isActive">
+            <img [src]="'assets/events/' + event.thumbnail" alt="" /><span>{{ event.name }}</span>
           </button>
         }
       </div>
-
       <article class="target-card">
         <div class="target-visual" [class.custom]="isCustomTarget">
-          @if (selectedImage) {
-            <img [src]="selectedImage" alt="" />
-          } @else {
-            <span class="custom-glyph" aria-hidden="true">+</span>
-          }
+          @if (selectedImage) { <img [src]="selectedImage" alt="" /> } @else { <span class="custom-glyph" aria-hidden="true">+</span> }
         </div>
-
-        <div class="target-copy">
-          <span class="target-label">{{ isCustomTarget ? 'Custom target' : 'Selected event' }}</span>
-          <h2>{{ currentEventName }}</h2>
-          <time>{{ selectedTargetDate | date : 'dd MMMM yyyy' }}</time>
-        </div>
-
+        <div class="target-copy"><span class="target-label">{{ isCustomTarget ? 'Custom target' : 'Selected event' }}</span><h2>{{ currentEventName }}</h2><time>{{ selectedTargetDate | date : 'dd MMMM yyyy' }}</time></div>
         <span class="target-signal" aria-hidden="true"></span>
       </article>
-
       <div class="countdown-grid" aria-live="polite" aria-atomic="true">
-        <div class="time-cell">
-          <strong>{{ countdown.days }}</strong>
-          <span>Days</span>
-        </div>
-        <div class="time-cell">
-          <strong>{{ countdown.hours | number : '2.0-0' }}</strong>
-          <span>Hours</span>
-        </div>
-        <div class="time-cell">
-          <strong>{{ countdown.minutes | number : '2.0-0' }}</strong>
-          <span>Minutes</span>
-        </div>
-        <div class="time-cell accent">
-          <strong>{{ countdown.seconds | number : '2.0-0' }}</strong>
-          <span>Seconds</span>
-        </div>
+        <div class="time-cell"><strong>{{ countdown.days }}</strong><span>Days</span></div>
+        <div class="time-cell"><strong>{{ countdown.hours | number : '2.0-0' }}</strong><span>Hours</span></div>
+        <div class="time-cell"><strong>{{ countdown.minutes | number : '2.0-0' }}</strong><span>Minutes</span></div>
+        <div class="time-cell accent"><strong>{{ countdown.seconds | number : '2.0-0' }}</strong><span>Seconds</span></div>
       </div>
-
       <div class="custom-row">
-        <div class="custom-copy">
-          <span>Custom target</span>
-          <strong>Pick any calendar date.</strong>
-        </div>
-
+        <div class="custom-copy"><span>Custom target</span><strong>Pick any calendar date.</strong></div>
         <div class="custom-controls">
-          <input
-            id="custom-date"
-            type="date"
-            [(ngModel)]="customDate"
-            (ngModelChange)="handleDateChange()"
-            aria-label="Custom countdown date"
-          />
-
-          @if (isCustomTarget) {
-            <button type="button" class="reset-button" (click)="resetToNextEvent()">
-              Next event
-            </button>
-          }
+          <input id="custom-date" type="date" [(ngModel)]="customDate" (ngModelChange)="handleDateChange()" aria-label="Custom countdown date" />
+          @if (isCustomTarget) { <button type="button" class="reset-button" (click)="resetToNextEvent()">Next event</button> }
         </div>
       </div>
     </section>
   </main>
-
-  <footer>
-    <span>FlyingPAD Projects</span>
-    <span>02 / Countdowns</span>
-  </footer>
-</div>
+</app-project-shell>
