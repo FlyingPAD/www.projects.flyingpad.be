@@ -1,56 +1,63 @@
-@if (title) {
-  <img class="title" src="assets/guess/title-screen.png" />
-  <div class="button" (click)="config()">PLAY</div>
-}
+<div class="project-page">
+  <header class="site-header">
+    <a class="identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
+    <nav><a routerLink="/projects">Projects</a><a routerLink="/about">About</a><a routerLink="/settings">Settings</a></nav>
+  </header>
 
-@if (configuration && !gameStart) {
-  <div>
-    <h1 class="h1">{{message}}</h1>
-    <div class="higher-or-lower">
+  <main>
+    <section class="intro">
+      <span class="kicker">05 / Guessing game</span>
+      <h1>Higher<br><span>/ Lower.</span></h1>
+      <p>Pick a range, find the hidden number and use the hints to close in on it.</p>
+    </section>
 
-      <div class="buttons-level">
-        <button (click)="selectLevel(1)">1</button>
-        <button (click)="selectLevel(2)">2</button>
-        <button (click)="selectLevel(3)">3</button>
-      </div>
+    <section class="game-panel">
+      <div class="section-heading"><span>Number search</span><span>Level {{ level }}</span></div>
 
-      @if (level !== '0') {
-        <h2 class="h2" *ngIf="level === '1'"> ▸ Level - 1 : Beginner</h2>
-        <h2 class="h2" *ngIf="level === '2'"> ▸ Level - 2 : Intermediate</h2>
-        <h2 class="h2" *ngIf="level === '3'"> ▸ Level - 3 : Expert</h2>
-
-        <p>( between 1 and {{ refLevel }} )</p>
-        <div class="button" (click)="startGame()">START</div>
+      @if(title) {
+        <div class="title-state">
+          <img src="assets/guess/title-screen.png" alt="" />
+          <button type="button" (click)="config()">Play</button>
+        </div>
       }
-    </div>
-  </div>
-}
 
-@if (gameStart && !configuration) {
-  <h2 class="h2">{{ message }}</h2>
+      @if(configuration && !gameStart) {
+        <div class="config-state">
+          <span class="state-label">{{ message }}</span>
+          <div class="level-grid">
+            <button type="button" [class.active]="level === '1'" (click)="selectLevel(1)"><span>01</span><strong>Beginner</strong><small>1 — 10</small></button>
+            <button type="button" [class.active]="level === '2'" (click)="selectLevel(2)"><span>02</span><strong>Intermediate</strong><small>1 — 100</small></button>
+            <button type="button" [class.active]="level === '3'" (click)="selectLevel(3)"><span>03</span><strong>Expert</strong><small>1 — 1000</small></button>
+          </div>
+          @if(level !== '0') {
+            <button type="button" class="primary" (click)="startGame()">Start game</button>
+          }
+        </div>
+      }
 
-  <div class="higher-or-lower">
-    <p>Level {{level}}</p>
-    <input type="number" [(ngModel)]="userInputValue">
-    <div class="button" (click)="process()">Process</div>
-    <p *ngIf="moves !== 0"><u>Moves</u>: {{ moves }}</p>
-  </div>
-}
+      @if(gameStart && !configuration) {
+        <div class="play-state">
+          <div class="feedback">
+            <span>Hint</span>
+            <strong>{{ message }}</strong>
+          </div>
+          <label for="guess">Your guess · 1 to {{ refLevel }}</label>
+          <input id="guess" type="number" [(ngModel)]="userInputValue">
+          <button type="button" class="primary" (click)="process()">Process</button>
+          <div class="moves">Moves <strong>{{ moves }}</strong></div>
+        </div>
+      }
 
-@if (gameEnd) {
-  <h2 class="h2">{{ message }}</h2>
+      @if(gameEnd) {
+        <div class="result-state">
+          <span class="state-label">Result</span>
+          <strong class="victory">{{ message }}</strong>
+          <p>{{ valueToFind }} found in {{ moves }} moves.</p>
+          <button type="button" class="primary" (click)="config()">Restart</button>
+        </div>
+      }
+    </section>
+  </main>
 
-  <div class="higher-or-lower">
-    <p *ngIf="moves !== 0"><u>Moves</u>: {{ moves }}</p>
-  </div>
-  
-  <div class="button" (click)="config()">Restart</div>
-}
-
-<app-button-top />
-
-<app-bottom-bar>
-  <app-bottom-icon-back />
-  <app-bottom-icon-about />
-  <app-bottom-icon-settings />
-</app-bottom-bar>
+  <footer><span>FlyingPAD Projects</span><span>05 / Higher / Lower</span></footer>
+</div>
