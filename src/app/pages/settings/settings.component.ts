@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProjectShellComponent } from '../../components/project-shell/project-shell.component';
 import { DisplayService } from '../../services/display.service';
 import { FullScreenService } from '../../services/full-screen.service';
 import { ImageUrlService } from '../../services/image-url.service';
@@ -15,7 +15,7 @@ import { Theme } from '../../enumerations/themes';
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
-  imports: [CommonModule, FormsModule, RouterLink, TranslateModule]
+  imports: [CommonModule, FormsModule, TranslateModule, ProjectShellComponent]
 })
 export class SettingsComponent {
   #languageService = inject(LanguageService);
