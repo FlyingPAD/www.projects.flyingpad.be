@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ProjectShellComponent } from '../../components/project-shell/project-shell.component';
 
 @Component({
   selector: 'app-higher-or-lower',
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, ProjectShellComponent],
   templateUrl: './higher-or-lower.component.html',
   styleUrl: './higher-or-lower.component.scss'
 })
