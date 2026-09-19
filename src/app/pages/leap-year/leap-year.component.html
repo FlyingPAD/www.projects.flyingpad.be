@@ -1,23 +1,17 @@
-<div class="project-page">
-  <header class="site-header">
-    <a class="identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
-    <nav><a routerLink="/projects">Projects</a><a routerLink="/about">About</a><a routerLink="/settings">Settings</a></nav>
-  </header>
-
-  <main>
-    <section class="intro">
-      <span class="kicker">08 / Calendar logic</span>
+<app-project-shell accent="#c05cff" footerLabel="08 / Leap Year">
+  <main class="project-main">
+    <section class="project-intro">
+      <span class="project-kicker">08 / Calendar logic</span>
       <h1>Leap<br><span>Year.</span></h1>
       <p>A tiny calendar rule with a surprisingly precise job: keeping civil time aligned with Earth's orbit.</p>
     </section>
 
     <section class="workspace">
-      <div class="section-heading"><span>Year test</span><span>Gregorian rule</span></div>
+      <div class="project-section-heading"><span>Year test</span><span>Gregorian rule</span></div>
 
       <div class="calculator" [formGroup]="form">
         <label for="year">Enter a year</label>
         <input id="year" type="number" formControlName="year" aria-label="Year input">
-
         @if(form.get('year')?.errors?.['required']) { <p class="error">Year is required.</p> }
         @if(form.get('year')?.errors?.['min']) { <p class="error">Please enter a year above -4500000000.</p> }
         @if(form.get('year')?.errors?.['max']) { <p class="error">Please enter a year below 5000000000.</p> }
@@ -45,6 +39,4 @@
       </div>
     </section>
   </main>
-
-  <footer><span>FlyingPAD Projects</span><span>08 / Leap Year</span></footer>
-</div>
+</app-project-shell>
