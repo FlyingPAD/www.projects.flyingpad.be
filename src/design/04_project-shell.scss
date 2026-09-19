@@ -1,21 +1,3 @@
-:root {
-  --projects-bg: #071014;
-  --projects-text: #e9eef0;
-  --projects-soft: #b9c4c8;
-  --projects-muted: #819198;
-  --projects-line: rgba(220, 235, 240, .15);
-  --projects-line-strong: rgba(220, 235, 240, .28);
-
-  --pad-red: #ff3b38;
-  --pad-orange: #ff9f1c;
-  --pad-yellow: #ffe14a;
-  --pad-green: #43dc78;
-  --pad-blue: #35b9ff;
-  --pad-indigo: #656dff;
-  --pad-violet: #c05cff;
-  --pad-black: #657176;
-}
-
 .project-shell {
   --project-accent: #9abcc9;
   width: min(calc(100% - 40px), 1320px);
