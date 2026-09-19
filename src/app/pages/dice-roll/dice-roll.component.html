@@ -1,81 +1,14 @@
-<div class="project-page">
-  <header class="site-header">
-    <a class="identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
-    <nav><a routerLink="/projects">Projects</a><a routerLink="/about">About</a><a routerLink="/settings">Settings</a></nav>
-  </header>
-
-  <main>
-    <section class="intro">
-      <span class="kicker">07 / Dice game</span>
-      <h1>Dice<br><span>Roll.</span></h1>
-      <p>Two players. One roll each. Highest die wins.</p>
-    </section>
-
-    <section class="game-shell">
-      <div class="section-heading"><span>Turn-based mini game</span><span>D6</span></div>
-
-      @if(title) {
-        <div class="launch-screen">
-          <img src="assets/dice_roll/title-screen.png" alt="" />
-          <button type="button" (click)="toggleTitle()">Start</button>
-        </div>
-      } @else {
+<app-project-shell accent="#656dff" footerLabel="07 / Dice Roll">
+  <main class="project-main project-main--wide">
+    <section class="project-intro"><span class="project-kicker">07 / Dice game</span><h1>Dice<br><span>Roll.</span></h1><p>Two players. One roll each. Highest die wins.</p></section>
+    <section class="game-shell"><div class="project-section-heading"><span>Turn-based mini game</span><span>D6</span></div>
+      @if(title) { <div class="launch-screen"><img src="assets/dice_roll/title-screen.png" alt="" /><button type="button" (click)="toggleTitle()">Start</button></div> } @else {
         <div class="match">
-          <article class="team">
-            <div class="team-label"><span>Player 01</span><strong>Girl</strong></div>
-            <div class="avatar">
-              <img class="gender" src="assets/app_icons/gender/female.png" alt="" />
-              <img src="assets/dice_roll/girl/f_{{emptyF}}.gif" alt="" />
-              <img src="assets/dice_roll/girl/f_{{overlayF}}.png" alt="" />
-              <img src="assets/dice_roll/girl/f_{{imageFName}}.png" alt="" />
-            </div>
-            @if(messageFemale !== undefined) { <p class="message">{{ messageFemale }}</p> }
-
-            @if(resultFemale === undefined) {
-              <button type="button" class="roll-zone" (click)="femaleStartRoll()">
-                <img src="assets/dice_roll/dice_roll.gif" alt="" />
-                <span>Roll the dice</span>
-              </button>
-            } @else {
-              <div class="roll-result"><span>Result</span><img [src]="getDiceImagePath(resultFemale)" alt="" /></div>
-            }
-          </article>
-
-          <section class="versus">
-            <span class="vs">VS</span>
-            @if(diceRollVictoryResult !== undefined) {
-              <strong>{{ messageResult }}</strong>
-              @if(diceRollVictoryResult !== 3) { <img src="assets/dice_roll/winner.gif" alt="" /> }
-              <button type="button" (click)="diceRollRestart()">Restart</button>
-            } @else {
-              <p>{{ resultFemale === undefined ? 'Player 01 rolls first' : 'Player 02 turn' }}</p>
-            }
-          </section>
-
-          <article class="team">
-            <div class="team-label"><span>Player 02</span><strong>Boy</strong></div>
-            <div class="avatar">
-              <img class="gender" src="assets/app_icons/gender/male.png" alt="" />
-              <img src="assets/dice_roll/boy/m_{{emptyM}}.gif" alt="" />
-              <img src="assets/dice_roll/boy/m_{{overlayM}}.png" alt="" />
-              <img src="assets/dice_roll/boy/m_{{imageMName}}.png" alt="" />
-            </div>
-            @if(messageMale !== undefined) { <p class="message">{{ messageMale }}</p> }
-
-            @if(resultFemale && resultMale === undefined) {
-              <button type="button" class="roll-zone" (click)="maleStartRoll()">
-                <img src="assets/dice_roll/dice_roll.gif" alt="" />
-                <span>Roll the dice</span>
-              </button>
-            }
-            @if(resultMale) {
-              <div class="roll-result"><span>Result</span><img [src]="getDiceImagePath(resultMale)" alt="" /></div>
-            }
-          </article>
+          <article class="team"><div class="team-label"><span>Player 01</span><strong>Girl</strong></div><div class="avatar"><img class="gender" src="assets/app_icons/gender/female.png" alt="" /><img src="assets/dice_roll/girl/f_{{emptyF}}.gif" alt="" /><img src="assets/dice_roll/girl/f_{{overlayF}}.png" alt="" /><img src="assets/dice_roll/girl/f_{{imageFName}}.png" alt="" /></div>@if(messageFemale !== undefined){<p class="message">{{messageFemale}}</p>}@if(resultFemale === undefined){<button type="button" class="roll-zone" (click)="femaleStartRoll()"><img src="assets/dice_roll/dice_roll.gif" alt="" /><span>Roll the dice</span></button>}@else{<div class="roll-result"><span>Result</span><img [src]="getDiceImagePath(resultFemale)" alt="" /></div>}</article>
+          <section class="versus"><span class="vs">VS</span>@if(diceRollVictoryResult !== undefined){<strong>{{messageResult}}</strong>@if(diceRollVictoryResult !== 3){<img src="assets/dice_roll/winner.gif" alt="" />}<button type="button" (click)="diceRollRestart()">Restart</button>}@else{<p>{{ resultFemale === undefined ? 'Player 01 rolls first' : 'Player 02 turn' }}</p>}</section>
+          <article class="team"><div class="team-label"><span>Player 02</span><strong>Boy</strong></div><div class="avatar"><img class="gender" src="assets/app_icons/gender/male.png" alt="" /><img src="assets/dice_roll/boy/m_{{emptyM}}.gif" alt="" /><img src="assets/dice_roll/boy/m_{{overlayM}}.png" alt="" /><img src="assets/dice_roll/boy/m_{{imageMName}}.png" alt="" /></div>@if(messageMale !== undefined){<p class="message">{{messageMale}}</p>}@if(resultFemale && resultMale === undefined){<button type="button" class="roll-zone" (click)="maleStartRoll()"><img src="assets/dice_roll/dice_roll.gif" alt="" /><span>Roll the dice</span></button>}@if(resultMale){<div class="roll-result"><span>Result</span><img [src]="getDiceImagePath(resultMale)" alt="" /></div>}</article>
         </div>
       }
     </section>
   </main>
-
-  <footer><span>FlyingPAD Projects</span><span>07 / Dice Roll</span></footer>
-</div>
+</app-project-shell>
