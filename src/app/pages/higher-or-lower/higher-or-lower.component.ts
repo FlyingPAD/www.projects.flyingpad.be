@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
 export class HigherOrLowerComponent {
   refLevel = 10;
   valueToFind = 0;
-  userInputValue = 0;
+  userInputValue = 5;
   message = 'Select your level';
   level = '0';
   moves = 0;
@@ -36,12 +36,17 @@ export class HigherOrLowerComponent {
   }
 
   process(): void {
+    if (!Number.isFinite(this.userInputValue)) return;
+
+    this.userInputValue = Math.min(this.refLevel, Math.max(1, Math.round(this.userInputValue)));
+
     if (this.userInputValue > this.valueToFind) this.message = 'Lower';
     else if (this.userInputValue < this.valueToFind) this.message = 'Higher';
     else {
       this.message = 'Correct!';
       this.checkGameStatus();
     }
+
     this.moves += 1;
   }
 
@@ -50,11 +55,20 @@ export class HigherOrLowerComponent {
       this.message = 'You need to select a level first!';
       return;
     }
+
     this.generateRandom();
+    this.userInputValue = Math.ceil(this.refLevel / 2);
     this.configuration = false;
     this.gameStart = true;
-    this.message = "Let's Go!!!";
+    this.message = 'Make your first guess';
     this.moves = 0;
+  }
+
+  adjustGuess(delta: number): void {
+    this.userInputValue = Math.min(
+      this.refLevel,
+      Math.max(1, Math.round((this.userInputValue || 1) + delta))
+    );
   }
 
   checkGameStatus(): void {
