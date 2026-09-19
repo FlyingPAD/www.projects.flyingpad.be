@@ -1,0 +1,24 @@
+<div
+  class="project-shell"
+  [class.project-shell--chromatic]="chromatic"
+  [style.--project-accent]="accent"
+>
+  <header class="project-header">
+    <a class="project-identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
+
+    <nav class="project-nav" aria-label="Secondary navigation">
+      @if (showProjectsLink) {
+        <a routerLink="/projects">Projects</a>
+      }
+      <a routerLink="/about">About</a>
+      <a routerLink="/settings">Settings</a>
+    </nav>
+  </header>
+
+  <ng-content />
+
+  <footer class="project-footer">
+    <span>FlyingPAD Projects</span>
+    <span>{{ footerLabel }}</span>
+  </footer>
+</div>
