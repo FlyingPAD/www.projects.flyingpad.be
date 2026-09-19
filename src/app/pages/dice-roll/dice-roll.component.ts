@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ProjectShellComponent } from '../../components/project-shell/project-shell.component';
 
 @Component({
   selector: 'app-dice-roll',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, ProjectShellComponent],
   templateUrl: './dice-roll.component.html',
   styleUrl: './dice-roll.component.scss'
 })
