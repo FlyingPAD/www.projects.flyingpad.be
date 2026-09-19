@@ -42,7 +42,7 @@
           <div class="setting-row">
             <div>
               <span class="setting-label">{{ 'title.full-screen' | translate }}</span>
-              <strong>{{ isFullScreen() ? ('title.enable' | translate) : ('title.disable' | translate) }}</strong>
+              <strong>{{ isFullScreen() ? 'ON' : 'OFF' }}</strong>
             </div>
             <button class="action-button" type="button" (click)="toggleFullScreen()">
               {{ isFullScreen() ? ('title.disable' | translate) : ('title.enable' | translate) }}
