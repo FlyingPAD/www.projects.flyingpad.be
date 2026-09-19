@@ -5,11 +5,12 @@ import { available_characters as availChars, displayed_characters as activeChars
 import { AudioLoopService } from '../../services/audio-loop.service';
 import { PreloadService, Asset } from '../../services/preload.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { ProjectShellComponent } from '../../components/project-shell/project-shell.component';
 
 @Component({
     selector: 'app-flying-loop',
-    imports: [CommonModule, ProjectShellComponent],
+    imports: [CommonModule, RouterLink, ProjectShellComponent],
     templateUrl: './flying-loop.component.html',
     styleUrls: ['./flying-loop.component.scss']
 })
