@@ -1,0 +1,52 @@
+<main class="reaction-page">
+  <header>
+    <a routerLink="/projects" class="back">← Projects</a>
+    <span>Reaction Time</span>
+  </header>
+
+  <section class="reaction-shell" aria-live="polite">
+    <div class="copy">
+      <span class="index">09</span>
+      <h1>Reaction<br><span>Time.</span></h1>
+      <p>Wait for the signal. Click as fast as you can.</p>
+
+      @if (bestTime !== null) {
+        <div class="best">Best this session <strong>{{ bestTime }} ms</strong></div>
+      }
+    </div>
+
+    <button
+      type="button"
+      class="reaction-zone"
+      [class.waiting]="state === 'waiting'"
+      [class.ready]="state === 'ready'"
+      [class.failed]="state === 'too-soon'"
+      (click)="state === 'idle' || state === 'result' || state === 'too-soon' ? start() : react()"
+    >
+      @switch (state) {
+        @case ('idle') {
+          <span class="state-label">Start</span>
+          <strong>Click to begin</strong>
+        }
+        @case ('waiting') {
+          <span class="state-label">Wait</span>
+          <strong>Not yet...</strong>
+        }
+        @case ('ready') {
+          <span class="state-label">Now</span>
+          <strong>Click!</strong>
+        }
+        @case ('result') {
+          <span class="state-label">Result</span>
+          <strong>{{ reactionTime }} ms</strong>
+          <small>Click to try again</small>
+        }
+        @case ('too-soon') {
+          <span class="state-label">Too soon</span>
+          <strong>False start</strong>
+          <small>Click to restart</small>
+        }
+      }
+    </button>
+  </section>
+</main>
