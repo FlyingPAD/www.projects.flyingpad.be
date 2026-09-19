@@ -1,0 +1,234 @@
+:root {
+  --projects-bg: #071014;
+  --projects-text: #e9eef0;
+  --projects-soft: #b9c4c8;
+  --projects-muted: #819198;
+  --projects-line: rgba(220, 235, 240, .15);
+  --projects-line-strong: rgba(220, 235, 240, .28);
+
+  --pad-red: #ff3b38;
+  --pad-orange: #ff9f1c;
+  --pad-yellow: #ffe14a;
+  --pad-green: #43dc78;
+  --pad-blue: #35b9ff;
+  --pad-indigo: #656dff;
+  --pad-violet: #c05cff;
+  --pad-black: #657176;
+}
+
+.project-shell {
+  --project-accent: #9abcc9;
+  width: min(calc(100% - 40px), 1320px);
+  min-height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  color: var(--projects-text);
+  background:
+    radial-gradient(circle at 82% 8%, color-mix(in srgb, var(--project-accent) 8%, transparent), transparent 30rem),
+    var(--projects-bg);
+}
+
+.project-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: var(--projects-bg);
+}
+
+.project-shell--chromatic {
+  background:
+    radial-gradient(circle at 82% 8%, rgba(53, 185, 255, .07), transparent 30rem),
+    radial-gradient(circle at 10% 78%, rgba(192, 92, 255, .04), transparent 32rem),
+    var(--projects-bg);
+}
+
+.project-header {
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid var(--projects-line);
+  position: relative;
+}
+
+.project-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 72px;
+  height: 2px;
+  background: var(--project-accent);
+  opacity: .82;
+}
+
+.project-shell--chromatic .project-header::after {
+  background: linear-gradient(
+    90deg,
+    var(--pad-red),
+    var(--pad-orange),
+    var(--pad-yellow),
+    var(--pad-green),
+    var(--pad-blue),
+    var(--pad-indigo),
+    var(--pad-violet),
+    #050708
+  );
+}
+
+.project-identity {
+  color: inherit;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: 11px;
+}
+
+.project-identity span,
+.project-kicker,
+.project-section-heading {
+  color: var(--projects-muted);
+}
+
+.project-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.project-nav a {
+  color: var(--projects-soft);
+  text-decoration: none;
+  font-size: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid transparent;
+  transition: color .18s ease, border-color .18s ease;
+}
+
+.project-nav a:hover,
+.project-nav a:focus-visible {
+  color: #fff;
+  border-color: var(--projects-line-strong);
+}
+
+.project-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(250px, .72fr) minmax(520px, 1.28fr);
+  gap: clamp(48px, 7vw, 110px);
+  align-items: center;
+  padding: clamp(48px, 7vw, 92px) 0;
+}
+
+.project-main--wide {
+  grid-template-columns: minmax(230px, .58fr) minmax(650px, 1.42fr);
+  gap: clamp(40px, 5vw, 80px);
+  padding: clamp(48px, 6vw, 82px) 0;
+}
+
+.project-intro {
+  align-self: center;
+}
+
+.project-kicker,
+.project-section-heading {
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  font-size: 10px;
+}
+
+.project-intro h1 {
+  margin: 24px 0;
+  font-size: clamp(64px, 7vw, 110px);
+  line-height: .88;
+  letter-spacing: -.055em;
+  font-weight: 300;
+}
+
+.project-intro h1 span {
+  color: var(--project-accent);
+}
+
+.project-intro p {
+  max-width: 350px;
+  margin: 0;
+  color: #9eacb1;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.project-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--projects-line);
+}
+
+.project-section-heading span:last-child {
+  color: #65767d;
+}
+
+.project-footer {
+  min-height: 72px;
+  border-top: 1px solid var(--projects-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #718188;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 980px) {
+  .project-main,
+  .project-main--wide {
+    grid-template-columns: 1fr;
+    gap: 52px;
+    align-items: start;
+  }
+
+  .project-intro {
+    max-width: 620px;
+  }
+}
+
+@media (max-width: 620px) {
+  .project-shell {
+    width: calc(100% - 24px);
+  }
+
+  .project-header {
+    min-height: 76px;
+  }
+
+  .project-identity {
+    font-size: 10px;
+  }
+
+  .project-nav {
+    gap: 14px;
+  }
+
+  .project-nav a {
+    font-size: 10px;
+  }
+
+  .project-main,
+  .project-main--wide {
+    padding: 48px 0 70px;
+    gap: 54px;
+  }
+
+  .project-intro h1 {
+    font-size: clamp(54px, 18vw, 80px);
+  }
+
+  .project-footer span:last-child {
+    display: none;
+  }
+}
