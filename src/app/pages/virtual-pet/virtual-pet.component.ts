@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ProjectShellComponent } from '../../components/project-shell/project-shell.component';
 import { Pet } from '../../models/pet';
 
 @Component({
   selector: 'app-virtual-pet',
   templateUrl: './virtual-pet.component.html',
   styleUrl: './virtual-pet.component.scss',
-  imports: [CommonModule, FormsModule, RouterLink]
+  imports: [CommonModule, FormsModule, ProjectShellComponent]
 })
 export class VirtualPetComponent implements OnDestroy {
   petSelection = false;
