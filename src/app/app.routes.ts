@@ -9,9 +9,10 @@ import { DiceRollComponent } from './pages/dice-roll/dice-roll.component';
 import { VirtualPetComponent } from './pages/virtual-pet/virtual-pet.component';
 import { CountdownComponent } from './pages/countdown/countdown.component';
 import { FlyingLoopComponent } from './pages/flying-loop/flying-loop.component';
+import { ReactionTimeComponent } from './pages/reaction-time/reaction-time.component';
 
-export const routes: Routes = 
-[ 
+export const routes: Routes =
+[
     { path: '', redirectTo: 'projects', pathMatch: 'full' },
     { path : 'projects', component : ProjectsComponent, title : 'Projects' },
     { path : 'about', component : AboutComponent, title : 'About' },
@@ -22,6 +23,7 @@ export const routes: Routes =
     { path : 'dice-roll', component : DiceRollComponent, title : 'Projects | Dice Roll' },
     { path : 'virtual-pet', component : VirtualPetComponent, title : 'Projects | Virtual Pet' },
     { path : 'countdowns', component : CountdownComponent, title : 'Projects | Countdowns' },
-    { path : 'flying-loop', component : FlyingLoopComponent, title : 'Project | Flying Loop' },
+    { path : 'flying-loop', component : FlyingLoopComponent, title : 'Projects | Flying Loop' },
+    { path : 'reaction-time', component : ReactionTimeComponent, title : 'Projects | Reaction Time' },
     { path : '**', redirectTo : 'projects'}
-]
+];
