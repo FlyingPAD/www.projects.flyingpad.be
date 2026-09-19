@@ -1,12 +1,7 @@
-<div class="project-page">
-  <header class="site-header">
-    <a class="identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
-    <nav><a routerLink="/projects">Projects</a><a routerLink="/about">About</a><a routerLink="/settings">Settings</a></nav>
-  </header>
-
-  <main>
-    <section class="intro">
-      <span class="kicker">09 / Timing challenge</span>
+<app-project-shell accent="#657176" footerLabel="09 / Reaction Time">
+  <main class="project-main">
+    <section class="project-intro">
+      <span class="project-kicker">09 / Timing challenge</span>
       <h1>Reaction<br><span>Time.</span></h1>
       <p>Wait for the signal. Click as fast as you can.</p>
       @if(bestTime !== null) {
@@ -15,7 +10,7 @@
     </section>
 
     <section class="workspace">
-      <div class="section-heading"><span>Reaction test</span><span>{{ state }}</span></div>
+      <div class="project-section-heading"><span>Reaction test</span><span>{{ state }}</span></div>
       <button
         type="button"
         class="reaction-zone"
@@ -34,6 +29,4 @@
       </button>
     </section>
   </main>
-
-  <footer><span>FlyingPAD Projects</span><span>09 / Reaction Time</span></footer>
-</div>
+</app-project-shell>
