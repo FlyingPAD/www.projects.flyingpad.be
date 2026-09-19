@@ -1,115 +1,197 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
-import { CommonModule } from '@angular/common'
-import { FormsModule } from '@angular/forms'
-import { BottomBarComponent } from '../../components/bottom-bar/bottom-bar.component'
-import { BottomIconBackComponent } from '../../components/bottom-bar-icons/bottom-icon-back/bottom-icon-back.component'
-import { BottomToggleEntityInfoComponent } from '../../components/bottom-bar-icons/bottom-toggle-entity-info/bottom-icon-about.component'
-import { BottomIconSettingsComponent } from '../../components/bottom-bar-icons/bottom-icon-settings/bottom-icon-settings.component'
-import { SpacerComponent } from '../../components/spacer/spacer.component'
-import { BottomIconToTopComponent } from '../../components/bottom-bar-icons/bottom-icon-to-top/bottom-icon-to-top.component'
-import { CountdownEvent } from '../../interfaces/countdown-event'
+import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { CountdownEvent } from '../../interfaces/countdown-event';
+
+type CountdownValue = {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
+type EventDefinition = {
+  id: number;
+  name: string;
+  thumbnail: string;
+  month: number;
+  day: number;
+};
 
 @Component({
   selector: 'app-countdown',
-  imports: [CommonModule, FormsModule, BottomBarComponent, BottomIconBackComponent, BottomToggleEntityInfoComponent, BottomIconSettingsComponent, SpacerComponent, BottomIconToTopComponent],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './countdown.component.html',
-  styleUrls: ['./countdown.component.scss']
+  styleUrl: './countdown.component.scss'
 })
 export class CountdownComponent implements OnInit, OnDestroy {
-  #intervalId: ReturnType<typeof setInterval> | undefined
-  #targetTime!: Date
+  #intervalId: ReturnType<typeof setInterval> | undefined;
+  #targetTime: Date | null = null;
 
-  public countdown!: { months: number, days: number, hours: number, minutes: number, seconds: number }
-  public countdownMessage: string = 'Time remaining :'
-  public currentEventName: string | null = null
-  public birthday!: Date | undefined
+  readonly #eventDefinitions: EventDefinition[] = [
+    { id: 1, name: 'New Year', thumbnail: 'newyear.webp', month: 0, day: 1 },
+    { id: 2, name: "Valentine's Day", thumbnail: 'valentines.webp', month: 1, day: 14 },
+    { id: 3, name: 'Carnival', thumbnail: 'carnival.webp', month: 2, day: 4 },
+    { id: 4, name: 'Halloween', thumbnail: 'halloween.webp', month: 9, day: 31 },
+    { id: 5, name: 'Christmas', thumbnail: 'christmas.webp', month: 11, day: 25 }
+  ];
 
-  public events: CountdownEvent[] = [
-    { id: 1, name: 'New Year', thumbnail: 'newyear.webp', date: new Date('2025-01-01'), isActive: false },
-    { id: 2, name: 'Valentine\'s Day', thumbnail: 'valentines.webp', date: new Date('2025-02-14'), isActive: false },
-    { id: 3, name: 'Carnival', thumbnail: 'carnival.webp', date: new Date('2025-03-04'), isActive: false },
-    { id: 4, name: 'Halloween', thumbnail: 'halloween.webp', date: new Date('2024-10-31'), isActive: false },
-    { id: 5, name: 'Christmas', thumbnail: 'christmas.webp', date: new Date('2024-12-25'), isActive: false }
-  ]
+  public countdown: CountdownValue = {
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  };
+
+  public countdownMessage = 'Time remaining';
+  public currentEventName = '';
+  public selectedTargetDate: Date | null = null;
+  public selectedImage: string | null = null;
+  public customDate = '';
+  public isCustomTarget = false;
+  public isPast = false;
+  public events: CountdownEvent[] = [];
 
   public ngOnInit(): void {
-    this.#updateEventDates()
-    this.#setNextActiveEvent()
+    this.events = this.#buildEvents();
+    this.#setNextActiveEvent();
   }
 
   public ngOnDestroy(): void {
-    this.#stopCountDown()
+    this.#stopCountdown();
   }
 
-  #updateEventDates(): void {
-    const currentYear = new Date().getFullYear()
-    const now = Date.now()
+  #buildEvents(): CountdownEvent[] {
+    const now = new Date();
 
-    this.events = this.events.map(event => {
-      const eventDate = new Date(event.date)
-      eventDate.setFullYear(currentYear)
+    return this.#eventDefinitions.map(definition => {
+      let date = new Date(
+        now.getFullYear(),
+        definition.month,
+        definition.day,
+        0,
+        0,
+        0,
+        0
+      );
 
-      if (eventDate.getTime() < now) eventDate.setFullYear(currentYear + 1)
-      return { ...event, date: new Date(eventDate) }
-    })
+      if (date.getTime() <= now.getTime()) {
+        date = new Date(
+          now.getFullYear() + 1,
+          definition.month,
+          definition.day,
+          0,
+          0,
+          0,
+          0
+        );
+      }
+
+      return {
+        id: definition.id,
+        name: definition.name,
+        thumbnail: definition.thumbnail,
+        date,
+        isActive: false
+      };
+    });
   }
 
   #setNextActiveEvent(): void {
-    const now = Date.now()
-    const nextEvent = this.events
-      .filter(event => event.date.getTime() > now)
-      .sort((a, b) => a.date.getTime() - b.date.getTime())[0]
+    const nextEvent = [...this.events].sort(
+      (a, b) => a.date.getTime() - b.date.getTime()
+    )[0];
 
-    if (nextEvent) this.#setTargetDate(nextEvent.date, nextEvent.id, nextEvent.name)
+    if (nextEvent) {
+      this.#selectTarget(nextEvent.date, nextEvent.id, nextEvent.name, nextEvent.thumbnail);
+    }
   }
 
-  #setTargetDate(targetDate: Date, eventId: number, eventName: string): void {
-    this.#targetTime = targetDate
-    this.currentEventName = eventName
+  #selectTarget(
+    targetDate: Date,
+    eventId: number,
+    eventName: string,
+    thumbnail: string | null
+  ): void {
+    this.#targetTime = new Date(targetDate);
+    this.selectedTargetDate = new Date(targetDate);
+    this.currentEventName = eventName;
+    this.selectedImage = thumbnail ? `assets/events/${thumbnail}` : null;
+    this.isCustomTarget = eventId === -1;
+
     this.events = this.events.map(event => ({
       ...event,
       isActive: event.id === eventId
-    }))
-    this.#updateCountdown()
-    if (this.#intervalId) clearInterval(this.#intervalId)
-    this.#startCountDown()
+    }));
+
+    this.#updateCountdown();
+    this.#stopCountdown();
+    this.#intervalId = setInterval(() => this.#updateCountdown(), 1000);
   }
 
   #updateCountdown(): void {
-    const now = new Date()
-    const diff = this.#targetTime.getTime() - now.getTime()
-    const absDiff = Math.abs(diff)
-    this.countdownMessage = diff < 0 ? 'Time since :' : 'Time remaining :'
-    const totalDays = Math.floor(absDiff / (1000 * 60 * 60 * 24))
-    const months = Math.floor(totalDays / 30)
-    const days = totalDays % 30
+    if (!this.#targetTime) return;
+
+    const diff = this.#targetTime.getTime() - Date.now();
+    const absoluteSeconds = Math.floor(Math.abs(diff) / 1000);
+
+    this.isPast = diff < 0;
+    this.countdownMessage = this.isPast ? 'Time since' : 'Time remaining';
+
     this.countdown = {
-      months,
-      days,
-      hours: Math.floor((absDiff / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((absDiff / (1000 * 60)) % 60),
-      seconds: Math.floor((absDiff / 1000) % 60)
-    }
+      days: Math.floor(absoluteSeconds / 86400),
+      hours: Math.floor((absoluteSeconds % 86400) / 3600),
+      minutes: Math.floor((absoluteSeconds % 3600) / 60),
+      seconds: absoluteSeconds % 60
+    };
   }
 
-  #startCountDown(): void {
-    this.#intervalId = setInterval(() => this.#updateCountdown(), 1000)
+  #stopCountdown(): void {
+    if (!this.#intervalId) return;
+
+    clearInterval(this.#intervalId);
+    this.#intervalId = undefined;
   }
 
-  #stopCountDown(): void {
-    if (this.#intervalId) {
-      clearInterval(this.#intervalId)
-      this.#intervalId = undefined
+  #parseLocalDate(value: string): Date | null {
+    const [year, month, day] = value.split('-').map(Number);
+
+    if (!year || !month || !day) return null;
+
+    const date = new Date(year, month - 1, day, 0, 0, 0, 0);
+
+    if (
+      date.getFullYear() !== year ||
+      date.getMonth() !== month - 1 ||
+      date.getDate() !== day
+    ) {
+      return null;
     }
+
+    return date;
   }
 
   public handleDateChange(): void {
-    if (this.birthday) this.#setTargetDate(new Date(this.birthday), -1, 'User Selected Date')
-    else this.#setNextActiveEvent()
+    if (!this.customDate) {
+      this.resetToNextEvent();
+      return;
+    }
+
+    const date = this.#parseLocalDate(this.customDate);
+    if (!date) return;
+
+    this.#selectTarget(date, -1, 'Custom date', null);
   }
 
-  public handleEventClick(targetDate: Date, eventId: number, eventName: string): void {
-    this.birthday = undefined
-    this.#setTargetDate(targetDate, eventId, eventName)
+  public handleEventClick(event: CountdownEvent): void {
+    this.customDate = '';
+    this.#selectTarget(event.date, event.id, event.name, event.thumbnail);
+  }
+
+  public resetToNextEvent(): void {
+    this.customDate = '';
+    this.isCustomTarget = false;
+    this.#setNextActiveEvent();
   }
 }
