@@ -1,21 +1,18 @@
-<div class="projects-page">
-  <header class="site-header">
-    <a class="identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
-    <nav class="header-nav" aria-label="Secondary navigation">
-      <a routerLink="/about">About</a>
-      <a routerLink="/settings">Settings</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="intro" aria-labelledby="projects-title">
-      <span class="kicker">FlyingPAD experiments</span>
+<app-project-shell
+  accent="#9abcc9"
+  footerLabel="Experiments · Tools · Play"
+  [chromatic]="true"
+  [showProjectsLink]="false"
+>
+  <main class="project-main">
+    <section class="project-intro" aria-labelledby="projects-title">
+      <span class="project-kicker">FlyingPAD experiments</span>
       <h1 id="projects-title">Projects<span>.</span></h1>
       <p>Small tools, games and interactive experiments built to test ideas.</p>
     </section>
 
     <section class="system" aria-label="Project system">
-      <div class="system-heading">
+      <div class="project-section-heading">
         <span>Project system</span>
         <span>01 / 09</span>
       </div>
@@ -28,7 +25,6 @@
 
         @for (project of projects; track project.index) {
           <a
-            class="project-card"
             [class]="'project-card tone-' + project.tone"
             [routerLink]="project.route"
             [attr.aria-label]="project.name + ' — ' + project.detail"
@@ -45,9 +41,4 @@
       </div>
     </section>
   </main>
-
-  <footer>
-    <span>FlyingPAD Projects</span>
-    <span>Experiments · Tools · Play</span>
-  </footer>
-</div>
+</app-project-shell>
