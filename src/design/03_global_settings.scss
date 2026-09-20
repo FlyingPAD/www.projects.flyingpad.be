@@ -1,7 +1,20 @@
 *, *::before, *::after{box-sizing:border-box}
-html{overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth;scrollbar-color:var(--projects-muted) var(--projects-bg)}
-html,body{margin:0;min-height:100%;background:var(--projects-bg)}
-body{min-width:0;min-height:100dvh;font-family:var(--fontFamily);color:var(--projects-text);text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-synthesis:none;transition:background-color .25s ease,color .25s ease}
+html{overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth;scrollbar-color:var(--projects-muted) var(--projects-bg);background:var(--projects-bg)}
+html,body{margin:0;min-height:100%}
+body{
+  min-width:0;
+  min-height:100dvh;
+  font-family:var(--fontFamily);
+  color:var(--projects-text);
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+  font-synthesis:none;
+  background:
+    radial-gradient(circle at 78% 8%,rgba(53,185,255,.07),transparent 28rem),
+    radial-gradient(circle at 12% 72%,rgba(192,92,255,.035),transparent 34rem),
+    var(--projects-bg);
+  background-attachment:fixed;
+}
 h1,h2,h3,h4,h5,h6{font-family:var(--fontDisplay);font-optical-sizing:auto}
 a,button,input,select,textarea{font:inherit}
 a:focus-visible,button:focus-visible{outline:1px solid var(--pad-blue);outline-offset:5px}
