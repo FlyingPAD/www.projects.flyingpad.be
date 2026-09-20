@@ -1,24 +1,121 @@
-<div
-  class="project-shell"
-  [class.project-shell--chromatic]="chromatic"
-  [style.--project-accent]="accent"
->
-  <header class="project-header">
-    <a class="project-identity" routerLink="/projects">FlyingPAD <span>/ Projects</span></a>
+<a class="skip-link" href="#project-main-content">Skip to content</a>
 
-    <nav class="project-nav" aria-label="Secondary navigation">
-      @if (showProjectsLink) {
-        <a routerLink="/projects">Projects</a>
-      }
-      <a routerLink="/about">About</a>
-      <a routerLink="/settings">Settings</a>
+<div class="project-shell" [style.--project-accent]="accent">
+  <header class="project-header" [class.scrolled]="headerScrolled()">
+    <div class="project-identity">
+      <span class="nine-mark" aria-hidden="true">
+        <i class="missing"></i><i class="red"></i><i class="orange"></i>
+        <i class="yellow"></i><i class="green"></i><i class="blue"></i>
+        <i class="indigo"></i><i class="violet"></i><i class="black"></i>
+      </span>
+      <a class="project-identity-name" routerLink="/projects">FlyingPAD<br>Projects</a>
+    </div>
+
+    <nav class="project-desktop-nav" aria-label="Primary navigation">
+      <a routerLink="/projects" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Projects</a>
+      <a routerLink="/about" routerLinkActive="active">About</a>
+      <a routerLink="/settings" routerLinkActive="active">Settings</a>
+
+      <div class="language-control" aria-label="Language">
+        <button type="button" [class.active]="language() === 'en'" (click)="setLanguage('en')" [attr.aria-pressed]="language() === 'en'">EN</button>
+        <button type="button" [class.active]="language() === 'fr'" (click)="setLanguage('fr')" [attr.aria-pressed]="language() === 'fr'">FR</button>
+      </div>
+
+      <a class="ecosystem-link" href="https://cv.flyingpad.be" target="_blank" rel="noreferrer">
+        Résumé <span aria-hidden="true">↗</span>
+      </a>
     </nav>
+
+    <button
+      class="menu-trigger"
+      type="button"
+      (click)="openMenu()"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="project-mobile-menu"
+    >
+      <span>Menu</span><i aria-hidden="true"></i>
+    </button>
   </header>
 
-  <ng-content />
+  <div id="project-main-content" class="project-content">
+    <ng-content />
+  </div>
 
   <footer class="project-footer">
-    <span>FlyingPAD Projects</span>
-    <span>{{ footerLabel }}</span>
+    <div class="footer-signature">
+      <span class="nine-mark footer-mark" aria-hidden="true">
+        <i class="missing"></i><i class="red"></i><i class="orange"></i>
+        <i class="yellow"></i><i class="green"></i><i class="blue"></i>
+        <i class="indigo"></i><i class="violet"></i><i class="black"></i>
+      </span>
+      <span>FlyingPAD Projects · {{ footerLabel }}</span>
+    </div>
+
+    <nav class="footer-links" aria-label="Ecosystem links">
+      <a href="https://cv.flyingpad.be" target="_blank" rel="noreferrer">Résumé ↗</a>
+      <a href="https://www.flyingpad.be" target="_blank" rel="noreferrer">FlyingPAD ↗</a>
+    </nav>
+
+    <span class="footer-year">2026</span>
   </footer>
 </div>
+
+@if(showBackToTop()) {
+  <button class="back-to-top" type="button" (click)="scrollToTop()" aria-label="Back to top">
+    <span aria-hidden="true">↑</span>
+  </button>
+}
+
+@if(menuMounted()) {
+  <div
+    class="menu-overlay"
+    [class.closing]="menuClosing()"
+    id="project-mobile-menu"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Navigation"
+    tabindex="-1"
+    (keydown)="onOverlayKeydown($event)"
+  >
+    <div class="overlay-top">
+      <div class="overlay-signature" aria-hidden="true">
+        <span class="overlay-mark">
+          <i></i><i class="red"></i><i class="orange"></i>
+          <i class="yellow"></i><i class="green"></i><i class="blue"></i>
+          <i class="indigo"></i><i class="violet"></i><i class="black"></i>
+        </span>
+        <span>Navigation</span>
+      </div>
+
+      <div class="overlay-actions">
+        <div class="language-control overlay-language" aria-label="Language">
+          <button type="button" [class.active]="language() === 'en'" (click)="setLanguage('en')" [attr.aria-pressed]="language() === 'en'">EN</button>
+          <button type="button" [class.active]="language() === 'fr'" (click)="setLanguage('fr')" [attr.aria-pressed]="language() === 'fr'">FR</button>
+        </div>
+        <button class="close-menu" type="button" (click)="closeMenu()" aria-label="Close navigation">
+          Close <span aria-hidden="true">×</span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="overlay-nav" aria-label="Mobile navigation">
+      <a href="/projects" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="navigateFromMenu($event, '/projects')">
+        <span>Projects</span><i aria-hidden="true">→</i>
+      </a>
+      <a href="/about" routerLinkActive="active" (click)="navigateFromMenu($event, '/about')">
+        <span>About</span><i aria-hidden="true">→</i>
+      </a>
+      <a href="/settings" routerLinkActive="active" (click)="navigateFromMenu($event, '/settings')">
+        <span>Settings</span><i aria-hidden="true">→</i>
+      </a>
+    </nav>
+
+    <div class="overlay-bottom">
+      <span>FlyingPAD ecosystem</span>
+      <div class="overlay-links">
+        <a href="https://cv.flyingpad.be" target="_blank" rel="noreferrer">Résumé <i aria-hidden="true">↗</i></a>
+        <a href="https://www.flyingpad.be" target="_blank" rel="noreferrer">FlyingPAD <i aria-hidden="true">↗</i></a>
+      </div>
+    </div>
+  </div>
+}
