@@ -1,41 +1,11 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  overflow-x: hidden;
-  scrollbar-color: var(--projects-muted) var(--projects-bg);
-}
-
-body {
-  min-width: 0;
-  min-height: 100dvh;
-  background: var(--projects-bg);
-  color: var(--projects-text);
-  font-family: var(--projects-font);
-  transition: background-color .25s ease, color .25s ease;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-img,
-video {
-  max-width: 100%;
-}
-
-a,
-button {
-  -webkit-tap-highlight-color: transparent;
-}
+*, *::before, *::after{box-sizing:border-box}
+html{overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth;scrollbar-color:var(--projects-muted) var(--projects-bg)}
+html,body{margin:0;min-height:100%;background:var(--projects-bg)}
+body{min-width:0;min-height:100dvh;font-family:var(--fontFamily);color:var(--projects-text);text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font-synthesis:none;transition:background-color .25s ease,color .25s ease}
+h1,h2,h3,h4,h5,h6{font-family:var(--fontDisplay);font-optical-sizing:auto}
+a,button,input,select,textarea{font:inherit}
+a:focus-visible,button:focus-visible{outline:1px solid var(--pad-blue);outline-offset:5px}
+img,video{max-width:100%}
+a,button{-webkit-tap-highlight-color:transparent}
+::selection{background:rgba(53,185,255,.25);color:#fff}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.001ms!important;animation-duration:.001ms!important}}
