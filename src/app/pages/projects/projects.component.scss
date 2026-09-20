@@ -10,14 +10,22 @@
   }
   .project-intro{align-self:center}
   .system{
+    width:min(100%,60dvh,620px);
     min-height:0;
-    align-self:stretch;
+    align-self:center;
+    justify-self:end;
+    margin-left:auto;
     display:flex;
     flex-direction:column;
     justify-content:center;
   }
+  .project-section-heading{
+    width:100%;
+    padding-bottom:12px;
+  }
   .system-grid{
-    width:min(100%,60dvh,620px);
+    width:100%;
+    margin-top:14px;
     aspect-ratio:1;
     grid-template-columns:repeat(3,minmax(0,1fr));
     grid-template-rows:repeat(3,minmax(0,1fr));
