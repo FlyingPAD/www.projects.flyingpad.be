@@ -36,9 +36,9 @@
 .menu-trigger{display:none;background:transparent;color:var(--projects-text);border:1px solid var(--projects-line-strong);font:inherit;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:9px 11px;align-items:center;gap:10px;cursor:pointer}
 .menu-trigger i{width:15px;height:1px;background:currentColor;position:relative}.menu-trigger i::after{content:'';position:absolute;right:0;top:5px;width:9px;height:1px;background:currentColor}
 
-.project-content{flex:1;display:flex;min-width:0}
-.project-main{width:100%;flex:1;display:grid;grid-template-columns:minmax(250px,.72fr) minmax(520px,1.28fr);gap:clamp(48px,7vw,110px);align-items:center;padding:clamp(48px,7vw,92px) 0}
-.project-main--wide{grid-template-columns:minmax(230px,.58fr) minmax(650px,1.42fr);gap:clamp(40px,5vw,80px);padding:clamp(48px,6vw,82px) 0}
+.project-content{width:100%;flex:1;display:flex;min-width:0}
+.project-main{width:100%;min-width:0;flex:1;display:grid;grid-template-columns:minmax(250px,.72fr) minmax(520px,1.28fr);gap:clamp(48px,7vw,110px);align-items:center;padding:clamp(48px,7vw,92px) 0}
+.project-main>*{min-width:0}.project-main--wide{grid-template-columns:minmax(230px,.58fr) minmax(650px,1.42fr);gap:clamp(40px,5vw,80px);padding:clamp(48px,6vw,82px) 0}
 .project-intro{align-self:center}
 .project-kicker,.project-section-heading{text-transform:uppercase;letter-spacing:.15em;font-size:10px;color:var(--projects-muted)}
 .project-intro h1{margin:24px 0;font-family:var(--fontDisplay);font-size:clamp(64px,7vw,110px);line-height:.88;letter-spacing:-.055em;font-weight:300}
