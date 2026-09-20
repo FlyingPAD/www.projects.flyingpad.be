@@ -1,11 +1,18 @@
 :root {
+  --fontFamily: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Text", "Segoe UI", sans-serif;
+  --fontDisplay: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", sans-serif;
+
   --projects-bg: #071014;
+  --projects-surface: #091419;
+  --projects-surface-raised: #0c191f;
   --projects-text: #e9eef0;
   --projects-soft: #b9c4c8;
-  --projects-muted: #819198;
+  --projects-muted: #8d9ba1;
   --projects-line: rgba(220, 235, 240, .15);
+  --projects-line-soft: rgba(220, 235, 240, .08);
   --projects-line-strong: rgba(220, 235, 240, .28);
-  --projects-font: 'Open Sans', sans-serif;
+  --projects-accent: #9abcc9;
+  --projects-font: var(--fontFamily);
 
   --pad-red: #ff3b38;
   --pad-orange: #ff9f1c;
@@ -14,25 +21,11 @@
   --pad-blue: #35b9ff;
   --pad-indigo: #656dff;
   --pad-violet: #c05cff;
-  --pad-black: #657176;
+  --pad-black: #050708;
 }
 
-.dark {
-  --projects-bg: #05090b;
-}
-
-.blue {
-  --projects-bg: #07111a;
-}
-
-.green {
-  --projects-bg: #07140d;
-}
-
-.pink {
-  --projects-bg: #150b11;
-}
-
-.orange {
-  --projects-bg: #160f07;
-}
+.dark { --projects-bg: #05090b; }
+.blue { --projects-bg: #07111a; }
+.green { --projects-bg: #07140d; }
+.pink { --projects-bg: #150b11; }
+.orange { --projects-bg: #160f07; }
