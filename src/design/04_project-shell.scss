@@ -8,22 +8,9 @@
   display:flex;
   flex-direction:column;
   color:var(--projects-text);
-  background:
-    radial-gradient(circle at 78% 8%,rgba(53,185,255,.07),transparent 28rem),
-    radial-gradient(circle at 12% 72%,rgba(192,92,255,.035),transparent 34rem),
-    var(--projects-bg);
+  background:transparent;
 }
 
-.project-shell::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  z-index:-2;
-  background:
-    radial-gradient(circle at 78% 8%,rgba(53,185,255,.07),transparent 28rem),
-    radial-gradient(circle at 12% 72%,rgba(192,92,255,.035),transparent 34rem),
-    var(--projects-bg);
-}
 
 .project-header{height:92px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--projects-line);position:relative}
 .project-header::after{content:'';position:absolute;bottom:-1px;left:0;width:72px;height:2px;background:linear-gradient(90deg,var(--pad-red),var(--pad-orange),var(--pad-yellow),var(--pad-green),var(--pad-blue),var(--pad-indigo),var(--pad-violet),var(--pad-black));opacity:.78}
