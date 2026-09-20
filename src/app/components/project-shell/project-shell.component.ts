@@ -31,8 +31,8 @@ export class ProjectShellComponent implements OnDestroy {
 
   constructor() {
     effect(() => {
-      if (this.menuMounted()) this.lockPageScroll();
-      else this.unlockPageScroll();
+      if (this.menuMounted()) this.#lockPageScroll();
+      else this.#unlockPageScroll();
     });
   }
 
